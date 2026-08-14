@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enneagram — แบบทดสอบบุคลิกภาพ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1428; --panel:#1A2140; --panel2:#212A4E;
+  --paper:#F1EDE4; --dim:#9DA3BD; --line:rgba(241,237,228,0.11);
+  --accent:#B98CCE; --accent2:#D6B6E4;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:radial-gradient(circle at 15% -12%, #232C57 0%, var(--ink) 58%);
+  background-attachment:fixed;
+  color:var(--paper); font-family:'IBM Plex Sans Thai',sans-serif; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:660px;margin:0 auto;padding:26px 20px 70px;}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;margin:0 0 10px;line-height:1.35;}
+h1{font-size:31px;} h2{font-size:21px;} h3{font-size:17px;}
+p{line-height:1.75;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);}
+.screen{display:none;} .screen.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.lead{font-size:15.5px;line-height:1.8;color:var(--dim);margin:0 0 22px;}
+.meta-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px;}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;border:1px solid var(--line);border-radius:99px;padding:7px 14px;background:rgba(241,237,228,0.04);color:var(--paper);}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;font-size:15px;padding:15px 22px;border-radius:11px;border:none;cursor:pointer;background:var(--accent);color:#0F1428;width:100%;transition:transform .14s ease,opacity .14s ease;text-decoration:none;}
+.btn:active{transform:scale(.985);}
+.btn:disabled{opacity:.3;cursor:not-allowed;}
+.btn.ghost{background:transparent;color:var(--paper);border:1px solid var(--line);}
+.btn.gold{background:linear-gradient(135deg,#E8C275,#D9A441);color:#241804;}
+/* progress */
+.ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;}
+.ptop span{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);}
+.ptop .pc{color:var(--accent);}
+.ptrack{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:26px;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:width .35s ease;}
+/* question */
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:19px 17px;margin-bottom:13px;}
+.qcard .qn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:8px;letter-spacing:.05em;}
+.qcard .qt{font-size:15.5px;line-height:1.62;margin-bottom:16px;}
+.lk{display:flex;gap:6px;}
+.lk button{flex:1;padding:12px 2px;border-radius:8px;border:1px solid var(--line);background:rgba(241,237,228,0.03);color:var(--dim);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;transition:all .13s ease;}
+.lk button.sel{background:var(--accent);border-color:var(--accent);color:#0F1428;}
+.lkcap{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-top:7px;opacity:.65;}
+.navrow{display:flex;gap:10px;margin-top:24px;}
+.warn{font-size:12.5px;color:#E8A87C;margin-top:12px;text-align:center;min-height:16px;}
+/* results */
+.radar{display:flex;justify-content:center;margin:8px 0 26px;}
+.scorerow{display:flex;align-items:center;gap:12px;margin-bottom:13px;}
+.scorerow .lb{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#0F1428;flex-shrink:0;}
+.scorerow .nm{flex:1;}
+.scorerow .nm .a{font-size:14px;font-weight:600;}
+.scorerow .nm .b{font-size:11px;color:var(--dim);font-family:'IBM Plex Mono',monospace;}
+.scorerow .bs{width:90px;height:7px;background:var(--line);border-radius:5px;overflow:hidden;}
+.scorerow .bf{height:100%;border-radius:5px;}
+.scorerow .v{font-family:'IBM Plex Mono',monospace;font-size:13px;width:32px;text-align:right;color:var(--dim);}
+.dcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:17px 16px;margin-bottom:12px;}
+.dcard h3{margin-bottom:4px;display:flex;align-items:center;gap:9px;}
+.dcard .lvl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:99px;background:rgba(241,237,228,0.08);color:var(--paper);letter-spacing:.08em;}
+.dcard p{font-size:14px;color:var(--dim);margin:6px 0 0;line-height:1.72;}
+.hero-type{background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:18px;padding:26px 22px;margin-bottom:24px;text-align:center;}
+.hero-type .num{font-family:'Noto Serif Thai',serif;font-size:64px;line-height:1;color:var(--accent);}
+.hero-type .tn{font-family:'Noto Serif Thai',serif;font-size:23px;margin-top:6px;}
+.hero-type .te{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);letter-spacing:.1em;margin-top:4px;}
+.hero-type .wing{margin-top:14px;font-size:13px;color:var(--dim);}
+.kv{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);}
+.kv:last-child{border-bottom:none;}
+.kv .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;width:74px;flex-shrink:0;padding-top:3px;}
+.kv .val{font-size:14px;line-height:1.7;color:var(--paper);}
+/* upsell */
+.personal{background:linear-gradient(150deg,rgba(185,140,206,.18),rgba(29,36,68,.95));border:1px solid rgba(185,140,206,.45);border-radius:18px;padding:24px 20px;margin-bottom:14px;}
+.ptag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#D6B6E4;margin-bottom:9px;}
+.personal ul{margin:14px 0 0;padding-left:0;list-style:none;}
+.personal li{font-size:13px;color:var(--dim);line-height:1.6;padding:5px 0 5px 20px;position:relative;}
+.personal li::before{content:'';position:absolute;left:3px;top:13px;width:5px;height:5px;border-radius:50%;background:#B98CCE;}
+.bookmeta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.06em;margin-top:2px;}
+.pkg{background:linear-gradient(150deg,rgba(62,142,126,.14),rgba(29,36,68,.9));border:1px solid rgba(62,142,126,.4);border-radius:18px;padding:24px 20px;margin-top:16px;}
+.pkgtag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6FC3AE;margin-bottom:9px;}
+.pkglist{border-top:1px solid var(--line);}
+.pkgrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);}
+.pkgrow .pn{width:24px;height:24px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);flex-shrink:0;}
+.pkgrow .pi{flex:1;}
+.pkgrow .pi .a{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pkgrow .pi .b{font-size:11.5px;color:var(--dim);margin-top:2px;}
+.pkgrow .pp{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--dim);}
+.pkgrow.bonus{background:rgba(217,164,65,.07);margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:8px;}
+.pkgrow.bonus .pn{border-color:#D9A441;color:#D9A441;}
+.pkgrow .pp.free{color:#D9A441;font-size:11px;}
+.freetag{font-family:'IBM Plex Sans Thai',sans-serif;font-size:10px;background:#D9A441;color:#241804;padding:2px 7px;border-radius:99px;font-weight:600;}
+.pkgmath{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);}
+.pkgmath .mrow{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim);padding:4px 0;font-family:'IBM Plex Mono',monospace;}
+.pkgmath .mrow.total{color:var(--paper);font-size:13.5px;padding-top:8px;margin-top:4px;border-top:1px solid var(--line);}
+.sell{background:linear-gradient(140deg,rgba(217,164,65,.16),rgba(217,164,65,.04));border:1px solid rgba(217,164,65,.42);border-radius:18px;padding:24px 21px;margin:34px 0 10px;}
+.sell .tagline{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:#E8C275;text-transform:uppercase;margin-bottom:9px;}
+.sell h2{font-size:20px;}
+.sell ul{margin:14px 0 0;padding-left:0;list-style:none;}
+.sell li{font-size:14px;color:var(--dim);line-height:1.6;padding:7px 0 7px 26px;position:relative;}
+.sell li::before{content:'';position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:#D9A441;}
+.pricebox{display:flex;align-items:baseline;gap:12px;margin:20px 0 4px;}
+.pricebox .now{font-family:'IBM Plex Mono',monospace;font-size:34px;color:#E8C275;}
+.pricebox .was{font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--dim);text-decoration:line-through;}
+.pricebox .save{font-size:11.5px;background:#D9A441;color:#241804;padding:4px 10px;border-radius:99px;font-weight:600;}
+.locknote{font-size:12.5px;color:var(--dim);margin-top:10px;line-height:1.65;}
+/* journey */
+.journey{margin:34px 0 0;}
+.jrow{display:flex;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:13px;margin-bottom:10px;background:var(--panel);text-decoration:none;color:var(--paper);transition:border-color .15s ease,transform .15s ease;}
+.jrow:active{transform:scale(.99);}
+.jrow.todo{border-color:rgba(241,237,228,0.28);}
+.jrow.done{opacity:.6;}
+.jrow .mark{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;flex-shrink:0;}
+.jrow.done .mark{background:var(--accent);border-color:var(--accent);color:#0F1428;}
+.jrow .txt{flex:1;}
+.jrow .txt .a{font-size:14.5px;font-weight:600;}
+.jrow .txt .b{font-size:11.5px;color:var(--dim);margin-top:2px;}
+.jrow .arrow{color:var(--dim);font-size:17px;}
+.tease{background:var(--panel2);border:1px dashed rgba(241,237,228,0.24);border-radius:14px;padding:19px 18px;margin-top:16px;}
+.tease p{font-size:13.5px;color:var(--dim);margin:8px 0 0;}
+.blurline{filter:blur(4.5px);opacity:.55;user-select:none;pointer-events:none;font-size:13.5px;line-height:1.9;color:var(--dim);margin-top:10px;}
+.explain{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 15px;margin-bottom:18px;}
+.explain .eh{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.explain p{font-size:12.8px;color:var(--dim);line-height:1.68;margin:0 0 8px;}
+.explain p:last-child{margin-bottom:0;}
+.explain strong{color:var(--paper);font-weight:600;}
+
+.preview{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:18px;padding:24px 20px;margin:30px 0 14px;}
+.preview .pv-eye{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.preview h2{font-size:20px;margin:0 0 6px;}
+.preview .pv-sub{font-size:13px;color:var(--dim);margin:0 0 18px;line-height:1.7;}
+.pv-page{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:13px;padding:20px 18px;position:relative;overflow:hidden;}
+.pv-page p{font-size:15px;line-height:1.9;color:#D8DAE6;margin:0 0 14px;}
+.pv-page p:last-child{margin-bottom:0;}
+.pv-fade{position:relative;}
+.pv-fade p{filter:blur(5px);opacity:.5;user-select:none;pointer-events:none;}
+.pv-lock{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:calc(100% - 30px);max-width:290px;}
+.pv-lock button{width:100%;padding:15px 18px;border:none;border-radius:11px;background:linear-gradient(135deg,#E8C275,#D9A441);color:#241804;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.5);}
+.pv-more{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);text-align:center;margin-top:14px;}
+.pv-get{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);}
+.pv-get .gh{font-size:14px;font-weight:600;margin-bottom:11px;}
+.pv-get ul{margin:0;padding-left:0;list-style:none;}
+.pv-get li{font-size:13.3px;color:var(--dim);line-height:1.65;padding:6px 0 6px 26px;position:relative;}
+.pv-get li::before{content:'✓';position:absolute;left:2px;top:6px;color:var(--accent);font-size:13px;}
+.pv-get li b{color:var(--paper);font-weight:600;}
+
+.facts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 0;}
+.facts div{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:rgba(241,237,228,.03);}
+.honest{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim);line-height:1.7;}
+.closing{background:linear-gradient(150deg,rgba(217,164,65,.15),rgba(29,36,68,.95));border:1px solid rgba(217,164,65,.4);border-radius:18px;padding:26px 20px;margin-top:26px;text-align:center;}
+.closing h2{font-size:19px;margin:0 0 8px;}
+.closing p{font-size:13.5px;color:var(--dim);margin:0 0 18px;line-height:1.75;}
+.closing button{width:100%;padding:16px;border:none;border-radius:11px;background:linear-gradient(135deg,#E8C275,#D9A441);color:#241804;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;font-size:15.5px;cursor:pointer;}
+.closing .cn{font-size:11.5px;color:var(--dim);margin-top:12px;line-height:1.6;}
+.divider{height:1px;background:var(--line);margin:34px 0;}
+.foot{font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:34px;padding-top:18px;border-top:1px solid var(--line);}
+.saved{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);text-align:center;margin-top:16px;}
+@media(max-width:400px){h1{font-size:26px;} .lk button{padding:11px 1px;font-size:12px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="screen active" id="s-intro">
+  <div class="eyebrow">Nine Types</div>
+  <h1>แรงขับที่อยู่เบื้องหลัง</h1>
+  <p class="lead">แบบทดสอบ 63 ข้อ ค้นหาประเภทหลักของคุณจาก 9 ประเภทตามระบบ Enneagram — ระบบที่ไม่ได้ถามว่า 'คุณทำอะไร' แต่ถามว่า 'อะไรคือสิ่งที่คุณกลัวและต้องการลึกที่สุด'</p>
+  <div class="meta-row">
+    <div class="chip">63 ข้อ</div>
+    <div class="chip">~14 นาที</div>
+    <div class="chip">ฟรี ไม่ต้องสมัคร</div>
+  </div>
+  <div id="resumeBox"></div>
+  <button class="btn" id="startBtn">เริ่มทำแบบทดสอบ</button>
+  <div class="journey" id="introJourney"></div>
+  <div class="foot">ตอบตามความเป็นจริงที่คุณเป็น ไม่ใช่ที่คุณอยากเป็น ผลลัพธ์จะแม่นขึ้นมาก · ผลจะถูกบันทึกไว้ในเครื่องของคุณเอง ไม่ถูกส่งไปที่ไหน</div>
+</div>
+
+<div class="screen" id="s-quiz">
+  <div class="ptop"><span id="pgLabel">หน้า 1 / 5</span><span class="pc" id="pcLabel">0%</span></div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+  <div id="qbox"></div>
+  <div class="warn" id="warnMsg"></div>
+  <div class="navrow">
+    <button class="btn ghost" id="prevBtn">ย้อนกลับ</button>
+    <button class="btn" id="nextBtn">ถัดไป</button>
+  </div>
+</div>
+
+<div class="screen" id="s-result">
+  <div class="eyebrow">ผลลัพธ์ของคุณ</div>
+  <div id="resultHead"></div>
+  <div id="resultBody"></div>
+  <div id="previewBox"></div>
+  <div id="combinedBox"></div>
+  <div class="journey" id="resultJourney"></div>
+  <div id="sellBox"></div>
+  <div id="closingBox"></div>
+  <div class="saved" id="savedNote"></div>
+  <button class="btn ghost" id="retakeBtn" style="margin-top:18px;">ทำแบบทดสอบนี้ใหม่</button>
+  <div class="foot">ผลลัพธ์นี้เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา ใช้เป็นจุดเริ่มต้นในการทำความเข้าใจตัวเองได้ แต่ไม่ควรใช้ตัดสินคุณค่าหรือความสามารถของใคร</div>
+</div>
+
+</div>
+<script>
+const TEST_ID = "enneagram";
+const TEST_NAME = "Enneagram";
+const MODE = "enneagram";
+const PER_PAGE = 9;
+const ITEMS = [{"t": "ฉันมักเห็นสิ่งที่ควรปรับปรุงให้ถูกต้องก่อนคนอื่นเสมอ", "d": 1, "r": 0}, {"t": "ฉันรู้ว่าคนรอบตัวต้องการอะไรก่อนที่เขาจะบอก", "d": 2, "r": 0}, {"t": "ฉันวัดคุณค่าตัวเองจากสิ่งที่ทำสำเร็จ", "d": 3, "r": 0}, {"t": "ฉันรู้สึกว่าตัวเองแตกต่างจากคนอื่นมาตั้งแต่เด็ก", "d": 4, "r": 0}, {"t": "ฉันต้องการเวลาและพื้นที่ส่วนตัวเพื่อเติมพลัง", "d": 5, "r": 0}, {"t": "ฉันคิดล่วงหน้าว่าอะไรจะผิดพลาดได้บ้าง", "d": 6, "r": 0}, {"t": "ฉันมองหาสิ่งใหม่ๆ ที่น่าตื่นเต้นอยู่เสมอ", "d": 7, "r": 0}, {"t": "ฉันพูดตรงและไม่กลัวการเผชิญหน้า", "d": 8, "r": 0}, {"t": "ฉันหลีกเลี่ยงความขัดแย้งถ้าเลี่ยงได้", "d": 9, "r": 0}, {"t": "ฉันรู้สึกไม่สบายใจเวลาต้องทำอะไรที่ขัดกับหลักการของตัวเอง", "d": 1, "r": 0}, {"t": "ฉันรู้สึกมีคุณค่าเมื่อมีคนต้องการความช่วยเหลือจากฉัน", "d": 2, "r": 0}, {"t": "ฉันปรับตัวเองให้เข้ากับภาพลักษณ์ที่สถานการณ์ต้องการได้", "d": 3, "r": 0}, {"t": "อารมณ์ของฉันลึกและซับซ้อนกว่าที่คนทั่วไปเข้าใจ", "d": 4, "r": 0}, {"t": "ฉันสะสมความรู้ในเรื่องที่สนใจอย่างลึกซึ้ง", "d": 5, "r": 0}, {"t": "ฉันให้ความสำคัญกับความไว้ใจและความจงรักภักดีมาก", "d": 6, "r": 0}, {"t": "ฉันวางแผนกิจกรรมข้างหน้าไว้เยอะเพื่อไม่ให้ชีวิตน่าเบื่อ", "d": 7, "r": 0}, {"t": "ฉันไม่ชอบให้ใครมาควบคุมชีวิตหรือการตัดสินใจของฉัน", "d": 8, "r": 0}, {"t": "ฉันเข้าใจมุมมองของทุกฝ่ายได้ง่าย", "d": 9, "r": 0}, {"t": "ฉันมีเสียงในหัวที่คอยวิจารณ์ตัวเองว่ายังทำได้ดีกว่านี้", "d": 1, "r": 0}, {"t": "ฉันปฏิเสธคนอื่นได้ยากแม้ตัวเองจะเหนื่อย", "d": 2, "r": 0}, {"t": "ฉันทำงานหลายอย่างพร้อมกันเพื่อให้ได้ผลลัพธ์มากที่สุด", "d": 3, "r": 0}, {"t": "ฉันมักรู้สึกว่ามีบางอย่างขาดหายไปในชีวิต", "d": 4, "r": 0}, {"t": "ฉันรู้สึกอึดอัดเวลามีคนเรียกร้องเวลาหรืออารมณ์จากฉันมากเกินไป", "d": 5, "r": 0}, {"t": "ฉันลังเลกับการตัดสินใจใหญ่ๆ และอยากได้ความเห็นจากคนที่ไว้ใจ", "d": 6, "r": 0}, {"t": "ฉันเบื่อง่ายกับสิ่งที่ทำซ้ำๆ", "d": 7, "r": 0}, {"t": "ฉันปกป้องคนที่อยู่ฝ่ายเดียวกับฉันอย่างเต็มที่", "d": 8, "r": 0}, {"t": "ฉันตัดสินใจเรื่องของตัวเองได้ช้าเพราะไม่แน่ใจว่าต้องการอะไรจริงๆ", "d": 9, "r": 0}, {"t": "ฉันหงุดหงิดเวลาเห็นคนทำงานแบบขอไปที", "d": 1, "r": 0}, {"t": "ฉันอยากให้คนอื่นรู้สึกว่าฉันเป็นคนสำคัญในชีวิตเขา", "d": 2, "r": 0}, {"t": "ฉันรู้สึกอึดอัดเวลาถูกมองว่าล้มเหลว", "d": 3, "r": 0}, {"t": "ฉันดึงดูดเข้าหาความงามหรือความเศร้าที่มีความหมาย", "d": 4, "r": 0}, {"t": "ฉันสังเกตสถานการณ์อยู่ห่างๆ ก่อนจะเข้าไปมีส่วนร่วม", "d": 5, "r": 0}, {"t": "ฉันตั้งคำถามกับผู้มีอำนาจแต่ก็ต้องการที่พึ่งในเวลาเดียวกัน", "d": 6, "r": 0}, {"t": "ฉันมองด้านบวกของสถานการณ์ได้เร็วกว่าคนอื่น", "d": 7, "r": 0}, {"t": "ฉันเข้าไปคุมสถานการณ์เองเวลาไม่มีใครนำ", "d": 8, "r": 0}, {"t": "ฉันปรับตัวเข้ากับความต้องการของคนรอบข้างจนบางทีลืมความต้องการตัวเอง", "d": 9, "r": 0}, {"t": "ฉันเชื่อว่ามีวิธีที่ถูกต้องในการทำสิ่งต่างๆ", "d": 1, "r": 0}, {"t": "ฉันมักละเลยความต้องการของตัวเองเพื่อดูแลคนอื่น", "d": 2, "r": 0}, {"t": "ฉันมักเป็นคนที่ทีมพึ่งพาให้ผลักงานไปข้างหน้า", "d": 3, "r": 0}, {"t": "ฉันไม่อยากเป็นคนธรรมดาเหมือนคนทั่วไป", "d": 4, "r": 0}, {"t": "ฉันอยากรู้ให้พร้อมก่อนแล้วค่อยลงมือ", "d": 5, "r": 0}, {"t": "ฉันเตรียมแผนสำรองไว้เสมอ", "d": 6, "r": 0}, {"t": "ฉันหลีกเลี่ยงการอยู่กับความรู้สึกเจ็บปวดนานๆ", "d": 7, "r": 0}, {"t": "ฉันเคารพคนที่กล้าเถียงกับฉันมากกว่าคนที่ยอมตลอด", "d": 8, "r": 0}, {"t": "ฉันรู้สึกสงบและไม่ค่อยตื่นเต้นกับเรื่องต่างๆ", "d": 9, "r": 0}, {"t": "ฉันควบคุมอารมณ์โกรธไว้เพราะรู้สึกว่าการแสดงออกแบบนั้นไม่เหมาะสม", "d": 1, "r": 0}, {"t": "ฉันน้อยใจเวลาคนที่ฉันช่วยเหลือไม่เห็นค่าสิ่งที่ฉันทำ", "d": 2, "r": 0}, {"t": "ฉันเลื่อนเรื่องความรู้สึกส่วนตัวออกไปเพื่อโฟกัสเป้าหมาย", "d": 3, "r": 0}, {"t": "ฉันเปรียบเทียบตัวเองกับคนอื่นแล้วรู้สึกด้อยหรือเหนือกว่าสลับกันไป", "d": 4, "r": 0}, {"t": "ฉันประหยัดพลังงานและทรัพยากรของตัวเองไว้", "d": 5, "r": 0}, {"t": "ฉันสังเกตเจตนาที่ซ่อนอยู่ของคนอื่นได้ไว", "d": 6, "r": 0}, {"t": "ฉันเริ่มหลายอย่างพร้อมกันแต่บางอย่างก็ไม่ได้ทำจนจบ", "d": 7, "r": 0}, {"t": "ฉันไม่ค่อยแสดงความอ่อนแอให้ใครเห็น", "d": 8, "r": 0}, {"t": "ฉันผัดผ่อนสิ่งสำคัญด้วยการทำสิ่งเล็กๆ ที่ไม่เร่งด่วนแทน", "d": 9, "r": 0}, {"t": "ฉันตั้งมาตรฐานกับตัวเองสูงกว่าที่คนอื่นคาดหวังจากฉัน", "d": 1, "r": 0}, {"t": "ฉันสร้างความสัมพันธ์กับคนใหม่ได้เร็วเพราะใส่ใจเขาจริงๆ", "d": 2, "r": 0}, {"t": "ฉันใส่ใจว่าคนอื่นมองความสำเร็จของฉันอย่างไร", "d": 3, "r": 0}, {"t": "ฉันแสดงตัวตนที่แท้จริงออกมาผ่านงานหรือการสร้างสรรค์", "d": 4, "r": 0}, {"t": "ฉันคิดวิเคราะห์ได้ดีกว่าเวลาไม่มีใครมากดดัน", "d": 5, "r": 0}, {"t": "ฉันรู้สึกไม่สบายใจกับความไม่แน่นอน", "d": 6, "r": 0}, {"t": "ฉันรู้สึกอึดอัดเวลาถูกจำกัดทางเลือก", "d": 7, "r": 0}, {"t": "ฉันมีพลังและความมุ่งมั่นมากกว่าคนทั่วไป", "d": 8, "r": 0}, {"t": "ฉันอยากให้ทุกอย่างราบรื่นและทุกคนเข้ากันได้", "d": 9, "r": 0}];
+const DIMS = [{"k": 1, "th": "ผู้ยึดหลักการ", "en": "The Reformer", "c": "#C1666B"}, {"k": 2, "th": "ผู้ให้", "en": "The Helper", "c": "#E8A87C"}, {"k": 3, "th": "ผู้มุ่งความสำเร็จ", "en": "The Achiever", "c": "#D9A441"}, {"k": 4, "th": "ผู้มีเอกลักษณ์", "en": "The Individualist", "c": "#B98CCE"}, {"k": 5, "th": "ผู้สังเกตการณ์", "en": "The Investigator", "c": "#7C9FD4"}, {"k": 6, "th": "ผู้ภักดี", "en": "The Loyalist", "c": "#6FA8A0"}, {"k": 7, "th": "ผู้แสวงหา", "en": "The Enthusiast", "c": "#E3B04B"}, {"k": 8, "th": "ผู้ท้าทาย", "en": "The Challenger", "c": "#B5524F"}, {"k": 9, "th": "ผู้ประสาน", "en": "The Peacemaker", "c": "#8FAF7E"}];
+const DESC = {"1": {"core": "แรงขับหลักคือความต้องการทำสิ่งที่ถูกต้องและปรับปรุงสิ่งรอบตัวให้ดีขึ้น", "fear": "กลัวว่าตัวเองจะบกพร่อง ผิดพลาด หรือเป็นคนไม่ดี", "desire": "ต้องการความถูกต้อง ความสมบูรณ์ และความมีคุณธรรม", "strength": "มีมาตรฐานสูง เชื่อถือได้ ยุติธรรม และมองเห็นจุดที่ควรปรับปรุงได้ชัดกว่าใคร", "watch": "เสียงวิจารณ์ในหัวที่ไม่เคยพอ ความโกรธที่เก็บกดไว้ และความยากในการยอมรับว่า 'ดีพอแล้ว'", "work": "เหมาะกับงานที่ต้องการมาตรฐาน คุณภาพ และความถูกต้อง เช่น ตรวจสอบ กฎหมาย บัญชี การควบคุมคุณภาพ"}, "2": {"core": "แรงขับหลักคือความต้องการเป็นที่รักและจำเป็นสำหรับคนอื่น", "fear": "กลัวว่าจะไม่มีใครต้องการหรือไม่มีใครรัก", "desire": "ต้องการความรัก การยอมรับ และความรู้สึกว่ามีคุณค่าต่อคนอื่น", "strength": "อ่านความต้องการของคนได้ไว อบอุ่น สร้างความสัมพันธ์ได้ลึกและเร็ว", "watch": "การให้จนละเลยตัวเอง การคาดหวังการตอบแทนโดยไม่พูดออกมา และความน้อยใจที่สะสม", "work": "เหมาะกับงานที่ต้องดูแลคน เช่น HR บริการลูกค้า พยาบาล การสอน หรือ Customer Success"}, "3": {"core": "แรงขับหลักคือความต้องการประสบความสำเร็จและเป็นที่ยอมรับ", "fear": "กลัวความล้มเหลวและกลัวว่าจะไม่มีคุณค่าถ้าไม่มีผลงาน", "desire": "ต้องการความสำเร็จ การยอมรับ และการเป็นที่ชื่นชม", "strength": "มีพลังขับเคลื่อนสูง ปรับตัวเก่ง มุ่งผลลัพธ์ และทำให้ทีมเดินหน้าได้จริง", "watch": "การผูกคุณค่าตัวเองไว้กับผลงาน การละเลยอารมณ์ตัวเอง และการสร้างภาพจนหลงลืมตัวตนจริง", "work": "เหมาะกับงานขาย การตลาด ผู้บริหาร ผู้ประกอบการ หรือบทบาทที่วัดผลได้ชัดเจน"}, "4": {"core": "แรงขับหลักคือความต้องการมีเอกลักษณ์และความหมายที่แท้จริง", "fear": "กลัวว่าตัวเองไม่มีเอกลักษณ์หรือไม่มีความสำคัญ", "desire": "ต้องการค้นพบตัวตนที่แท้จริงและได้รับความเข้าใจอย่างลึกซึ้ง", "strength": "เข้าใจอารมณ์เชิงลึก มีความคิดสร้างสรรค์ และเห็นความงามในสิ่งที่คนอื่นมองข้าม", "watch": "การเปรียบเทียบตัวเองกับคนอื่น ความรู้สึกขาดเรื้อรัง และอารมณ์ที่ขึ้นลงกระทบงาน", "work": "เหมาะกับงานสร้างสรรค์ ออกแบบ ศิลปะ การเขียน แบรนดิ้ง หรืองานที่ปรึกษาเชิงลึก"}, "5": {"core": "แรงขับหลักคือความต้องการเข้าใจโลกและมีทรัพยากรพอสำหรับตัวเอง", "fear": "กลัวว่าจะไร้ความสามารถหรือถูกดูดพลังจนหมด", "desire": "ต้องการความรู้ ความเข้าใจ และความสามารถในการพึ่งพาตัวเอง", "strength": "คิดวิเคราะห์ลึก เป็นอิสระทางความคิด นิ่งในวิกฤต และเชี่ยวชาญในสิ่งที่สนใจอย่างแท้จริง", "watch": "การถอยห่างจากคนรอบตัว การสะสมข้อมูลจนไม่ลงมือ และการตัดขาดจากอารมณ์ตัวเอง", "work": "เหมาะกับงานวิจัย วิเคราะห์ข้อมูล วิศวกรรม เทคโนโลยี หรืองานที่ต้องเจาะลึกเฉพาะทาง"}, "6": {"core": "แรงขับหลักคือความต้องการความมั่นคงและสิ่งที่ไว้ใจได้", "fear": "กลัวว่าจะไม่มีที่พึ่งหรือไม่มีอะไรรองรับเวลาเกิดปัญหา", "desire": "ต้องการความปลอดภัย ความมั่นคง และการสนับสนุนที่ไว้ใจได้", "strength": "มองเห็นความเสี่ยงล่วงหน้า ซื่อสัตย์ต่อทีม รับผิดชอบสูง และเตรียมพร้อมเสมอ", "watch": "ความกังวลเกินเหตุ การลังเลจนพลาดโอกาส และการตั้งคำถามกับตัวเองซ้ำๆ", "work": "เหมาะกับงานบริหารความเสี่ยง ตรวจสอบ ปฏิบัติการ กฎหมาย หรือบทบาทมือขวาที่ไว้ใจได้"}, "7": {"core": "แรงขับหลักคือความต้องการประสบการณ์ที่ดีและอิสระในการเลือก", "fear": "กลัวความเจ็บปวด ความจำเจ และการถูกกักขังในสถานการณ์ที่ไม่มีทางออก", "desire": "ต้องการความสุข อิสระ และความหลากหลายของประสบการณ์", "strength": "พลังบวกสูง คิดไอเดียได้ไว มองเห็นโอกาสในทุกสถานการณ์ และปลุกพลังคนรอบตัวได้", "watch": "การเริ่มหลายอย่างแต่ไม่จบ การหนีความรู้สึกลบ และความยากในการโฟกัสระยะยาว", "work": "เหมาะกับงานการตลาด สร้างสรรค์ พัฒนาธุรกิจใหม่ อีเวนต์ หรือบทบาทที่ต้องคิดไอเดียตลอดเวลา"}, "8": {"core": "แรงขับหลักคือความต้องการควบคุมชีวิตตัวเองและไม่ถูกใครกดขี่", "fear": "กลัวการถูกควบคุม ถูกทรยศ หรือแสดงความอ่อนแอให้คนเห็น", "desire": "ต้องการอำนาจในการกำหนดชีวิตตัวเองและปกป้องคนของตัวเอง", "strength": "เด็ดขาด กล้าตัดสินใจ ปกป้องทีม พูดความจริงที่คนอื่นไม่กล้าพูด และนำได้ในภาวะวิกฤต", "watch": "ความแรงที่ทำให้คนรอบตัวกลัวจนไม่กล้าบอกความจริง และความยากในการเปิดเผยด้านอ่อนแอ", "work": "เหมาะกับบทบาทผู้นำ ผู้ประกอบการ การเจรจาต่อรอง หรืองานที่ต้องพลิกสถานการณ์"}, "9": {"core": "แรงขับหลักคือความต้องการความสงบและความกลมเกลียว", "fear": "กลัวความขัดแย้ง การแตกแยก และการสูญเสียความเชื่อมโยงกับคนอื่น", "desire": "ต้องการความสงบภายในและความสัมพันธ์ที่ราบรื่น", "strength": "ใจเย็น รับฟังทุกฝ่ายอย่างเป็นกลาง ประสานคนได้ดี และทำให้บรรยากาศทีมผ่อนคลาย", "watch": "การหลีกเลี่ยงปัญหาจนสะสม การผัดผ่อนเรื่องสำคัญ และความยากในการรู้ว่าตัวเองต้องการอะไร", "work": "เหมาะกับงานประสานงาน ไกล่เกลี่ย HR การบริการ หรือบทบาทที่ต้องยึดทีมไว้ด้วยกัน"}};
+const TEASERS = {"1": ["คุณมีเสียงในหัวที่คอยบอกว่ายังทำได้ดีกว่านี้ เสียงนั้นไม่เคยหยุด และมันดังกับตัวคุณเองมากกว่าที่ดังกับคนอื่นเสมอ", "คนภายนอกเห็นคุณเป็นคนละเอียด เป็นระเบียบ มีมาตรฐาน และเชื่อถือได้ แต่สิ่งที่พวกเขาไม่เห็นคือความพยายามที่คุณใช้ในการควบคุมความไม่พอใจที่เกิดขึ้นตลอดเวลา"], "2": ["คุณรู้ว่าคนรอบตัวต้องการอะไรก่อนที่เขาจะบอก และคุณให้ก่อนที่จะถูกขอ นี่คือความสามารถที่แท้จริงและมีค่ามาก แต่มันมีเงื่อนไขที่ซ่อนอยู่ที่คุณอาจไม่ได้พูดออกมาแม้กับตัวเอง", "เงื่อนไขนั้นคือ ถ้าฉันให้พอ เขาจะรักฉัน และเมื่อวันหนึ่งที่คุณให้เต็มที่แล้วไม่ได้รับกลับ ความน้อยใจที่เกิดขึ้นจะรุนแรงเกินกว่าที่สถานการณ์ควรเป็น เพราะสิ่งที่แตกไม่ใช่ความคาดหวังในเรื่องนั้น แต่คือข้อตกลงที่คุณทำไว้กับตัวเองมาทั้งชีวิต"], "3": ["คุณทำได้ดีในเกือบทุกอย่างที่ลงมือทำ คุณอ่านสถานการณ์ออกว่าอะไรคือความสำเร็จในบริบทนั้น แล้วปรับตัวเองให้เป็นแบบนั้น นี่คือความสามารถที่ทำให้คุณไปได้ไกลกว่าคนอื่นในเวลาที่สั้นกว่า", "แต่มีคำถามหนึ่งที่คุณมักหลีกเลี่ยง คือ ถ้าเอาผลงานทั้งหมดออกไป เหลืออะไร"], "4": ["คุณรู้สึกมาตั้งแต่เด็กว่าตัวเองแตกต่าง และรู้สึกว่ามีบางอย่างขาดหายไปที่คนอื่นดูเหมือนจะมีกันหมด", "โลกภายในของคุณลึกและมีสีสันมากกว่าที่คนภายนอกเห็น คุณรู้สึกได้ละเอียดมากในเรื่องที่คนอื่นไม่รู้สึกอะไรเลย ซึ่งเป็นแหล่งที่มาของความคิดสร้างสรรค์และความงามในงานของคุณ"], "5": ["คุณมองโลกผ่านคำถามว่ามันทำงานอย่างไร และคุณสะสมความรู้ในเรื่องที่สนใจจนลึกกว่าคนทั่วไปมาก", "สิ่งที่ขับเคลื่อนคุณจริงๆ ไม่ใช่ความอยากรู้อย่างเดียว แต่คือความรู้สึกว่าทรัพยากรของตัวเองมีจำกัด ทั้งพลังงาน เวลา และความสามารถ คุณจึงประหยัดมันไว้ และการที่ใครเรียกร้องเวลาหรืออารมณ์จากคุณมากเกินไป รู้สึกเหมือนการถูกดูดจนแห้ง"], "6": ["จิตใจของคุณทำงานแบบระบบเตือนภัย มันสแกนหาสิ่งที่อาจผิดพลาดตลอดเวลา และมันเก่งมากในสิ่งที่มันทำ", "คุณเป็นคนที่ทีมโชคดีที่มี เพราะคุณคือคนที่ถามคำถามที่ไม่มีใครอยากถามในการประชุม และหลายครั้งคำถามนั้นช่วยองค์กรไว้"], "7": ["คุณคือคนที่ทำให้ห้องสว่างขึ้น คุณเห็นโอกาสในทุกสถานการณ์ คิดไอเดียได้เร็ว และมีพลังที่ติดต่อไปยังคนรอบตัว", "แต่ใต้พลังงานนั้นมีบางอย่างที่คุณอาจไม่เคยมองตรงๆ คือคุณกำลังวิ่งหนี ไม่ได้วิ่งไปหา"], "8": ["คุณมีพลังที่คนรู้สึกได้ตั้งแต่เดินเข้าห้อง คุณพูดตรง ตัดสินใจเร็ว และไม่กลัวการเผชิญหน้า เมื่อไม่มีใครนำ คุณจะเข้าไปคุมเอง", "สิ่งที่คนไม่ค่อยเห็นคือ ด้านที่แข็งของคุณสร้างขึ้นเพื่อปกป้องด้านที่อ่อนไหวมาก คุณเรียนรู้ตั้งแต่เนิ่นๆ ว่าการแสดงความอ่อนแอทำให้ถูกทำร้าย คุณจึงตัดสินใจว่าจะไม่ยอมอยู่ในตำแหน่งนั้นอีก"], "9": ["คุณคือคนที่ทุกคนสบายใจที่จะอยู่ด้วย คุณเข้าใจมุมมองของทุกฝ่ายได้ง่าย และคุณมีความสามารถในการทำให้บรรยากาศตึงเครียดผ่อนคลายลงโดยไม่ต้องทำอะไรมาก", "แต่ความสามารถในการเห็นทุกมุมนั้นมีด้านมืด คือคุณมักไม่รู้ว่าตัวเองต้องการอะไร เมื่อมีคนถามว่าอยากกินอะไร อยากไปไหน หรืออยากทำงานแบบไหน คุณจะตอบว่าอะไรก็ได้ และนั่นมักเป็นความจริง ไม่ใช่การเกรงใจ"]};
+const NAV = [{"id": "bigfive", "name": "Big Five (OCEAN)", "file": "bigfive.html", "tag": "Five-Factor Model"}, {"id": "hexaco", "name": "HEXACO", "file": "hexaco.html", "tag": "Six-Factor Model"}, {"id": "enneagram", "name": "Enneagram", "file": "enneagram.html", "tag": "Nine Types"}];
+const WINGS = {"1": [9, 2], "2": [1, 3], "3": [2, 4], "4": [3, 5], "5": [4, 6], "6": [5, 7], "7": [6, 8], "8": [7, 9], "9": [8, 1]};
+const FACTS = ["20 บท", "อ่านประมาณ 2 ชั่วโมงครึ่ง", "ปรับตามผลของคุณ", "อ่านได้ตลอด ไม่มีวันหมดอายุ"];
+const GETS = ["<b>บทประเภทของคุณแบบเต็ม</b> ยาวกว่าสรุปที่คุณเพิ่งอ่านหลายเท่า", "<b>ปีกของคุณ</b> สีสันที่ผสมอยู่และทำให้คุณต่างจากคนประเภทเดียวกัน", "<b>ทิศทางเครียดและทิศทางเติบโต</b> ระบบเตือนภัยส่วนตัวที่บอกว่าเมื่อไหร่คุณกำลังจะพัง", "<b>ประเภทของคุณในที่ทำงาน ความสัมพันธ์ และการเลี้ยงลูก</b>", "<b>ตารางเทียบตอนคุณอยู่ในระดับดีกับตอนแย่</b> ใช้วัดตัวเองได้ทุกเดือน"];
+const EBOOK_URL = "ebook.html";
+const SELF_BOOK = {"name": "แรงขับเบื้องหลัง", "sys": "ENNEAGRAM · 9 TYPES", "pages": 47, "tag": "อ่านประเภทของคุณแบบเต็ม", "pitch": "ผลที่คุณเพิ่งอ่านคือสรุปสั้นของประเภทหลัก ในเล่มนี้คือทั้งเก้าประเภทแบบละเอียด รวมถึงประเภทที่คะแนนคุณสูสีกับอันดับหนึ่ง", "bullets": ["ทั้ง 9 ประเภทเต็มรูปแบบ ความกลัวพื้นฐาน ความต้องการ จุดแข็ง และกับดัก", "พฤติกรรมของแต่ละประเภทในที่ทำงาน ในความสัมพันธ์ และตอนเลี้ยงลูก", "ประเภทเดียวกันแต่คนละระดับ ตารางเทียบตอนอยู่ในระดับดีกับตอนแย่", "ปีกทั้ง 18 แบบ และคู่ประเภทที่คนมักสับสน 8 คู่ พร้อมคำถามที่ใช้แยก", "ทิศทางเครียดและทิศทางเติบโตของทั้งเก้าประเภท พร้อมแผน 90 วัน"]};
+const PRICE_SINGLE = 290;
+const PRICE_SET = 590;
+const HAS_PERSONAL = true;
+const PRICE_PERSONAL = 149;
+const PERSONAL = {"name": "ฉบับเฉพาะ Type ของคุณ", "desc": "เจาะเฉพาะประเภทของคุณ ปีก ทิศทางเครียด และทิศทางเติบโต ไม่ต้องอ่านประเภทที่ไม่เกี่ยวกับตัวเอง", "bullets": ["บทประเภทหลักของคุณแบบเต็ม พร้อมพฤติกรรมในที่ทำงานและความสัมพันธ์", "บทของปีกคุณ เพื่อเข้าใจสีสันที่ผสมอยู่", "บททิศทางเครียดและทิศทางเติบโต ซึ่งเป็นระบบเตือนภัยส่วนตัวของคุณ", "เปิดมาเจอบทสรุปผลของคุณเป็นหน้าแรก"]};
+
+/* ---------- storage ---------- */
+const KEY = 'ptx_results_v1';
+const memFallback = {};
+function loadAll(){
+  try{ const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : {}; }
+  catch(e){ return memFallback.data || {}; }
+}
+function saveAll(o){
+  try{ localStorage.setItem(KEY, JSON.stringify(o)); }
+  catch(e){ memFallback.data = o; }
+}
+
+/* ---------- ส่งผลแบบทดสอบไปหน้าชำระเงิน ---------- */
+const READER_URL = "https://whoyouare-production.up.railway.app";
+function buildProfile(){
+  const all = loadAll();
+  const p = {};
+  if(all.bigfive && all.bigfive.scores) p.bigfive = all.bigfive.scores;
+  if(all.hexaco && all.hexaco.scores) p.hexaco = all.hexaco.scores;
+  if(all.enneagram && all.enneagram.main){
+    p.enneagram = {type: all.enneagram.main};
+    if(all.enneagram.wing) p.enneagram.wing = all.enneagram.wing;
+  }
+  return p;
+}
+function goBuy(book, edition){
+  const f = document.createElement('form');
+  f.method = 'POST';
+  f.action = READER_URL + '/buy';
+  [['book',book],['edition',edition],['profile',JSON.stringify(buildProfile())]]
+    .forEach(([k,v])=>{
+      const i=document.createElement('input');
+      i.type='hidden'; i.name=k; i.value=v; f.appendChild(i);
+    });
+  document.body.appendChild(f);
+  f.submit();
+}
+
+function saveResult(res){
+  const all = loadAll();
+  all[TEST_ID] = Object.assign({ savedAt: new Date().toISOString(), name: TEST_NAME }, res);
+  saveAll(all);
+}
+
+/* ---------- state ---------- */
+let answers = new Array(ITEMS.length).fill(null);
+let page = 0;
+const totalPages = Math.ceil(ITEMS.length / PER_PAGE);
+const DRAFT = 'ptx_draft_' + TEST_ID;
+function saveDraft(){ try{ localStorage.setItem(DRAFT, JSON.stringify({answers,page})); }catch(e){} }
+function loadDraft(){ try{ const r=localStorage.getItem(DRAFT); return r?JSON.parse(r):null; }catch(e){ return null; } }
+function clearDraft(){ try{ localStorage.removeItem(DRAFT); }catch(e){} }
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+/* ---------- intro ---------- */
+renderJourney('introJourney', false);
+const d = loadDraft();
+if(d && d.answers && d.answers.some(x=>x!==null) && d.answers.filter(x=>x!==null).length < ITEMS.length){
+  const done = d.answers.filter(x=>x!==null).length;
+  document.getElementById('resumeBox').innerHTML =
+    '<div class="tease" style="margin-bottom:16px;"><h3 style="margin:0;font-size:15px;">คุณทำค้างไว้ '+done+' ข้อ</h3><p>กดปุ่มด้านล่างเพื่อทำต่อจากจุดเดิมได้เลย</p></div>';
+  document.getElementById('startBtn').textContent = 'ทำต่อจากข้อที่ค้างไว้';
+}
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  const dd = loadDraft();
+  if(dd && dd.answers && dd.answers.length === ITEMS.length){ answers = dd.answers; page = dd.page || 0; }
+  show('s-quiz'); renderPage(page);
+});
+document.getElementById('retakeBtn').addEventListener('click', ()=>{
+  answers = new Array(ITEMS.length).fill(null); page = 0; clearDraft(); show('s-intro');
+});
+
+/* ---------- quiz ---------- */
+function renderPage(p){
+  page = p;
+  const start = p * PER_PAGE;
+  const end = Math.min(start + PER_PAGE, ITEMS.length);
+  document.getElementById('pgLabel').textContent = 'หน้า ' + (p+1) + ' / ' + totalPages;
+  const answered = answers.filter(x=>x!==null).length;
+  const pct = Math.round(answered / ITEMS.length * 100);
+  document.getElementById('pcLabel').textContent = pct + '%';
+  document.getElementById('pfill').style.width = pct + '%';
+  document.getElementById('warnMsg').textContent = '';
+
+  const box = document.getElementById('qbox');
+  box.innerHTML = '';
+  for(let i = start; i < end; i++){
+    const it = ITEMS[i];
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.innerHTML =
+      '<div class="qn">ข้อ ' + (i+1) + ' / ' + ITEMS.length + '</div>' +
+      '<div class="qt">' + it.t + '</div>' +
+      '<div class="lk">' + [1,2,3,4,5].map(v=>'<button data-v="'+v+'">'+v+'</button>').join('') + '</div>' +
+      '<div class="lkcap"><span>ไม่ใช่ฉันเลย</span><span>ใช่ฉันมาก</span></div>';
+    box.appendChild(card);
+    const btns = card.querySelectorAll('.lk button');
+    if(answers[i]) btns[answers[i]-1].classList.add('sel');
+    btns.forEach(b=>b.addEventListener('click', ()=>{
+      btns.forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      answers[i] = parseInt(b.dataset.v);
+      const a = answers.filter(x=>x!==null).length;
+      const pc = Math.round(a/ITEMS.length*100);
+      document.getElementById('pcLabel').textContent = pc + '%';
+      document.getElementById('pfill').style.width = pc + '%';
+      document.getElementById('warnMsg').textContent = '';
+      saveDraft();
+    }));
+  }
+  document.getElementById('prevBtn').style.visibility = p === 0 ? 'hidden' : 'visible';
+  document.getElementById('nextBtn').textContent = (p === totalPages-1) ? 'ดูผลลัพธ์' : 'ถัดไป';
+  window.scrollTo({top:0, behavior:'instant'});
+}
+document.getElementById('prevBtn').addEventListener('click', ()=>{ if(page>0) renderPage(page-1); });
+document.getElementById('nextBtn').addEventListener('click', ()=>{
+  const start = page*PER_PAGE, end = Math.min(start+PER_PAGE, ITEMS.length);
+  for(let i=start;i<end;i++){
+    if(answers[i]===null){
+      document.getElementById('warnMsg').textContent = 'ยังตอบไม่ครบทุกข้อในหน้านี้ (ข้อ ' + (i+1) + ')';
+      return;
+    }
+  }
+  if(page < totalPages-1){ renderPage(page+1); }
+  else { finish(); }
+});
+
+/* ---------- scoring ---------- */
+function computeScores(){
+  const sums = {}, counts = {};
+  DIMS.forEach(d=>{ sums[d.k]=0; counts[d.k]=0; });
+  ITEMS.forEach((it,i)=>{
+    const v = answers[i];
+    const s = it.r ? (6-v) : v;
+    sums[it.d] += s; counts[it.d]++;
+  });
+  const out = {};
+  DIMS.forEach(d=>{
+    const avg = sums[d.k]/counts[d.k];
+    out[d.k] = Math.round((avg-1)/4*100);
+  });
+  return out;
+}
+function level(v){ return v>=65 ? 'high' : (v>=40 ? 'mid' : 'low'); }
+const LEVEL_TH = {high:'สูง', mid:'ปานกลาง', low:'ต่ำ'};
+
+function finish(){
+  const scores = computeScores();
+  let payload = { scores: scores };
+  if(MODE === 'enneagram'){
+    const sorted = DIMS.map(d=>({k:d.k, v:scores[d.k]})).sort((a,b)=>b.v-a.v);
+    payload.main = sorted[0].k;
+    payload.top3 = sorted.slice(0,3).map(x=>x.k);
+    const w = WINGS[sorted[0].k];
+    payload.wing = (scores[w[0]] >= scores[w[1]]) ? w[0] : w[1];
+  }
+  saveResult(payload);
+  clearDraft();
+  renderResult(payload);
+  show('s-result');
+}
+
+/* ---------- results ---------- */
+function dimBy(k){ return DIMS.find(d=>String(d.k)===String(k)); }
+
+function renderResult(p){
+  const scores = p.scores;
+  const head = document.getElementById('resultHead');
+  const body = document.getElementById('resultBody');
+  body.innerHTML = '';
+
+  if(MODE === 'enneagram'){
+    const m = dimBy(p.main), w = dimBy(p.wing);
+    head.innerHTML =
+      '<div class="hero-type"><div class="num">' + p.main + '</div>' +
+      '<div class="tn">' + m.th + '</div><div class="te">TYPE ' + p.main + ' · ' + m.en + '</div>' +
+      '<div class="wing">ปีก (Wing): ' + p.main + 'w' + p.wing + ' — มีสีสันของ "' + w.th + '" ผสมอยู่</div></div>';
+    const D = DESC[String(p.main)];
+    body.innerHTML =
+      '<div class="dcard"><div class="kv"><div class="k">แรงขับ</div><div class="val">' + D.core + '</div></div>' +
+      '<div class="kv"><div class="k">ความกลัว</div><div class="val">' + D.fear + '</div></div>' +
+      '<div class="kv"><div class="k">ความต้องการ</div><div class="val">' + D.desire + '</div></div>' +
+      '<div class="kv"><div class="k">จุดแข็ง</div><div class="val">' + D.strength + '</div></div>' +
+      '<div class="kv"><div class="k">จุดระวัง</div><div class="val">' + D.watch + '</div></div>' +
+      '<div class="kv"><div class="k">งานที่เข้ากัน</div><div class="val">' + D.work + '</div></div></div>';
+    const sortedAll = DIMS.map(d=>({k:d.k, v:scores[d.k]})).sort((a,b)=>b.v-a.v);
+    const gapTop = sortedAll[0].v - sortedAll[1].v;
+    let h = '<h2 style="margin-top:30px;">คะแนนทั้ง 9 ประเภท</h2>' +
+      '<p class="lead" style="font-size:13.5px;margin-bottom:14px;">คนส่วนใหญ่มีประเภทหลัก 1 ประเภท แต่มีอีก 2–3 ประเภทที่คะแนนใกล้เคียงกัน ซึ่งเป็นด้านที่คุณใช้ในบางสถานการณ์</p>' +
+      '<div class="explain"><div class="eh">ตัวเลขนี้คืออะไร</div>' +
+      '<p>แต่ละประเภทมีคำถาม 7 ข้อ ระบบเอาค่าเฉลี่ยคำตอบของคุณในกลุ่มนั้นมาแปลงเป็นสเกล 0–100 เช่น 80 แปลว่าคุณตอบข้อของประเภทนั้นเฉลี่ยราว 4.2 จาก 5</p>' +
+      '<p><strong>เทียบกับตัวคุณเอง ไม่ใช่เทียบกับคนอื่น</strong> นี่ไม่ใช่เปอร์เซ็นไทล์ คะแนน 80 ไม่ได้แปลว่าคุณเป็นประเภทนั้นมากกว่าคนทั่วไป 80% แต่แปลว่าคุณเห็นด้วยกับข้อความของประเภทนั้นในระดับ 80 จากเต็ม 100</p>' +
+      '<p><strong>ให้อ่านลำดับ มากกว่าอ่านตัวเลข</strong> คนที่ชอบตอบ 4–5 จะได้คะแนนสูงเกือบทุกประเภท ส่วนคนที่ตอบระมัดระวังจะได้ต่ำทั้งแถว ตัวเลขดิบจึงเอาไปเทียบกับเพื่อนไม่ได้ แต่ลำดับภายในตัวคุณเชื่อถือได้</p>' +
+      '<p><strong>ช่องว่างระหว่างอันดับ 1 กับ 2 บอกความชัดเจน</strong> ' +
+      (gapTop >= 15
+        ? 'ของคุณห่างกัน ' + gapTop + ' คะแนน ซึ่งถือว่าชัดเจน ประเภทหลักของคุณค่อนข้างแน่นอน'
+        : 'ของคุณห่างกันแค่ ' + gapTop + ' คะแนน ซึ่งถือว่าสูสี แปลว่าประเภทหลักอาจเป็นอันดับ 2 ก็ได้ ให้ตัดสินจากความกลัวพื้นฐานว่าอันไหนตรงกว่า ไม่ใช่จากตัวเลข') +
+      '</p></div>';
+    const sorted = DIMS.slice().sort((a,b)=>scores[b.k]-scores[a.k]);
+    sorted.forEach(d=>{
+      h += '<div class="scorerow"><div class="lb" style="background:'+d.c+'">'+d.k+'</div>' +
+        '<div class="nm"><div class="a">'+d.th+'</div><div class="b">'+d.en+'</div></div>' +
+        '<div class="bs"><div class="bf" style="width:'+scores[d.k]+'%;background:'+d.c+'"></div></div>' +
+        '<div class="v">'+scores[d.k]+'</div></div>';
+    });
+    body.innerHTML += h;
+  } else {
+    head.innerHTML = '<h1>โปรไฟล์ ' + TEST_NAME + ' ของคุณ</h1><div class="radar"><svg id="radar" width="290" height="290" viewBox="0 0 290 290"></svg></div>';
+    let h = '';
+    DIMS.forEach(d=>{
+      h += '<div class="scorerow"><div class="lb" style="background:'+d.c+'">'+d.k+'</div>' +
+        '<div class="nm"><div class="a">'+d.th+'</div><div class="b">'+d.en+'</div></div>' +
+        '<div class="bs"><div class="bf" style="width:'+scores[d.k]+'%;background:'+d.c+'"></div></div>' +
+        '<div class="v">'+scores[d.k]+'</div></div>';
+    });
+    h += '<div class="divider"></div><h2>คำอธิบายรายมิติ</h2>';
+    DIMS.forEach(d=>{
+      const lv = level(scores[d.k]);
+      h += '<div class="dcard" style="border-left-color:'+d.c+'"><h3>'+d.th+'<span class="lvl">'+LEVEL_TH[lv]+' · '+scores[d.k]+'</span></h3><p>'+DESC[d.k][lv]+'</p></div>';
+    });
+    body.innerHTML = h;
+    drawRadar(scores);
+  }
+
+  // ตัวอย่างจากในเล่ม — เจาะจงตามประเภทของผู้อ่าน
+  if(MODE === 'enneagram' && p.main && TEASERS[String(p.main)]){
+    const tz = TEASERS[String(p.main)];
+    const mm = dimBy(p.main);
+    document.getElementById('previewBox').innerHTML = renderPreview(
+      'บทของ Type ' + p.main + ' ' + mm.th + ' ในเล่มเริ่มแบบนี้',
+      'นี่คือย่อหน้าแรกจริงจากบทประเภทของคุณ ในเล่มบทนี้ยาวกว่าที่คุณเพิ่งอ่านหลายเท่า',
+      [tz[0]], [tz[1] || tz[0]], GETS, 'sellBox');
+  }
+
+  const all = loadAll();
+  const doneCount = NAV.filter(n=>all[n.id]).length;
+  renderJourney('resultJourney', true);
+  renderCombined(all, doneCount);
+  renderSell(doneCount);
+  if(MODE === 'enneagram' && p.main){
+    const mm = dimBy(p.main);
+    document.getElementById('closingBox').innerHTML = renderClosing(
+      'ยังมีอีกมากที่ Type ' + p.main + ' ควรรู้เกี่ยวกับตัวเอง',
+      'สิ่งที่คุณเพิ่งอ่านคือสรุปหกบรรทัด ในเล่มคือบททั้งบทที่เขียนถึง' + mm.th +
+      ' พร้อมปีก ทิศทางเครียด และเส้นทางเติบโตของคุณโดยเฉพาะ',
+      'อ่านออนไลน์ ไม่มีวันหมดอายุ · ระบบจำว่าคุณอ่านถึงบทไหน',
+      'enneagram','personal');
+  }
+  const dt = new Date();
+  document.getElementById('savedNote').textContent = 'บันทึกผลไว้ในเครื่องนี้แล้ว · ' + dt.toLocaleDateString('th-TH') + ' ' + dt.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+}
+
+function drawRadar(scores){
+  const svg = document.getElementById('radar');
+  if(!svg) return;
+  svg.innerHTML = '';
+  const cx=145, cy=145, R=100, n=DIMS.length;
+  const ang = i => (Math.PI*2*i/n) - Math.PI/2;
+  const NS = 'http://www.w3.org/2000/svg';
+  [0.25,0.5,0.75,1].forEach(f=>{
+    const pts = DIMS.map((d,i)=>{const a=ang(i);return (cx+Math.cos(a)*R*f)+','+(cy+Math.sin(a)*R*f);}).join(' ');
+    const pg = document.createElementNS(NS,'polygon');
+    pg.setAttribute('points',pts); pg.setAttribute('fill','none');
+    pg.setAttribute('stroke','rgba(241,237,228,0.13)');
+    svg.appendChild(pg);
+  });
+  DIMS.forEach((d,i)=>{
+    const a=ang(i);
+    const ln=document.createElementNS(NS,'line');
+    ln.setAttribute('x1',cx);ln.setAttribute('y1',cy);
+    ln.setAttribute('x2',cx+Math.cos(a)*R);ln.setAttribute('y2',cy+Math.sin(a)*R);
+    ln.setAttribute('stroke','rgba(241,237,228,0.13)');
+    svg.appendChild(ln);
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',cx+Math.cos(a)*(R+20));t.setAttribute('y',cy+Math.sin(a)*(R+20));
+    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+    t.setAttribute('fill',d.c);t.setAttribute('font-family','IBM Plex Mono, monospace');
+    t.setAttribute('font-size','15');t.setAttribute('font-weight','600');
+    t.textContent=d.k; svg.appendChild(t);
+  });
+  const pts = DIMS.map((d,i)=>{const a=ang(i);const r=scores[d.k]/100*R;return [cx+Math.cos(a)*r, cy+Math.sin(a)*r];});
+  const pg=document.createElementNS(NS,'polygon');
+  pg.setAttribute('points',pts.map(p=>p.join(',')).join(' '));
+  pg.setAttribute('fill','rgba(255,255,255,0.16)');
+  pg.setAttribute('stroke',getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
+  pg.setAttribute('stroke-width','2');
+  svg.appendChild(pg);
+  pts.forEach(p=>{
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r','3.5');
+    c.setAttribute('fill',getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
+    svg.appendChild(c);
+  });
+}
+
+/* ---------- journey ---------- */
+function renderJourney(elId, isResult){
+  const all = loadAll();
+  const el = document.getElementById(elId);
+  if(!el) return;
+  const doneCount = NAV.filter(n=>all[n.id]).length;
+  let h = '<h2 style="margin-bottom:5px;">' + (isResult ? 'เส้นทางของคุณ · ' + doneCount + ' จาก 3' : 'แบบทดสอบในชุดนี้') + '</h2>' +
+    '<p class="lead" style="font-size:13.5px;margin-bottom:14px;">' +
+    (isResult
+      ? (doneCount >= 3
+          ? 'คุณทำครบทั้ง 3 แบบทดสอบแล้ว — ปลดล็อกการวิเคราะห์ความเข้ากันและราคาพิเศษเรียบร้อย'
+          : 'แต่ละแบบทดสอบมองคุณจากคนละมุม เมื่อครบทั้ง 3 ระบบจะวิเคราะห์ให้ว่ามุมเหล่านั้นสอดคล้องกันหรือขัดกันตรงไหน')
+      : 'ทำอันไหนก่อนก็ได้ ผลของแต่ละอันจะถูกเก็บไว้ให้อัตโนมัติ') +
+    '</p>';
+  NAV.forEach(n=>{
+    const done = !!all[n.id];
+    const isSelf = n.id === TEST_ID;
+    const cls = done ? 'done' : 'todo';
+    const sub = done ? ('ทำแล้ว · ' + summaryLine(all[n.id], n.id)) : (isSelf ? 'คุณอยู่ที่นี่' : 'ยังไม่ได้ทำ');
+    const tag = done ? '✓' : '→';
+    h += '<a class="jrow '+cls+'" href="'+n.file+'"><div class="mark">'+tag+'</div>' +
+      '<div class="txt"><div class="a">'+n.name+'</div><div class="b">'+sub+'</div></div>' +
+      '<div class="arrow">›</div></a>';
+  });
+  el.innerHTML = h;
+}
+function summaryLine(res, id){
+  if(!res) return '';
+  if(id === 'enneagram' && res.main) return 'Type ' + res.main + (res.wing ? 'w'+res.wing : '');
+  if(res.scores){
+    const ks = Object.keys(res.scores);
+    const top = ks.sort((a,b)=>res.scores[b]-res.scores[a])[0];
+    return 'เด่นที่ ' + top + ' (' + res.scores[top] + ')';
+  }
+  return '';
+}
+
+/* ---------- combined analysis ---------- */
+function renderCombined(all, doneCount){
+  const el = document.getElementById('combinedBox');
+  if(doneCount < 3){
+    el.innerHTML = '<div class="divider"></div>' +
+      '<div class="tease"><div class="eyebrow" style="margin-bottom:8px;">ยังล็อกอยู่ · ทำอีก ' + (3-doneCount) + ' แบบทดสอบ</div>' +
+      '<h3 style="margin:0;">การวิเคราะห์ความเข้ากันของทั้ง 3 ระบบ</h3>' +
+      '<p>Big Five บอกว่าคุณ <em>เป็น</em> คนแบบไหน · HEXACO เพิ่มมิติที่บอกว่าคุณ <em>เล่นเกม</em> แบบไหน · Enneagram บอกว่า <em>ทำไม</em> คุณถึงเป็นแบบนั้น เมื่อครบทั้งสาม เราจะเทียบให้เห็นว่าภาพของคุณสอดคล้องหรือขัดกันเองตรงไหน — ซึ่งจุดที่ขัดกันมักเป็นจุดที่คนติดอยู่นานที่สุดโดยไม่รู้ตัว</p>' +
+      '<div class="blurline">ตัวอย่างสิ่งที่คุณจะได้เห็น: คุณมีคะแนน ██ สูงแต่ Enneagram ชี้ว่าแรงขับหลักของคุณคือ ████ ซึ่งแปลว่า ██████████ และนี่คือสาเหตุที่คุณมัก ███████ ในสถานการณ์ที่ ██████</div></div>';
+    return;
+  }
+  const bf = all.bigfive, hx = all.hexaco, en = all.enneagram;
+  let rows = [];
+
+  // 1. Extraversion cross-check
+  if(bf && hx){
+    const diff = Math.abs(bf.scores.E - hx.scores.X);
+    rows.push(['ความสม่ำเสมอของคำตอบ',
+      diff <= 12
+        ? 'คะแนนการแสดงออกทางสังคมของคุณจากทั้งสองแบบทดสอบใกล้เคียงกันมาก (' + bf.scores.E + ' และ ' + hx.scores.X + ') แปลว่าคุณตอบอย่างสม่ำเสมอและผลลัพธ์นี้เชื่อถือได้'
+        : 'คะแนนการแสดงออกทางสังคมจากสองแบบทดสอบต่างกันพอสมควร (' + bf.scores.E + ' กับ ' + hx.scores.X + ') ซึ่งมักเกิดกับคนที่พฤติกรรมทางสังคมเปลี่ยนตามบริบท — เข้าสังคมได้ดีในบทบาทหนึ่งแต่ถอยกลับมาเงียบในอีกบทบาท']);
+  }
+  // 2. Neuroticism vs Emotionality
+  if(bf && hx){
+    rows.push(['อารมณ์ภายใต้ความกดดัน',
+      'Big Five วัดความไม่มั่นคงทางอารมณ์ของคุณได้ ' + bf.scores.N + ' ส่วน HEXACO วัดความอ่อนไหวได้ ' + hx.scores.E + ' — สองตัวนี้ไม่ใช่สิ่งเดียวกัน ตัวแรกคือ "คุณเครียดง่ายแค่ไหน" ตัวหลังคือ "คุณเชื่อมโยงกับอารมณ์ของตัวเองและคนอื่นลึกแค่ไหน" ' +
+      (hx.scores.E > bf.scores.N + 10
+        ? 'ในกรณีของคุณ ความอ่อนไหวสูงกว่าความเครียด แปลว่าคุณรู้สึกลึกโดยที่ไม่ได้พังง่าย ซึ่งเป็นชุดที่ดีมากสำหรับงานที่ต้องดูแลคน'
+        : (bf.scores.N > hx.scores.E + 10
+          ? 'ในกรณีของคุณ ความเครียดสูงกว่าความอ่อนไหว แปลว่าแรงกดดันกระทบคุณมากกว่าที่ความสัมพันธ์กระทบ ซึ่งมักเป็นสัญญาณว่าภาระงานหรือความคาดหวังกับตัวเองกำลังหนักเกินไป'
+          : 'ในกรณีของคุณสองตัวนี้อยู่ในระดับใกล้กัน แสดงถึงระบบอารมณ์ที่ตอบสนองตามสถานการณ์อย่างสมเหตุสมผล'))]);
+  }
+  // 3. Honesty-Humility (unique to HEXACO)
+  if(hx){
+    const H = hx.scores.H;
+    rows.push(['มิติที่ Big Five มองไม่เห็น',
+      'คะแนนความซื่อสัตย์-อ่อนน้อมของคุณคือ ' + H + ' ซึ่งเป็นมิติที่มีเฉพาะใน HEXACO และเป็นตัวทำนายพฤติกรรมเชิงจริยธรรมในองค์กรที่แม่นที่สุด ' +
+      (H >= 65 ? 'คะแนนระดับนี้แปลว่าคุณเป็นคนที่องค์กรไว้ใจได้จริงในเรื่องที่ไม่มีใครตรวจสอบ — เป็นทุนที่มีมูลค่าสูงและควรอยู่ในที่ที่มันถูกให้ค่า'
+        : (H >= 40 ? 'คะแนนระดับกลางแปลว่าคุณยึดหลักการแต่ก็ปรับตามความจริงของธุรกิจได้ — ยืดหยุ่นแต่ไม่ไร้เส้น'
+          : 'คะแนนระดับนี้แปลว่าคุณเล่นเกมเชิงกลยุทธ์เก่งและใช้โอกาสได้ดี ซึ่งได้เปรียบในระยะสั้น แต่ควรจับตาต้นทุนความไว้วางใจที่สะสมในระยะยาว'))]);
+  }
+  // 4. Enneagram cross
+  if(en && bf){
+    const t = en.main;
+    const map = {
+      1:['C','คนประเภท 1 มักมีคะแนนความมีวินัยสูง'],
+      2:['A','คนประเภท 2 มักมีคะแนนความเห็นอกเห็นใจสูง'],
+      3:['C','คนประเภท 3 มักมีคะแนนความมีวินัยและการแสดงออกสูง'],
+      4:['O','คนประเภท 4 มักมีคะแนนการเปิดรับประสบการณ์สูง'],
+      5:['O','คนประเภท 5 มักมีคะแนนการเปิดรับสูงและการแสดงออกต่ำ'],
+      6:['N','คนประเภท 6 มักมีคะแนนความกังวลสูงกว่าค่าเฉลี่ย'],
+      7:['E','คนประเภท 7 มักมีคะแนนการแสดงออกและการเปิดรับสูง'],
+      8:['E','คนประเภท 8 มักมีคะแนนการแสดงออกสูงและความประนีประนอมต่ำ'],
+      9:['A','คนประเภท 9 มักมีคะแนนความเห็นอกเห็นใจสูงและความกังวลต่ำ'],
+    };
+    const m = map[t];
+    const v = bf.scores[m[0]];
+    rows.push(['ทำไมคุณถึงเป็นแบบนี้',
+      'Enneagram จัดคุณเป็น Type ' + t + ' ซึ่ง' + m[1] + ' และคะแนนจริงของคุณในมิตินั้นคือ ' + v + ' ' +
+      (v >= 60 ? '— ตรงตามรูปแบบที่คาด แปลว่าแรงขับภายในกับพฤติกรรมภายนอกของคุณไปในทางเดียวกัน คุณค่อนข้าง "เป็นตัวเอง" อย่างสม่ำเสมอ'
+               : '— ต่างจากรูปแบบที่คาดไว้ ซึ่งน่าสนใจมาก มักหมายความว่าคุณมีแรงขับภายในแบบหนึ่งแต่แสดงออกอีกแบบ อาจเพราะสภาพแวดล้อมหรือบทบาทที่ต้องรับ นี่คือช่องว่างที่ทำให้หลายคนรู้สึกเหนื่อยโดยไม่รู้สาเหตุ')]);
+  }
+  // 5. summary triangle
+  if(bf && hx && en){
+    const topBF = Object.keys(bf.scores).sort((a,b)=>bf.scores[b]-bf.scores[a])[0];
+    const topHX = Object.keys(hx.scores).sort((a,b)=>hx.scores[b]-hx.scores[a])[0];
+    rows.push(['ภาพรวมสามมุม',
+      'จุดเด่นที่สุดของคุณคือ ' + topBF + ' (Big Five) และ ' + topHX + ' (HEXACO) โดยมีแรงขับหลักจาก Type ' + en.main + (en.wing?('w'+en.wing):'') + ' ' +
+      'สามอย่างนี้รวมกันคือ "สิ่งที่คุณทำได้ดี" + "วิธีที่คุณเล่น" + "เหตุผลที่คุณทำ" ซึ่งเป็นภาพที่ครบกว่าการดูแบบทดสอบใดแบบเดียว']);
+  }
+
+  let h = '<div class="divider"></div><div class="eyebrow">ปลดล็อกแล้ว · การวิเคราะห์รวม 3 ระบบ</div><h2>ทั้งสามมุมของคุณเข้ากันแค่ไหน</h2><div class="dcard" style="margin-top:14px;">';
+  rows.forEach(r=>{ h += '<div class="kv"><div class="k">'+r[0]+'</div><div class="val">'+r[1]+'</div></div>'; });
+  h += '</div>';
+  el.innerHTML = h;
+}
+
+
+/* ---------- ตัวอย่างจากในเล่ม ---------- */
+function renderPreview(headline, sub, openPs, blurPs, gets, targetId){
+  return '<div class="preview">' +
+    '<div class="pv-eye">ตัวอย่างจากในเล่ม</div>' +
+    '<h2>' + headline + '</h2>' +
+    '<p class="pv-sub">' + sub + '</p>' +
+    '<div class="pv-page">' +
+      openPs.map(function(p){ return '<p>' + p + '</p>'; }).join('') +
+      '<div class="pv-fade">' +
+        blurPs.map(function(p){ return '<p>' + p + '</p>'; }).join('') +
+        '<div class="pv-lock"><button onclick="document.getElementById(\'' + targetId + '\').scrollIntoView({behavior:\'smooth\'})">อ่านต่อทั้งหมด</button></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="pv-more">ยังมีอีกหลายบทที่เขียนถึงคุณโดยเฉพาะ</div>' +
+    '<div class="pv-get"><div class="gh">สิ่งที่คุณจะได้</div><ul>' +
+      gets.map(function(g){ return '<li>' + g + '</li>'; }).join('') +
+    '</ul></div></div>';
+}
+function renderClosing(title, body, note, book, edition){
+  return '<div class="closing"><h2>' + title + '</h2><p>' + body + '</p>' +
+    '<div class="facts">' + FACTS.map(function(x){ return '<div>' + x + '</div>'; }).join('') + '</div>' +
+    '<div style="height:16px"></div>' +
+    '<button onclick="goBuy(\'' + book + '\',\'' + edition + '\')">เริ่มอ่านฉบับเต็ม</button>' +
+    '<div class="cn">' + note + '</div>' +
+    '<div class="honest">แบบทดสอบฟรีทั้งหมด ไม่ต้องสมัครสมาชิก และผลถูกเก็บไว้ในเบราว์เซอร์ของคุณเอง ' +
+    'ไม่ถูกส่งไปที่เซิร์ฟเวอร์จนกว่าคุณจะกดซื้อ</div></div>';
+}
+
+/* ---------- upsell ---------- */
+function renderSell(doneCount){
+  const el = document.getElementById('sellBox');
+  const complete = doneCount >= 3;
+  const singlesTotal = PRICE_SINGLE * 3;
+
+  let h = '';
+  if(HAS_PERSONAL){
+    h += '<div class="personal">' +
+      '<div class="ptag">ตรงกับผลที่คุณเพิ่งได้</div>' +
+      '<h2 style="margin:0 0 3px;">' + PERSONAL.name + '</h2>' +
+      '<div class="bookmeta">อ่านออนไลน์ · เฉพาะเนื้อหาที่ตรงกับผลของคุณ</div>' +
+      '<p style="font-size:13.5px;color:var(--dim);margin:12px 0 0;line-height:1.75;">' + PERSONAL.desc + '</p>' +
+      '<ul>' + PERSONAL.bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+      '<div class="pricebox"><div class="now">฿' + PRICE_PERSONAL + '</div></div>' +
+      '<p class="locknote">รหัสของคุณจะถูกล็อกกับผลที่คุณได้ ส่งต่อให้คนอื่นแล้วเนื้อหาจะไม่ตรงกับเขา</p>' +
+      '<button class="btn gold" style="margin-top:14px;" onclick="goBuy(\'enneagram\',\'personal\')">สั่งซื้อ ฿' + PRICE_PERSONAL + '</button>' +
+      '</div>';
+  }
+  h += '<div class="sell">' +
+    '<div class="tagline">' + SELF_BOOK.tag + '</div>' +
+    '<h2>' + SELF_BOOK.name + '</h2>' +
+    '<div class="bookmeta">' + SELF_BOOK.sys + ' · ' + SELF_BOOK.pages + ' หน้า · PDF</div>' +
+    '<p style="font-size:14px;color:var(--dim);margin:10px 0 0;line-height:1.75;">' + SELF_BOOK.pitch + '</p>' +
+    '<ul>' + SELF_BOOK.bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+    '<div class="pricebox"><div class="now">฿' + PRICE_SINGLE + '</div></div>' +
+    '<p class="locknote">เล่มเดี่ยว เจาะเฉพาะระบบนี้ ดาวน์โหลดได้ทันทีหลังชำระเงิน</p>' +
+    '<button class="btn gold" style="margin-top:16px;" onclick="goBuy(\'enneagram\',\'full\')">สั่งซื้อเล่มนี้ ฿' + PRICE_SINGLE + '</button>' +
+    '</div>';
+
+  h += '<div class="pkg">' +
+    '<div class="pkgtag">อีกทางเลือกหนึ่ง</div>' +
+    '<h2 style="margin:0 0 3px;">ฉบับรวมสามระบบ</h2>' +
+    '<div class="bookmeta">BIG FIVE + HEXACO + ENNEAGRAM · 136 หน้า · ไฟล์เดียวจบ</div>' +
+    '<p style="font-size:13.5px;color:var(--dim);margin:12px 0 0;line-height:1.75;">' +
+      'ถ้าคุณอยากอ่านครบทั้งสามระบบ เล่มรวมคุ้มกว่าซื้อแยกทีละเล่ม และมีภาคที่เล่มเดี่ยวไม่มี คือภาควิเคราะห์ว่าทั้งสามระบบประกอบกันเป็นภาพอะไร และจุดที่มันขัดกันบอกอะไรเกี่ยวกับคุณ</p>' +
+    '<div class="pkglist">' +
+      '<div class="pkgrow"><div class="pn">1</div><div class="pi"><div class="a">Big Five ทั้งห้ามิติ</div><div class="b">คุณเป็นคนแบบไหน · 9 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">2</div><div class="pi"><div class="a">HEXACO ทั้งหกมิติ</div><div class="b">คุณเล่นเกมแบบไหน · 7 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">3</div><div class="pi"><div class="a">Enneagram ทั้งเก้าประเภท</div><div class="b">ทำไมคุณถึงเป็นแบบนั้น · 16 บท</div></div></div>' +
+      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">ภาคสามมุมประกอบเป็นภาพเดียว<span class="freetag">มีเฉพาะในเล่มรวม</span></div><div class="b">วิเคราะห์จุดที่ทั้งสามระบบขัดกัน · อ่านคน · บริหารทีม · ความสัมพันธ์ · 17 บท</div></div></div>' +
+    '</div>' +
+    '<div class="pkgmath">' +
+      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>฿' + singlesTotal + '</span></div>' +
+      '<div class="mrow"><span>ฉบับรวม ไฟล์เดียว</span><span>฿' + PRICE_SET + '</span></div>' +
+      '<div class="mrow total"><span>ประหยัด</span><span>฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
+    '</div>' +
+    '<div class="pricebox" style="margin-top:16px;">' +
+      '<div class="now">฿' + PRICE_SET + '</div>' +
+      '<div class="was">฿' + singlesTotal + '</div>' +
+      '<div class="save">ประหยัด ฿' + (singlesTotal - PRICE_SET) + '</div>' +
+    '</div>' +
+    '<p class="locknote">' +
+      (complete
+        ? 'คุณทำครบทั้ง 3 แบบทดสอบแล้ว ภาควิเคราะห์รวมในเล่มนี้จะใช้ได้เต็มที่ตั้งแต่หน้าแรก เพราะต้องใช้ผลทั้งสามชุดมาวางเทียบกัน'
+        : 'ซื้อได้เลยตอนนี้ แต่แนะนำให้ทำอีก ' + (3-doneCount) + ' แบบทดสอบให้ครบก่อน เพราะภาควิเคราะห์รวมต้องใช้ผลทั้งสามชุดมาวางเทียบกันจึงจะได้ประโยชน์เต็มที่') +
+      ' · อ่านออนไลน์ผ่านลิงก์ส่วนตัว จำไว้ว่าอ่านถึงบทไหนแล้ว</p>' +
+    '<button class="btn gold" style="margin-top:16px;" onclick="goBuy(\'complete\',\'full\')">สั่งซื้อฉบับรวม ฿' + PRICE_SET + '</button>' +
+    '</div>';
+  el.innerHTML = h;
+}
+</script>
+</body>
+</html>
