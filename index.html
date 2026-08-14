@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รู้จักตัวเองใน 3 มุม — แบบทดสอบบุคลิกภาพฟรี</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1428;--panel:#1A2140;--paper:#F1EDE4;--dim:#9DA3BD;--line:rgba(241,237,228,0.11);--gold:#D9A441;}
+*{box-sizing:border-box;}
+body{margin:0;background:radial-gradient(circle at 15% -12%,#232C57 0%,var(--ink) 58%);background-attachment:fixed;color:var(--paper);font-family:'IBM Plex Sans Thai',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:660px;margin:0 auto;padding:36px 20px 70px;}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;margin:0 0 10px;line-height:1.35;}
+h1{font-size:34px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.lead{font-size:15.5px;line-height:1.8;color:var(--dim);margin:0 0 26px;}
+.prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);margin-bottom:8px;}
+.ptrack{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:30px;}
+.pfill{height:100%;background:linear-gradient(90deg,#3E8E7E,#D9A441,#B98CCE);width:0;transition:width .5s ease;}
+.card{display:flex;gap:16px;align-items:center;padding:20px 18px;border:1px solid var(--line);border-radius:15px;margin-bottom:12px;background:var(--panel);text-decoration:none;color:var(--paper);transition:transform .15s ease,border-color .15s ease;}
+.card:active{transform:scale(.99);}
+.card .n{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#0F1428;flex-shrink:0;}
+.card .t{flex:1;}
+.card .t .a{font-family:'Noto Serif Thai',serif;font-size:18px;}
+.card .t .b{font-size:12.5px;color:var(--dim);margin-top:3px;line-height:1.5;}
+.card .t .st{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;}
+.card .go{font-size:20px;color:var(--dim);}
+.note{background:linear-gradient(140deg,rgba(217,164,65,.14),rgba(217,164,65,.03));border:1px solid rgba(217,164,65,.4);border-radius:16px;padding:20px 18px;margin-top:26px;}
+.note p{font-size:14px;color:var(--dim);line-height:1.72;margin:8px 0 0;}
+.tobook{display:block;text-align:center;margin-top:20px;padding:15px;border:1px solid var(--line);border-radius:12px;color:var(--gold);text-decoration:none;font-size:14px;}
+.foot{font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:36px;padding-top:18px;border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Personality Triangulation</div>
+  <h1>รู้จักตัวเองใน 3 มุม</h1>
+  <p class="lead">แบบทดสอบเดียวบอกคุณได้แค่ด้านเดียว ชุดนี้มี 3 แบบทดสอบที่มองคุณจากคนละมุม — <strong>Big Five</strong> บอกว่าคุณเป็นคนแบบไหน · <strong>HEXACO</strong> เพิ่มมิติที่บอกว่าคุณเล่นเกมแบบไหน · <strong>Enneagram</strong> บอกว่าทำไมคุณถึงเป็นแบบนั้น</p>
+
+  <div class="prog" id="progText">ความคืบหน้า 0 จาก 3</div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+
+  <div id="cards"></div>
+
+  <div class="note">
+    <h3 style="margin:0;font-size:17px;">ทำครบทั้ง 3 จะได้อะไร</h3>
+    <p>ระบบจะวิเคราะห์ให้ว่าผลจากทั้งสามระบบสอดคล้องหรือขัดกันตรงไหน — จุดที่ขัดกันมักเป็นจุดที่คนติดอยู่นานที่สุดโดยไม่รู้ตัว และคุณจะปลดล็อกราคาพิเศษของคู่มือถอดรหัสบุคลิกภาพฉบับเต็มด้วย</p>
+  </div>
+
+  <a class="tobook" href="ebook.html">ดูรายละเอียดคู่มือฉบับเต็ม ›</a>
+
+  <div class="foot">ทุกแบบทดสอบฟรี ไม่ต้องสมัครสมาชิก ผลลัพธ์ถูกบันทึกไว้ในเบราว์เซอร์ของคุณเอง ไม่ถูกส่งไปที่ไหน · ผลลัพธ์เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา</div>
+</div>
+<script>
+const TESTS = [
+ {id:'bigfive', file:'bigfive.html', name:'Big Five (OCEAN)', desc:'5 มิติ · 50 ข้อ · มาตรฐานงานวิจัยจิตวิทยาทั่วโลก', color:'#3E8E7E', label:'5'},
+ {id:'hexaco', file:'hexaco.html', name:'HEXACO', desc:'6 มิติ · 60 ข้อ · เพิ่มมิติความซื่อสัตย์ที่ Big Five มองไม่เห็น', color:'#D9A441', label:'6'},
+ {id:'enneagram', file:'enneagram.html', name:'Enneagram', desc:'9 ประเภท · 63 ข้อ · ค้นหาแรงขับและความกลัวที่อยู่เบื้องหลัง', color:'#B98CCE', label:'9'},
+];
+function loadAll(){ try{ const r=localStorage.getItem('ptx_results_v1'); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+const all = loadAll();
+const done = TESTS.filter(t=>all[t.id]).length;
+document.getElementById('progText').textContent = 'ความคืบหน้า ' + done + ' จาก 3' + (done>=3 ? ' · ปลดล็อกครบแล้ว' : '');
+document.getElementById('pfill').style.width = (done/3*100) + '%';
+document.getElementById('cards').innerHTML = TESTS.map(t=>{
+  const r = all[t.id];
+  let st = '';
+  if(r){
+    if(t.id==='enneagram' && r.main) st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · Type '+r.main+(r.wing?('w'+r.wing):'')+'</div>';
+    else if(r.scores){ const k=Object.keys(r.scores).sort((a,b)=>r.scores[b]-r.scores[a])[0]; st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · เด่นที่ '+k+' ('+r.scores[k]+')</div>'; }
+    else st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว</div>';
+  } else {
+    st = '<div class="st" style="color:var(--dim)">ยังไม่ได้ทำ</div>';
+  }
+  return '<a class="card" href="'+t.file+'"><div class="n" style="background:'+t.color+'">'+t.label+'</div>'+
+    '<div class="t"><div class="a">'+t.name+'</div><div class="b">'+t.desc+'</div>'+st+'</div>'+
+    '<div class="go">›</div></a>';
+}).join('');
+</script>
+</body>
+</html>
