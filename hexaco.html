@@ -153,6 +153,15 @@ p{line-height:1.75;}
 .closing p{font-size:13.5px;color:var(--dim);margin:0 0 18px;line-height:1.75;}
 .closing button{width:100%;padding:16px;border:none;border-radius:11px;background:linear-gradient(135deg,#E8C275,#D9A441);color:#241804;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;font-size:15.5px;cursor:pointer;}
 .closing .cn{font-size:11.5px;color:var(--dim);margin-top:12px;line-height:1.6;}
+
+.backtop{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--dim);text-decoration:none;
+  border:1px solid var(--line);border-radius:99px;padding:8px 15px;margin-bottom:20px;
+  background:rgba(241,237,228,.03);transition:color .15s ease,border-color .15s ease;}
+.backtop:hover{color:var(--paper);border-color:var(--accent);}
+.backbot{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;
+  padding:15px;border-radius:11px;border:1px solid var(--line);background:transparent;
+  color:var(--paper);text-decoration:none;font-size:14.5px;font-weight:600;
+  font-family:'IBM Plex Sans Thai',sans-serif;}
 .divider{height:1px;background:var(--line);margin:34px 0;}
 .foot{font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:34px;padding-top:18px;border-top:1px solid var(--line);}
 .saved{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);text-align:center;margin-top:16px;}
@@ -163,6 +172,7 @@ p{line-height:1.75;}
 <div class="wrap">
 
 <div class="screen active" id="s-intro">
+  <a class="backtop" href="index.html">← กลับหน้าแรก</a>
   <div class="eyebrow">Six-Factor Model</div>
   <h1>หกด้านของตัวคุณ</h1>
   <p class="lead">แบบทดสอบ 60 ข้อ วัดบุคลิกภาพ 6 มิติตามโมเดล HEXACO — โมเดลที่พัฒนาต่อจาก Big Five โดยเพิ่มมิติ 'ความซื่อสัตย์-อ่อนน้อม' ซึ่งเป็นมิติเดียวที่ทำนายพฤติกรรมด้านจริยธรรมในองค์กรได้จริง</p>
@@ -186,6 +196,7 @@ p{line-height:1.75;}
     <button class="btn ghost" id="prevBtn">ย้อนกลับ</button>
     <button class="btn" id="nextBtn">ถัดไป</button>
   </div>
+  <a class="backtop" href="index.html" style="margin:16px auto 0;display:flex;width:fit-content;">← ออกไปหน้าแรก · คำตอบถูกบันทึกไว้แล้ว</a>
 </div>
 
 <div class="screen" id="s-result">
@@ -199,6 +210,7 @@ p{line-height:1.75;}
   <div id="closingBox"></div>
   <div class="saved" id="savedNote"></div>
   <button class="btn ghost" id="retakeBtn" style="margin-top:18px;">ทำแบบทดสอบนี้ใหม่</button>
+  <a class="backbot" href="index.html">← กลับหน้าแรก</a>
   <div class="foot">ผลลัพธ์นี้เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา ใช้เป็นจุดเริ่มต้นในการทำความเข้าใจตัวเองได้ แต่ไม่ควรใช้ตัดสินคุณค่าหรือความสามารถของใคร</div>
 </div>
 
