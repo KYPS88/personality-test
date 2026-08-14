@@ -218,8 +218,8 @@ const FACTS = ["11 บท", "อ่านประมาณ 1 ชั่วโม
 const GETS = ["<b>ทั้งหกมิติแบบเต็ม</b> แยกคำอธิบายตามระดับคะแนนที่คุณได้จริง", "<b>มิติ H เจาะลึก</b> มิติที่ทำนายพฤติกรรมเชิงจริยธรรมในองค์กรได้ดีกว่าโมเดลอื่น", "<b>ทำไมการสัมภาษณ์งานถึงจับมิตินี้ไม่ได้</b> และสัญญาณที่พอจับได้ในสามนาทีแรก", "<b>การผสม 8 ชุด</b> รวมชุดที่ต้องจับตาที่สุดในองค์กร", "<b>หกมิติในความสัมพันธ์</b> และรูปแบบการทะเลาะที่ทำนายได้จากคะแนน A"];
 const EBOOK_URL = "ebook.html";
 const SELF_BOOK = {"name": "หกด้านของตัวคุณ", "sys": "HEXACO", "pages": 31, "tag": "อ่านผลของคุณแบบเต็ม", "pitch": "ผลที่คุณเพิ่งอ่านคือสรุปสั้นของแต่ละมิติ ในเล่มนี้เจาะลึกมิติ H มิติที่ Big Five ไม่ได้แยกไว้ และงานวิจัยพบว่าทำนายพฤติกรรมเชิงจริยธรรมในองค์กรได้ดีกว่า", "bullets": ["H · ความซื่อสัตย์ที่วัดได้ และทำไม Big Five มองมิตินี้ไม่เห็น", "ทำไมการสัมภาษณ์ถึงจับ H ไม่ได้ และสัญญาณที่พอจับได้ในสามนาทีแรก", "การผสม 8 ชุด รวมถึงชุดที่ต้องจับตาที่สุดในองค์กร", "หกมิติในความสัมพันธ์ และรูปแบบการทะเลาะที่ทำนายได้จากคะแนน A", "แผน 90 วัน แบบฝึกรายมิติ และแบบบันทึกที่พิมพ์ใช้ได้"]};
-const PRICE_SINGLE = 290;
-const PRICE_SET = 590;
+const PRICE_SINGLE = 190;
+const PRICE_SET = 490;
 const HAS_PERSONAL = false;
 
 /* ---------- storage ---------- */
@@ -688,22 +688,22 @@ function renderSell(doneCount){
     '<h2 style="margin:0 0 3px;">ฉบับรวมสามระบบ</h2>' +
     '<div class="bookmeta">BIG FIVE + HEXACO + ENNEAGRAM · 136 หน้า · ไฟล์เดียวจบ</div>' +
     '<p style="font-size:13.5px;color:var(--dim);margin:12px 0 0;line-height:1.75;">' +
-      'ถ้าคุณอยากอ่านครบทั้งสามระบบ เล่มรวมคุ้มกว่าซื้อแยกทีละเล่ม และมีภาคที่เล่มเดี่ยวไม่มี คือภาควิเคราะห์ว่าทั้งสามระบบประกอบกันเป็นภาพอะไร และจุดที่มันขัดกันบอกอะไรเกี่ยวกับคุณ</p>' +
+      'รวมเนื้อหาทั้งสามเล่ม บวกอีก <b style="color:var(--paper)">19 บทที่ไม่มีในเล่มเดี่ยวเลย</b> เพราะเป็นบทที่ต้องใช้ผลจากทั้งสามระบบพร้อมกันถึงจะเขียนได้</p>' +
     '<div class="pkglist">' +
       '<div class="pkgrow"><div class="pn">1</div><div class="pi"><div class="a">Big Five ทั้งห้ามิติ</div><div class="b">คุณเป็นคนแบบไหน · 9 บท</div></div></div>' +
       '<div class="pkgrow"><div class="pn">2</div><div class="pi"><div class="a">HEXACO ทั้งหกมิติ</div><div class="b">คุณเล่นเกมแบบไหน · 7 บท</div></div></div>' +
       '<div class="pkgrow"><div class="pn">3</div><div class="pi"><div class="a">Enneagram ทั้งเก้าประเภท</div><div class="b">ทำไมคุณถึงเป็นแบบนั้น · 16 บท</div></div></div>' +
-      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">ภาคสามมุมประกอบเป็นภาพเดียว<span class="freetag">มีเฉพาะในเล่มรวม</span></div><div class="b">วิเคราะห์จุดที่ทั้งสามระบบขัดกัน · อ่านคน · บริหารทีม · ความสัมพันธ์ · 17 บท</div></div></div>' +
+      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">อีก 19 บทที่ไม่มีในเล่มเดี่ยว<span class="freetag">มีเฉพาะในฉบับรวม</span></div><div class="b">เมื่อสามระบบขัดกัน 4 บท · อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ 5 บท · บริหารทีม 2 บท · ความสัมพันธ์และครอบครัว 3 บท · แผน 90 วัน 5 บท</div></div></div>' +
     '</div>' +
     '<div class="pkgmath">' +
-      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>฿' + singlesTotal + '</span></div>' +
-      '<div class="mrow"><span>ฉบับรวม ไฟล์เดียว</span><span>฿' + PRICE_SET + '</span></div>' +
-      '<div class="mrow total"><span>ประหยัด</span><span>฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
+      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>34 บท · ฿' + singlesTotal + '</span></div>' +
+      '<div class="mrow"><span>ฉบับรวม</span><span>53 บท · ฿' + PRICE_SET + '</span></div>' +
+      '<div class="mrow total"><span>ได้เพิ่ม</span><span>+19 บท · ถูกกว่า ฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
     '</div>' +
     '<div class="pricebox" style="margin-top:16px;">' +
       '<div class="now">฿' + PRICE_SET + '</div>' +
       '<div class="was">฿' + singlesTotal + '</div>' +
-      '<div class="save">ประหยัด ฿' + (singlesTotal - PRICE_SET) + '</div>' +
+      '<div class="save">+19 บทที่ไม่มีในเล่มเดี่ยว</div>' +
     '</div>' +
     '<p class="locknote">' +
       (complete

@@ -30,6 +30,59 @@ h1{font-size:34px;}
 .card .go{font-size:20px;color:var(--dim);}
 .note{background:linear-gradient(140deg,rgba(217,164,65,.14),rgba(217,164,65,.03));border:1px solid rgba(217,164,65,.4);border-radius:16px;padding:20px 18px;margin-top:26px;}
 .note p{font-size:14px;color:var(--dim);line-height:1.72;margin:8px 0 0;}
+
+.sec{margin-top:44px;}
+.sec > h2{font-family:'Noto Serif Thai',serif;font-size:22px;margin:0 0 6px;}
+.sec > .lead2{font-size:14px;color:var(--dim);line-height:1.75;margin:0 0 20px;}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:13px;border-left:3px solid var(--gold);}
+.tcard.t1{border-left-color:#3E8E7E;}
+.tcard.t3{border-left-color:#B98CCE;}
+.tcard .th{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;flex-wrap:wrap;}
+.tcard .th h3{font-family:'Noto Serif Thai',serif;font-size:18px;margin:0;}
+.tcard .th .q{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);}
+.tcard.t1 .th .q{color:#6FC3AE;}
+.tcard.t3 .th .q{color:#D6B6E4;}
+.tcard .desc{font-size:13.8px;color:var(--dim);line-height:1.8;margin:10px 0 0;}
+.tcard .why{font-size:13.5px;line-height:1.8;margin:12px 0 0;padding:13px 14px;background:rgba(255,255,255,.04);border-radius:10px;color:#C8CBDA;}
+.tcard .why b{color:var(--paper);font-weight:600;}
+.samp{margin-top:13px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:11px;padding:14px;}
+.samp .sl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:9px;}
+.samp .row{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:12px;}
+.samp .row:last-child{margin-bottom:0;}
+.samp .row .k{width:88px;color:var(--dim);flex-shrink:0;}
+.samp .row .bar{flex:1;height:6px;background:rgba(255,255,255,.09);border-radius:4px;overflow:hidden;}
+.samp .row .bar i{display:block;height:100%;border-radius:4px;}
+.samp .row .v{font-family:'IBM Plex Mono',monospace;width:26px;text-align:right;color:var(--paper);}
+.samp .txt{font-size:12.5px;color:#C8CBDA;line-height:1.75;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);}
+.combo2{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:12px;}
+.combo2 .ct{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.combo2 .cn{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--gold);flex-shrink:0;}
+.combo2 .ch2{font-size:15.5px;font-weight:600;}
+.combo2 p{font-size:13.3px;color:var(--dim);line-height:1.8;margin:0;}
+.combo2.best{border-color:rgba(217,164,65,.45);background:linear-gradient(150deg,rgba(217,164,65,.13),rgba(26,33,64,.95));}
+.combo2.best .cn{background:var(--gold);color:#241804;}
+.bk{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:11px;}
+.bk .bi{width:38px;height:52px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#0F1428;}
+.bk .bb{flex:1;}
+.bk .bb .bn{font-family:'Noto Serif Thai',serif;font-size:16px;margin-bottom:2px;}
+.bk .bb .bm{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--dim);margin-bottom:7px;}
+.bk .bb .bd{font-size:12.8px;color:var(--dim);line-height:1.7;}
+.bk .bb .bf{font-size:12px;color:var(--paper);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);}
+.bk .bb .bf span{color:var(--gold);}
+.bk .bp{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#E8C275;flex-shrink:0;}
+
+.useit{margin-top:12px;padding:15px 15px 13px;background:rgba(255,255,255,.03);border:1px dashed rgba(241,237,228,.18);border-radius:11px;}
+.useit .ut{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.useit ul{margin:0;padding-left:0;list-style:none;}
+.useit li{font-size:13px;line-height:1.75;color:#C8CBDA;padding:5px 0 5px 22px;position:relative;}
+.useit li::before{content:'→';position:absolute;left:2px;top:5px;color:var(--gold);font-size:12px;}
+.tcard.t1 .useit li::before{color:#6FC3AE;}
+.tcard.t3 .useit li::before{color:#D6B6E4;}
+.useit li b{color:var(--paper);font-weight:600;}
+.only19{margin-top:12px;padding:14px;background:rgba(217,164,65,.08);border:1px solid rgba(217,164,65,.28);border-radius:11px;}
+.o19h{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#E8C275;margin-bottom:10px;}
+.o19g div{font-size:12.5px;color:#C8CBDA;line-height:1.65;padding:5px 0;display:flex;gap:10px;align-items:baseline;}
+.o19g div span{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8C275;flex-shrink:0;width:38px;}
 .tobook{display:block;text-align:center;margin-top:20px;padding:15px;border:1px solid var(--line);border-radius:12px;color:var(--gold);text-decoration:none;font-size:14px;}
 .foot{font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:36px;padding-top:18px;border-top:1px solid var(--line);}
 </style>
@@ -45,9 +98,166 @@ h1{font-size:34px;}
 
   <div id="cards"></div>
 
-  <div class="note">
-    <h3 style="margin:0;font-size:17px;">ทำครบทั้ง 3 จะได้อะไร</h3>
-    <p>ระบบจะวิเคราะห์ให้ว่าผลจากทั้งสามระบบสอดคล้องหรือขัดกันตรงไหน — จุดที่ขัดกันมักเป็นจุดที่คนติดอยู่นานที่สุดโดยไม่รู้ตัว และคุณจะปลดล็อกราคาพิเศษของคู่มือถอดรหัสบุคลิกภาพฉบับเต็มด้วย</p>
+
+
+  <div class="sec">
+    <h2>แต่ละแบบทดสอบวัดอะไร</h2>
+    <p class="lead2">ทั้งสามชุดไม่ได้วัดเรื่องเดียวกันในมุมต่างกัน แต่ตอบคนละคำถามคนละชั้น อ่านตรงนี้ก่อนจะช่วยให้เลือกได้ว่าควรเริ่มจากอันไหน</p>
+
+    <div class="tcard t1">
+      <div class="th"><h3>Big Five</h3><span class="q">คุณเป็นคนแบบไหน</span></div>
+      <p class="desc">วัดลักษณะนิสัยที่คนอื่นสังเกตเห็นได้จากพฤติกรรมประจำวันของคุณ 5 ด้าน คือการเปิดรับสิ่งใหม่ ความมีวินัย การแสดงออกทางสังคม ความเห็นอกเห็นใจ และความมั่นคงทางอารมณ์ เป็นโมเดลที่วงการวิจัยจิตวิทยาทั่วโลกใช้เป็นมาตรฐาน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">เปิดรับสิ่งใหม่</span><span class="bar"><i style="width:72%;background:#E8A87C"></i></span><span class="v">72</span></div>
+        <div class="row"><span class="k">ความมีวินัย</span><span class="bar"><i style="width:80%;background:#B98CCE"></i></span><span class="v">80</span></div>
+        <div class="row"><span class="k">การแสดงออก</span><span class="bar"><i style="width:45%;background:#3E8E7E"></i></span><span class="v">45</span></div>
+        <div class="txt">พร้อมคำอธิบายว่าคะแนนระดับนี้ทำให้คุณเก่งเรื่องอะไร ต้องระวังอะไร และควรอยู่ในงานแบบไหน</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> ความมีวินัยเป็นตัวทำนายผลงานและความสำเร็จในอาชีพได้ดีที่สุดในบรรดาห้าด้าน ส่วนความมั่นคงทางอารมณ์ทำนายความพึงพอใจในความสัมพันธ์ระยะยาวได้ดีที่สุด รู้คะแนนสองตัวนี้ก็อธิบายชีวิตตัวเองได้เยอะแล้ว</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าทำไมงานบางแบบเหนื่อยกว่าคนอื่นทั้งที่ทำได้</b> เพราะคะแนนบอกต้นทุนพลังงาน ไม่ใช่ความสามารถ ใช้ตัดสินใจว่าจะรับงานแบบไหนและปฏิเสธแบบไหน</li>
+          <li><b>รู้ว่าควรออกแรงพัฒนาตรงไหนถึงคุ้ม</b> แทนที่จะพยายามเก่งทุกด้าน ใช้จุดแข็งเป็นแกนหลักของอาชีพ แล้วพัฒนาจุดอ่อนแค่ให้ไม่เป็นอุปสรรค</li>
+          <li><b>เข้าใจว่าทำไมทะเลาะกับคนที่บ้านเรื่องเดิมซ้ำๆ</b> เรื่องของไม่เข้าที่หรือการวางแผนล่วงหน้า มักเป็นความต่างเรื่องความมีวินัย ไม่ใช่เรื่องใครรักใครน้อยกว่า</li>
+          <li><b>ใช้เลือกวิธีทำงานที่เข้ากับตัวเอง</b> เช่น คนคะแนนวินัยต่ำไม่ควรฝืนสร้างวินัย แต่ควรยืมโครงสร้างจากภายนอกมาช่วยแทน ซึ่งได้ผลกว่ามาก</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tcard">
+      <div class="th"><h3>HEXACO</h3><span class="q">คุณเล่นเกมแบบไหน</span></div>
+      <p class="desc">พัฒนาต่อจาก Big Five โดยเพิ่มด้านที่หกเข้ามาคือความซื่อสัตย์และความอ่อนน้อม ซึ่งวัดว่าคุณจะทำอะไรเมื่อไม่มีใครเห็นและมีโอกาสเอาเปรียบ เป็นด้านที่ Big Five ไม่ได้แยกไว้</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">ซื่อสัตย์-ถ่อมตัว</span><span class="bar"><i style="width:70%;background:#D9A441"></i></span><span class="v">70</span></div>
+        <div class="row"><span class="k">อ่อนไหวทางใจ</span><span class="bar"><i style="width:40%;background:#C1666B"></i></span><span class="v">40</span></div>
+        <div class="row"><span class="k">ประนีประนอม</span><span class="bar"><i style="width:55%;background:#7C9FD4"></i></span><span class="v">55</span></div>
+        <div class="txt">พร้อมคำอธิบายว่าคนคะแนนแบบนี้มักถูกเอาเปรียบตรงไหน และควรวางระบบป้องกันตัวเองอย่างไร</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> ถ้าคุณเคยเจอคนที่ดูดีทุกอย่างบนกระดาษ เก่ง ขยัน เข้ากับคนง่าย แต่ทำงานด้วยแล้วรู้สึกไม่ปลอดภัย นี่คือด้านที่อธิบายความรู้สึกนั้น และเป็นด้านที่การสัมภาษณ์งานจับไม่ได้</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณควรอยู่ในสภาพแวดล้อมแบบไหน</b> คนที่ซื่อตรงสูงจะทรมานมากในที่ที่คนเก่งการเมืองได้ดีกว่าคนเก่งงาน รู้ตรงนี้แล้วเลือกที่ทำงานได้ถูก</li>
+          <li><b>รู้ว่าตัวเองมักถูกเอาเปรียบตรงไหน</b> คนคะแนนสูงมักไม่ต่อรองค่าตอบแทนเพราะรู้สึกว่าการขอเพิ่มคือความโลภ ทั้งที่มันคือการรับเท่าที่สร้าง</li>
+          <li><b>ใช้ดูคนก่อนร่วมงานหรือร่วมลงทุน</b> มีสัญญาณที่สังเกตได้ในสามนาทีแรก เช่น เขาพูดถึงคนที่ไม่อยู่ในห้องอย่างไร</li>
+          <li><b>เข้าใจความรู้สึกไม่ปลอดภัยที่อธิบายไม่ถูก</b> เวลาอยู่กับบางคนแล้วรู้สึกเหมือนกำลังถูกจัดการอยู่ตลอด แต่จับผิดเป็นเรื่องๆ ไม่ได้ นี่คือด้านที่อธิบายมันได้</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tcard t3">
+      <div class="th"><h3>Enneagram</h3><span class="q">ทำไมคุณถึงเป็นแบบนั้น</span></div>
+      <p class="desc">ไม่ได้วัดว่าคุณทำอะไร แต่ถามว่าอะไรคือสิ่งที่คุณกลัวและต้องการลึกที่สุด แบ่งคนเป็น 9 ประเภทตามแรงขับพื้นฐาน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="txt" style="margin:0;padding:0;border:none;"><b style="color:#D6B6E4;">Type 8 ผู้ท้าทาย · ปีก 8w9</b><br><br>ความกลัวพื้นฐาน กลัวการถูกควบคุมหรือถูกเห็นว่าอ่อนแอ<br>ทิศทางเครียด เคลื่อนไปทาง Type 5 คือตัดขาดและถอยไปอยู่คนเดียว<br>ทิศทางเติบโต เคลื่อนไปทาง Type 2 คือเปิดใจและยอมให้คนดูแลบ้าง</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> สองแบบทดสอบแรกบอกว่าคุณทำอะไร แต่ไม่บอกว่าทำไม คนสองคนที่ขยันเท่ากันอาจขยันเพราะกลัวคนละอย่าง เวลาเจอความเครียดพวกเขาจะพังคนละแบบและต้องการการช่วยเหลือคนละอย่างสิ้นเชิง</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>ได้ระบบเตือนภัยส่วนตัว</b> แต่ละประเภทมีพฤติกรรมเฉพาะที่จะโผล่มาเวลาเครียดเกินไป พอจับสัญญาณได้ก็รู้ว่าต้องพักก่อนที่จะพังจริง</li>
+          <li><b>รู้ว่าควรฝึกอะไรถึงจะโตขึ้นจริง</b> ไม่ใช่การพยายามเป็นคนอื่น แต่เป็นเส้นทางเติบโตที่เจาะจงกับประเภทของคุณโดยเฉพาะ</li>
+          <li><b>เข้าใจว่าทำไมถึงทำเรื่องเดิมซ้ำทั้งที่รู้ว่าไม่ดี</b> เพราะพฤติกรรมนั้นกำลังปกป้องคุณจากความกลัวบางอย่าง พอเห็นความกลัวชัดก็มีทางเลือก</li>
+          <li><b>ใช้กับคนใกล้ตัวได้ทันที</b> คนแต่ละประเภทต้องการคำพูดคนละแบบ เช่น คนที่ตอบว่าไม่เป็นไรทุกครั้งไม่ได้แปลว่าไม่เป็นไร และการกดดันให้พูดจะยิ่งทำให้เขาถอย</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>ทำกี่ชุดดี</h2>
+    <p class="lead2">ทำชุดเดียวก็ได้ผลที่ใช้ได้จริง ไม่ต้องทำครบถึงจะมีประโยชน์ แต่ละทางเลือกให้อะไรต่างกันแบบนี้</p>
+
+    <div class="combo2">
+      <div class="ct"><div class="cn">1</div><div class="ch2">ทำ 1 ชุด</div></div>
+      <p>ได้ภาพของตัวเองในมุมนั้นครบถ้วน เห็นคะแนนทุกด้านพร้อมคำอธิบายว่าระดับที่คุณได้หมายความว่าอย่างไร เหมาะถ้าอยากลองก่อนหรือมีเรื่องที่สนใจเฉพาะ เช่น อยากรู้แรงขับเบื้องหลังก็ทำ Enneagram อย่างเดียวได้เลย</p>
+    </div>
+
+    <div class="combo2">
+      <div class="ct"><div class="cn">2</div><div class="ch2">ทำ 2 ชุด</div></div>
+      <p>เริ่มเห็นความสัมพันธ์ระหว่างมุมมอง เช่น ทำ Big Five คู่กับ HEXACO จะเทียบได้ว่าคะแนนที่ทับซ้อนกันตรงกันไหม ถ้าต่างกันมากแปลว่าพฤติกรรมคุณเปลี่ยนตามสถานการณ์มากกว่าคนทั่วไป หรือทำ Big Five คู่กับ Enneagram จะเห็นว่าแรงขับภายในตรงกับพฤติกรรมที่แสดงออกหรือเปล่า</p>
+    </div>
+
+    <div class="combo2 best">
+      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบ 3 ชุด</div></div>
+      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>คู่มือมีกี่เล่ม ได้เล่มไหนบ้าง</h2>
+    <p class="lead2">แบบทดสอบทั้งหมดฟรี ส่วนคู่มือคือเนื้อหาฉบับเต็มที่ขายแยก ทำชุดไหนก็เลือกซื้อคู่มือของชุดนั้นได้ ไม่บังคับว่าต้องซื้อ</p>
+
+    <div class="bk">
+      <div class="bi" style="background:#3E8E7E">5</div>
+      <div class="bb">
+        <div class="bn">ห้าเสาหลัก</div>
+        <div class="bm">BIG FIVE · 14 บท · อ่านประมาณ 2 ชั่วโมงครึ่ง</div>
+        <div class="bd">ทั้งห้าด้านแบบเต็ม แยกคำอธิบายตามระดับคะแนนที่คุณได้จริง พร้อมคู่ผสมของสองด้าน โปรไฟล์กับสายอาชีพ 9 สาย และแผนพัฒนา 90 วัน</div>
+        <div class="bf">ได้จากการทำ <span>Big Five</span></div>
+      </div>
+      <div class="bp">฿190</div>
+    </div>
+
+    <div class="bk">
+      <div class="bi" style="background:#D9A441">6</div>
+      <div class="bb">
+        <div class="bn">หกด้านของตัวคุณ</div>
+        <div class="bm">HEXACO · 11 บท · อ่านประมาณ 1 ชั่วโมงครึ่ง</div>
+        <div class="bd">เจาะด้านความซื่อสัตย์ที่โมเดลอื่นวัดไม่ได้ ทำไมการสัมภาษณ์งานถึงจับด้านนี้ไม่ได้ การผสม 8 ชุดที่ต้องรู้จัก และรูปแบบการทะเลาะที่ทำนายได้จากคะแนน</div>
+        <div class="bf">ได้จากการทำ <span>HEXACO</span></div>
+      </div>
+      <div class="bp">฿190</div>
+    </div>
+
+    <div class="bk">
+      <div class="bi" style="background:#B98CCE">9</div>
+      <div class="bb">
+        <div class="bn">แรงขับเบื้องหลัง</div>
+        <div class="bm">ENNEAGRAM · 20 บท · อ่านประมาณ 2 ชั่วโมงครึ่ง</div>
+        <div class="bd">ครบทั้งเก้าประเภท ปีก ทิศทางเครียดและเติบโต ประเภทเดียวกันแต่คนละระดับ คู่ที่มักสับสน และประเภทกับการเลี้ยงลูก</div>
+        <div class="bf">ได้จากการทำ <span>Enneagram</span></div>
+      </div>
+      <div class="bp">฿190</div>
+    </div>
+
+    <div class="bk" style="border-color:rgba(185,140,206,.4);">
+      <div class="bi" style="background:#D6B6E4">8</div>
+      <div class="bb">
+        <div class="bn">ฉบับเฉพาะ Type ของคุณ</div>
+        <div class="bm">ENNEAGRAM · เฉพาะส่วนที่ตรงกับคุณ</div>
+        <div class="bd">ถ้าไม่อยากอ่านทั้งเก้าประเภท เล่มนี้ตัดเหลือเฉพาะประเภทของคุณ ปีกของคุณ และสองประเภทที่คุณจะเคลื่อนไปหาเวลาเครียดกับเวลาเติบโต</div>
+        <div class="bf">ได้จากการทำ <span>Enneagram</span></div>
+      </div>
+      <div class="bp">฿90</div>
+    </div>
+
+    <div class="bk" style="border-color:rgba(217,164,65,.45);background:linear-gradient(150deg,rgba(217,164,65,.12),rgba(26,33,64,.95));">
+      <div class="bi" style="background:linear-gradient(135deg,#E8C275,#D9A441)">∞</div>
+      <div class="bb">
+        <div class="bn">ฉบับรวมสามระบบ</div>
+        <div class="bm">รวมทุกเล่ม · 53 บท · อ่านประมาณ 7 ชั่วโมงครึ่ง</div>
+        <div class="bd">รวมเนื้อหาทั้งสามเล่มไว้ด้วยกัน <b style="color:var(--paper);">บวก 19 บทที่ไม่มีในเล่มเดี่ยวเลยแม้แต่บทเดียว</b> เพราะเป็นบทที่ต้องใช้ผลจากทั้งสามระบบพร้อมกันถึงจะเขียนได้</div>
+        <div class="only19">
+          <div class="o19h">19 บทที่มีเฉพาะในฉบับรวม</div>
+          <div class="o19g">
+            <div><span>4 บท</span>เมื่อสามระบบขัดกัน จุดที่ขัดบอกอะไร และวิธีอ่านผลสามชุดพร้อมกัน</div>
+            <div><span>5 บท</span>อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ · เดาประเภทจากพฤติกรรม · สัญญาณใน 3 นาทีแรก</div>
+            <div><span>2 บท</span>บริหารทีมตามบุคลิกภาพ และการให้ฟีดแบคที่ตรงกับแต่ละคน</div>
+            <div><span>3 บท</span>ความสัมพันธ์และครอบครัว · ภาษาที่แต่ละคนได้ยิน · เมื่อลูกมีบุคลิกคนละแบบกับพ่อแม่</div>
+            <div><span>5 บท</span>แผนลงมือทำ 90 วัน พร้อมแบบฝึกรายมิติและแบบบันทึกรวมสามระบบ</div>
+          </div>
+        </div>
+        <div class="bf">เหมาะกับคนที่ทำครบ <span>ทั้ง 3 ชุด</span> · เนื้อหาเยอะกว่าซื้อแยกสามเล่ม</div>
+      </div>
+      <div class="bp">฿490</div>
+    </div>
+
+    <p class="lead2" style="margin-top:16px;margin-bottom:0;font-size:13px;">ทุกเล่มอ่านออนไลน์ ไม่มีวันหมดอายุ และเนื้อหาจะถูกปรับให้ตรงกับผลของคุณโดยอัตโนมัติ — เปิดมาเจอบทสรุปผลตัวเองเป็นหน้าแรก และในทุกบทจะไฮไลต์ระดับคะแนนที่ตรงกับคุณไว้ให้</p>
   </div>
 
   <a class="tobook" href="ebook.html">ดูรายละเอียดคู่มือฉบับเต็ม ›</a>

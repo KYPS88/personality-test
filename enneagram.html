@@ -223,10 +223,10 @@ const FACTS = ["20 บท", "อ่านประมาณ 2 ชั่วโม
 const GETS = ["<b>บทประเภทของคุณแบบเต็ม</b> ยาวกว่าสรุปที่คุณเพิ่งอ่านหลายเท่า", "<b>ปีกของคุณ</b> สีสันที่ผสมอยู่และทำให้คุณต่างจากคนประเภทเดียวกัน", "<b>ทิศทางเครียดและทิศทางเติบโต</b> ระบบเตือนภัยส่วนตัวที่บอกว่าเมื่อไหร่คุณกำลังจะพัง", "<b>ประเภทของคุณในที่ทำงาน ความสัมพันธ์ และการเลี้ยงลูก</b>", "<b>ตารางเทียบตอนคุณอยู่ในระดับดีกับตอนแย่</b> ใช้วัดตัวเองได้ทุกเดือน"];
 const EBOOK_URL = "ebook.html";
 const SELF_BOOK = {"name": "แรงขับเบื้องหลัง", "sys": "ENNEAGRAM · 9 TYPES", "pages": 47, "tag": "อ่านประเภทของคุณแบบเต็ม", "pitch": "ผลที่คุณเพิ่งอ่านคือสรุปสั้นของประเภทหลัก ในเล่มนี้คือทั้งเก้าประเภทแบบละเอียด รวมถึงประเภทที่คะแนนคุณสูสีกับอันดับหนึ่ง", "bullets": ["ทั้ง 9 ประเภทเต็มรูปแบบ ความกลัวพื้นฐาน ความต้องการ จุดแข็ง และกับดัก", "พฤติกรรมของแต่ละประเภทในที่ทำงาน ในความสัมพันธ์ และตอนเลี้ยงลูก", "ประเภทเดียวกันแต่คนละระดับ ตารางเทียบตอนอยู่ในระดับดีกับตอนแย่", "ปีกทั้ง 18 แบบ และคู่ประเภทที่คนมักสับสน 8 คู่ พร้อมคำถามที่ใช้แยก", "ทิศทางเครียดและทิศทางเติบโตของทั้งเก้าประเภท พร้อมแผน 90 วัน"]};
-const PRICE_SINGLE = 290;
-const PRICE_SET = 590;
+const PRICE_SINGLE = 190;
+const PRICE_SET = 490;
 const HAS_PERSONAL = true;
-const PRICE_PERSONAL = 149;
+const PRICE_PERSONAL = 90;
 const PERSONAL = {"name": "ฉบับเฉพาะ Type ของคุณ", "desc": "เจาะเฉพาะประเภทของคุณ ปีก ทิศทางเครียด และทิศทางเติบโต ไม่ต้องอ่านประเภทที่ไม่เกี่ยวกับตัวเอง", "bullets": ["บทประเภทหลักของคุณแบบเต็ม พร้อมพฤติกรรมในที่ทำงานและความสัมพันธ์", "บทของปีกคุณ เพื่อเข้าใจสีสันที่ผสมอยู่", "บททิศทางเครียดและทิศทางเติบโต ซึ่งเป็นระบบเตือนภัยส่วนตัวของคุณ", "เปิดมาเจอบทสรุปผลของคุณเป็นหน้าแรก"]};
 
 /* ---------- storage ---------- */
@@ -707,22 +707,22 @@ function renderSell(doneCount){
     '<h2 style="margin:0 0 3px;">ฉบับรวมสามระบบ</h2>' +
     '<div class="bookmeta">BIG FIVE + HEXACO + ENNEAGRAM · 136 หน้า · ไฟล์เดียวจบ</div>' +
     '<p style="font-size:13.5px;color:var(--dim);margin:12px 0 0;line-height:1.75;">' +
-      'ถ้าคุณอยากอ่านครบทั้งสามระบบ เล่มรวมคุ้มกว่าซื้อแยกทีละเล่ม และมีภาคที่เล่มเดี่ยวไม่มี คือภาควิเคราะห์ว่าทั้งสามระบบประกอบกันเป็นภาพอะไร และจุดที่มันขัดกันบอกอะไรเกี่ยวกับคุณ</p>' +
+      'รวมเนื้อหาทั้งสามเล่ม บวกอีก <b style="color:var(--paper)">19 บทที่ไม่มีในเล่มเดี่ยวเลย</b> เพราะเป็นบทที่ต้องใช้ผลจากทั้งสามระบบพร้อมกันถึงจะเขียนได้</p>' +
     '<div class="pkglist">' +
       '<div class="pkgrow"><div class="pn">1</div><div class="pi"><div class="a">Big Five ทั้งห้ามิติ</div><div class="b">คุณเป็นคนแบบไหน · 9 บท</div></div></div>' +
       '<div class="pkgrow"><div class="pn">2</div><div class="pi"><div class="a">HEXACO ทั้งหกมิติ</div><div class="b">คุณเล่นเกมแบบไหน · 7 บท</div></div></div>' +
       '<div class="pkgrow"><div class="pn">3</div><div class="pi"><div class="a">Enneagram ทั้งเก้าประเภท</div><div class="b">ทำไมคุณถึงเป็นแบบนั้น · 16 บท</div></div></div>' +
-      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">ภาคสามมุมประกอบเป็นภาพเดียว<span class="freetag">มีเฉพาะในเล่มรวม</span></div><div class="b">วิเคราะห์จุดที่ทั้งสามระบบขัดกัน · อ่านคน · บริหารทีม · ความสัมพันธ์ · 17 บท</div></div></div>' +
+      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">อีก 19 บทที่ไม่มีในเล่มเดี่ยว<span class="freetag">มีเฉพาะในฉบับรวม</span></div><div class="b">เมื่อสามระบบขัดกัน 4 บท · อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ 5 บท · บริหารทีม 2 บท · ความสัมพันธ์และครอบครัว 3 บท · แผน 90 วัน 5 บท</div></div></div>' +
     '</div>' +
     '<div class="pkgmath">' +
-      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>฿' + singlesTotal + '</span></div>' +
-      '<div class="mrow"><span>ฉบับรวม ไฟล์เดียว</span><span>฿' + PRICE_SET + '</span></div>' +
-      '<div class="mrow total"><span>ประหยัด</span><span>฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
+      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>34 บท · ฿' + singlesTotal + '</span></div>' +
+      '<div class="mrow"><span>ฉบับรวม</span><span>53 บท · ฿' + PRICE_SET + '</span></div>' +
+      '<div class="mrow total"><span>ได้เพิ่ม</span><span>+19 บท · ถูกกว่า ฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
     '</div>' +
     '<div class="pricebox" style="margin-top:16px;">' +
       '<div class="now">฿' + PRICE_SET + '</div>' +
       '<div class="was">฿' + singlesTotal + '</div>' +
-      '<div class="save">ประหยัด ฿' + (singlesTotal - PRICE_SET) + '</div>' +
+      '<div class="save">+19 บทที่ไม่มีในเล่มเดี่ยว</div>' +
     '</div>' +
     '<p class="locknote">' +
       (complete
