@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16 ตัวตน — แบบทดสอบบุคลิกภาพ 4 แกน</title>
+<meta name="description" content="แบบทดสอบ 16 ตัวตน 60 ข้อ วัด 4 แกนของบุคลิกภาพ อ่านผลได้ทันที ฟรี">
+<meta property="og:title" content="16 ตัวตน — คุณเป็นแบบไหนใน 16 แบบ">
+<meta property="og:description" content="60 ข้อ ใช้เวลา 8-10 นาที รู้รหัส 4 ตัวอักษรของคุณและความเข้มของแต่ละแกน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1428; --panel:#1A2140; --panel2:#212A4E;
+  --paper:#F1EDE4; --dim:#9DA3BD; --line:rgba(241,237,228,0.11);
+  --accent:#E0785E; --accent2:#F2A183; --gold:#D9A441;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:radial-gradient(circle at 15% -12%, #232C57 0%, var(--ink) 58%);
+  background-attachment:fixed;
+  color:var(--paper); font-family:'IBM Plex Sans Thai',sans-serif; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:660px;margin:0 auto;padding:26px 20px 70px;}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;margin:0 0 10px;line-height:1.35;}
+h1{font-size:31px;} h2{font-size:21px;} h3{font-size:17px;}
+p{line-height:1.75;}
+a{color:var(--accent2);}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);}
+.screen{display:none;} .screen.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.lead{font-size:15.5px;line-height:1.8;color:var(--dim);margin:0 0 22px;}
+.meta-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px;}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;border:1px solid var(--line);border-radius:99px;padding:7px 14px;background:rgba(241,237,228,0.04);color:var(--paper);}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;font-size:15px;padding:15px 22px;border-radius:11px;border:none;cursor:pointer;background:var(--accent);color:#20100B;width:100%;transition:transform .14s ease,opacity .14s ease;text-decoration:none;}
+.btn:active{transform:scale(.985);}
+.btn:disabled{opacity:.3;cursor:not-allowed;}
+.btn.ghost{background:transparent;color:var(--paper);border:1px solid var(--line);}
+.btn.gold{background:linear-gradient(135deg,#E8C275,#D9A441);color:#241804;}
+.btn:focus-visible,.lk button:focus-visible,a:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+/* แกนสี่คู่บนหน้าแรก */
+.axes{border-top:1px solid var(--line);margin:24px 0 6px;}
+.axrow{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);}
+.axrow .pair{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:.12em;width:64px;flex-shrink:0;}
+.axrow .txt{font-size:13.5px;color:var(--dim);line-height:1.6;}
+/* progress */
+.ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;}
+.ptop span{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);}
+.ptop .pc{color:var(--accent);}
+.ptrack{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:26px;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:width .35s ease;}
+/* question */
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:19px 17px;margin-bottom:13px;}
+.qcard .qn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:8px;letter-spacing:.05em;}
+.qcard .qt{font-size:15.5px;line-height:1.62;margin-bottom:16px;}
+.lk{display:flex;gap:6px;}
+.lk button{flex:1;padding:12px 2px;border-radius:8px;border:1px solid var(--line);background:rgba(241,237,228,0.03);color:var(--dim);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;transition:all .13s ease;}
+.lk button.sel{background:var(--accent);border-color:var(--accent);color:#20100B;}
+.lkcap{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-top:7px;opacity:.65;}
+.navrow{display:flex;gap:10px;margin-top:24px;}
+.warn{font-size:12.5px;color:#E8A87C;margin-top:12px;text-align:center;min-height:16px;}
+/* ---- ผลลัพธ์: รหัส 4 ตัว ---- */
+.codebox{text-align:center;background:linear-gradient(140deg,rgba(224,120,94,.16),rgba(29,36,68,.85));border:1px solid rgba(224,120,94,.4);border-radius:18px;padding:28px 18px 24px;margin-bottom:20px;}
+.codetiles{display:flex;justify-content:center;gap:9px;margin-bottom:16px;}
+.tile{width:60px;height:72px;border:1px solid rgba(224,120,94,.5);border-radius:12px;background:rgba(15,20,40,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:0;transform:translateY(10px);animation:pop .4s ease forwards;}
+.tile:nth-child(1){animation-delay:.05s} .tile:nth-child(2){animation-delay:.18s}
+.tile:nth-child(3){animation-delay:.31s} .tile:nth-child(4){animation-delay:.44s}
+@keyframes pop{to{opacity:1;transform:none}}
+.tile .l{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:var(--accent2);line-height:1;}
+.tile .s{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);}
+.codebox .tname{font-family:'Noto Serif Thai',serif;font-size:24px;}
+.codebox .tmotto{font-size:14px;color:var(--dim);margin:6px 0 0;}
+.wordrow{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:16px;}
+.wordrow span{font-size:11.5px;border:1px solid var(--line);border-radius:99px;padding:5px 12px;color:var(--paper);background:rgba(241,237,228,.05);}
+/* แถบสี่แกน */
+.axmeter{margin-bottom:16px;}
+.axmeter .head{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:6px;}
+.axmeter .head .on{color:var(--accent2);}
+.axmeter .head .off{color:var(--dim);}
+.axmeter .track{height:9px;border-radius:99px;background:var(--line);position:relative;overflow:hidden;}
+.axmeter .fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:99px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1);}
+.axmeter .cap{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.6;}
+.axmeter .mid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(241,237,228,.35);}
+.dcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:17px 16px;margin-bottom:12px;}
+.dcard p{font-size:14px;color:var(--dim);margin:6px 0 0;line-height:1.72;}
+.note{font-size:12.5px;color:var(--dim);line-height:1.7;border:1px dashed var(--line);border-radius:12px;padding:14px 15px;margin:18px 0 8px;}
+/* upsell */
+.sell{background:linear-gradient(140deg,rgba(217,164,65,.16),rgba(217,164,65,.04));border:1px solid rgba(217,164,65,.42);border-radius:18px;padding:24px 21px;margin:34px 0 10px;}
+.sell .tagline{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:#E8C275;text-transform:uppercase;margin-bottom:9px;}
+.sell h2{font-size:20px;}
+.sell ul{margin:14px 0 0;padding-left:0;list-style:none;}
+.sell li{font-size:14px;color:var(--dim);line-height:1.6;padding:7px 0 7px 26px;position:relative;}
+.sell li::before{content:'';position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:#D9A441;}
+.blur{position:relative;margin-top:16px;border-radius:12px;overflow:hidden;}
+.blur .inner{filter:blur(5px);opacity:.55;font-size:13.5px;color:var(--dim);line-height:1.8;padding:2px;user-select:none;pointer-events:none;}
+.blur .veil{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(26,33,64,0) 20%,rgba(26,33,64,.92) 92%);font-size:12px;color:var(--paper);padding-bottom:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;}
+.tiers{margin-top:20px;border-top:1px solid var(--line);}
+.tier{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid var(--line);}
+.tier .ti{flex:1;}
+.tier .ti .a{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tier .ti .b{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6;}
+.tier .pp{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#E8C275;flex-shrink:0;}
+.tier.best{background:rgba(217,164,65,.08);margin:0 -10px;padding-left:10px;padding-right:10px;border-radius:10px;}
+.hot{font-size:10px;background:#D9A441;color:#241804;padding:2px 8px;border-radius:99px;font-weight:600;}
+.buyrow{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.locknote{font-size:12.5px;color:var(--dim);margin-top:12px;line-height:1.65;}
+/* journey */
+.journey{margin:34px 0 0;}
+.jrow{display:flex;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:13px;margin-bottom:10px;background:var(--panel);text-decoration:none;color:var(--paper);transition:border-color .15s ease,transform .15s ease;}
+.jrow:active{transform:scale(.99);}
+.jrow.todo{border-color:rgba(241,237,228,0.28);}
+.jrow.done{opacity:.6;}
+.jrow .mark{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;flex-shrink:0;}
+.jrow.done .mark{background:var(--accent);border-color:var(--accent);color:#20100B;}
+.jrow .txt{flex:1;}
+.jrow .txt .a{font-size:14.5px;font-weight:600;}
+.jrow .txt .b{font-size:11.5px;color:var(--dim);margin-top:2px;}
+.jrow .arrow{color:var(--dim);font-size:17px;}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim);line-height:1.8;}
+.sharebox{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;}
+.sharebox .btn{width:auto;flex:1;min-width:150px;font-size:13.5px;padding:12px 16px;}
+@media (max-width:400px){
+  h1{font-size:26px;} .tile{width:52px;height:64px;} .tile .l{font-size:26px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+  .tile{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ==================== หน้าแรก ==================== -->
+<section id="intro" class="screen active">
+  <div class="eyebrow">16 Types · 4 Axes</div>
+  <h1>16 ตัวตน</h1>
+  <p class="lead">คนเราตัดสินใจไม่เหมือนกันเพราะ “ต้นทางความคิด” ไม่เหมือนกัน แบบทดสอบนี้วัด 4 แกนที่ต่างกันชัดที่สุด แล้วประกอบออกมาเป็นรหัส 4 ตัวอักษร พร้อมบอกด้วยว่าคุณเอียงไปทางไหนมากแค่ไหน ไม่ใช่แค่ตอบว่าเป็นตัวไหน</p>
+
+  <div class="meta-row">
+    <div class="chip">60 ข้อ</div>
+    <div class="chip">8–10 นาที</div>
+    <div class="chip">4 แกน · 16 แบบ</div>
+    <div class="chip">ไม่ต้องสมัครสมาชิก</div>
+  </div>
+
+  <div class="axes">
+    <div class="axrow"><div class="pair">E — I</div><div class="txt">คุณได้พลังคืนจากการอยู่กับคน หรือจากการอยู่กับตัวเอง</div></div>
+    <div class="axrow"><div class="pair">S — N</div><div class="txt">คุณเชื่อสิ่งที่จับต้องได้ตรงหน้า หรือสนใจความเป็นไปได้ที่ยังไม่เกิด</div></div>
+    <div class="axrow"><div class="pair">T — F</div><div class="txt">เวลาตัดสินใจ คุณชั่งด้วยเหตุผล หรือชั่งด้วยผลกระทบต่อคน</div></div>
+    <div class="axrow"><div class="pair">J — P</div><div class="txt">คุณสบายใจเมื่อวางแผนไว้แล้ว หรือเมื่อยังเปิดทางเลือกไว้</div></div>
+  </div>
+
+  <p class="lead" style="font-size:13.5px;margin:22px 0 18px;">ตอบตามที่คุณเป็นจริงในชีวิตประจำวัน ไม่ใช่ตามที่อยากเป็นหรือที่คนอื่นคาดหวัง ไม่มีคำตอบถูกผิด และไม่มีแบบไหนดีกว่าแบบไหน</p>
+
+  <button class="btn" id="startBtn">เริ่มทำแบบทดสอบ</button>
+  <button class="btn ghost" id="resumeBtn" style="margin-top:10px;display:none;"></button>
+
+  <div class="journey" id="introJourney"></div>
+
+  <div class="foot">
+    ผลของคุณถูกเก็บไว้ในเครื่องคุณเองเท่านั้น ไม่มีการส่งขึ้นเซิร์ฟเวอร์และไม่มีการเก็บสถิติผู้ทำ<br>
+    แบบทดสอบนี้พัฒนาขึ้นเองโดยอ้างอิงแนวคิดบุคลิกภาพ 4 แกนที่เผยแพร่เป็นสาธารณะ ไม่ใช่ MBTI® และไม่มีความเกี่ยวข้องกับ The Myers-Briggs Company
+  </div>
+</section>
+
+<!-- ==================== หน้าคำถาม ==================== -->
+<section id="quiz" class="screen">
+  <div class="ptop"><span id="pLabel">หน้า 1 จาก 10</span><span class="pc" id="pCount">0 / 60</span></div>
+  <div class="ptrack"><div class="pfill" id="pFill"></div></div>
+  <div id="qList"></div>
+  <div class="warn" id="qWarn"></div>
+  <div class="navrow">
+    <button class="btn ghost" id="prevBtn">ย้อนกลับ</button>
+    <button class="btn" id="nextBtn">ถัดไป</button>
+  </div>
+</section>
+
+<!-- ==================== หน้าผลลัพธ์ ==================== -->
+<section id="result" class="screen">
+  <div class="eyebrow">ผลของคุณ</div>
+
+  <div class="codebox">
+    <div class="codetiles" id="rTiles"></div>
+    <div class="tname" id="rName"></div>
+    <p class="tmotto" id="rMotto"></p>
+    <div class="wordrow" id="rWords"></div>
+  </div>
+
+  <h2>คุณเอียงไปทางไหนมากแค่ไหน</h2>
+  <p class="lead" style="font-size:13.5px;">ตัวเลขคือความเข้มของแกนนั้นในตัวคุณเอง เส้นตรงกลางคือจุดกึ่งกลาง ยิ่งใกล้กลางแปลว่าคุณใช้ทั้งสองด้านพอๆ กัน</p>
+  <div id="rAxes"></div>
+
+  <h2 style="margin-top:30px;">อ่านตัวเองแบบสั้น</h2>
+  <div class="dcard"><p id="rDesc"></p></div>
+
+  <div class="note">
+    คะแนนนี้เป็นการเทียบภายในตัวคุณเอง ไม่ใช่การเทียบเปอร์เซ็นไทล์กับคนอื่น และเป็นเครื่องมือทำความเข้าใจตัวเอง ไม่ใช่การวินิจฉัยหรือประเมินสุขภาพจิต คนคนหนึ่งเปลี่ยนได้ตามช่วงชีวิต ถ้าทำอีกครั้งในอีกหกเดือนแล้วผลขยับ นั่นเป็นเรื่องปกติ
+  </div>
+
+  <div class="sharebox">
+    <button class="btn ghost" id="copyBtn">คัดลอกลิงก์ผลของฉัน</button>
+    <button class="btn ghost" id="againBtn">ทำใหม่อีกครั้ง</button>
+  </div>
+
+  <!-- ---------- กล่องขาย ---------- -->
+  <div class="sell">
+    <div class="tagline">Full reading</div>
+    <h2>คู่มืออ่านตัวเองฉบับ <span id="rSellCode"></span></h2>
+    <p style="font-size:14px;color:var(--dim);margin:8px 0 0;">ที่คุณเพิ่งอ่านคือสรุปสั้นของไทป์คุณ ในคู่มือคือคำอธิบายเต็ม ที่เขียนแยกตามความเข้มของแกนที่คุณได้จริง ไม่ใช่ข้อความชุดเดียวที่ทุกคนได้เหมือนกัน</p>
+    <ul>
+      <li>คำอธิบายเต็มของไทป์คุณ พร้อมกับดักที่คนไทป์นี้มักตกซ้ำ</li>
+      <li>ลำดับการทำงานของความคิดสี่ชั้นในหัวคุณ อธิบายแบบไม่ใช้ศัพท์วิชาการ</li>
+      <li>ตอนเครียดคุณจะเปลี่ยนไปเป็นแบบไหน และวิธีดึงตัวเองกลับ</li>
+      <li>งานแบบไหนทำแล้วหมดพลัง งานแบบไหนยิ่งทำยิ่งมีไฟ</li>
+      <li>แผน 60 วัน ฝึกด้านที่คุณยังไม่ถนัด ทีละอย่างเล็กๆ</li>
+    </ul>
+
+    <div class="blur">
+      <div class="inner" id="rTease"></div>
+      <div class="veil">อ่านต่อได้เมื่อสั่งซื้อ</div>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="ti"><div class="a">ฉบับส่วนตัว</div><div class="b">เฉพาะไทป์ของคุณ ประมาณ 15 หน้า</div></div>
+        <div class="pp">฿90</div>
+      </div>
+      <div class="tier">
+        <div class="ti"><div class="a">ฉบับเต็ม</div><div class="b">ไทป์คุณ + เรื่องงาน + ความรัก + โหมดตอนเครียด + แผนพัฒนา</div></div>
+        <div class="pp">฿190</div>
+      </div>
+      <div class="tier best">
+        <div class="ti"><div class="a">ฉบับคู่สัมพันธ์ <span class="hot">คนเลือกมากที่สุด</span></div><div class="b">ฉบับเต็ม + วิเคราะห์การเข้ากันกับอีก 15 ไทป์ ทีละคู่ พร้อมประโยคที่ควรใช้เวลาคุยกันไม่รู้เรื่อง</div></div>
+        <div class="pp">฿290</div>
+      </div>
+      <div class="tier">
+        <div class="ti"><div class="a">บันเดิลสี่ระบบ</div><div class="b">16 ตัวตน + Big Five + HEXACO + Enneagram รวม 53 บทของชุดเดิม พร้อมบทเทียบสี่ระบบว่าตรงกันหรือขัดกันตรงไหน</div></div>
+        <div class="pp">฿690</div>
+      </div>
+    </div>
+
+    <div class="buyrow">
+      <button class="btn gold" data-ed="pair">สั่งซื้อฉบับคู่สัมพันธ์ ฿290</button>
+      <button class="btn ghost" data-ed="full">ฉบับเต็ม ฿190</button>
+      <button class="btn ghost" data-ed="personal">ฉบับส่วนตัว ฿90</button>
+      <button class="btn ghost" data-ed="bundle4">บันเดิลสี่ระบบ ฿690</button>
+    </div>
+    <p class="locknote">ปุ่มจะเปิดแชท LINE พร้อมข้อความสั่งซื้อและรหัสไทป์ของคุณให้อัตโนมัติ · ถ้ายังไม่เคยเป็นเพื่อนกัน <a href="https://line.me/R/ti/p/%40000tkljp">กดเพิ่มเพื่อนที่นี่ก่อน</a> · ชำระเงินโดยโอนธนาคารแล้วส่งสลิป จากนั้นจะได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส</p>
+  </div>
+
+  <div class="journey" id="resultJourney"></div>
+
+  <div class="foot">
+    ผลนี้อยู่ในเครื่องคุณเท่านั้น ถ้าล้างข้อมูลเบราว์เซอร์ ผลจะหายไป เก็บลิงก์ผลไว้ถ้าอยากกลับมาอ่านอีก<br>
+    ไม่ใช่ MBTI® และไม่มีความเกี่ยวข้องกับ The Myers-Briggs Company
+  </div>
+</section>
+
+</div>
+
+<script>
+/* ============ ค่าคงที่ ============ */
+const TEST_ID   = 'sixteen';
+const TEST_NAME = '16 ตัวตน';
+const PER_PAGE  = 6;
+const OA        = '%40000tkljp';
+const READER_READY = false;   /* เปลี่ยนเป็น true เมื่อเพิ่มหนังสือ sixteen ใน orders.py แล้ว */
+const READER_URL   = 'https://whoyouare-production.up.railway.app';
+const PRICES = {personal:90, full:190, pair:290, bundle4:690};
+const EDNAMES = {personal:'ฉบับส่วนตัว', full:'ฉบับเต็ม', pair:'ฉบับคู่สัมพันธ์', bundle4:'บันเดิลสี่ระบบ'};
+
+const NAV = [
+  {id:'bigfive',   file:'bigfive.html',   name:'Big Five (OCEAN)'},
+  {id:'hexaco',    file:'hexaco.html',    name:'HEXACO'},
+  {id:'enneagram', file:'enneagram.html', name:'Enneagram'},
+  {id:'sixteen',   file:'sixteen.html',   name:'16 ตัวตน'}
+];
+
+/* ============ ข้อคำถาม 60 ข้อ ============
+   ax = แกน, k = +1 คือเห็นด้วยแล้วเอียงไปตัวอักษรแรก, -1 คือเอียงไปตัวอักษรหลัง */
+const ITEMS = [
+/* E–I */
+{ax:'EI',k:1, t:'งานที่มีคนเยอะทำให้ฉันรู้สึกมีพลังมากกว่าเหนื่อย'},
+{ax:'EI',k:-1,t:'หลังเจอผู้คนมาทั้งวัน ฉันต้องการเวลาอยู่คนเดียวเพื่อชาร์จตัวเอง'},
+{ax:'EI',k:1, t:'ฉันมักเป็นฝ่ายเริ่มบทสนทนากับคนที่ยังไม่รู้จัก'},
+{ax:'EI',k:-1,t:'ฉันชอบคิดให้จบในหัวก่อน แล้วค่อยพูดออกมา'},
+{ax:'EI',k:1, t:'ฉันคิดออกดีที่สุดตอนได้พูดคุยกับคนอื่น'},
+{ax:'EI',k:-1,t:'ฉันเลือกเจอเพื่อนสนิทไม่กี่คน มากกว่าไปงานที่มีคนเยอะ'},
+{ax:'EI',k:1, t:'ในที่ประชุม ฉันมักออกความเห็นก่อนคนอื่น'},
+{ax:'EI',k:-1,t:'เวลาโทรศัพท์ดังจากเบอร์ที่ไม่รู้จัก ฉันมักไม่อยากรับ'},
+{ax:'EI',k:1, t:'ถ้าต้องอยู่คนเดียวเงียบๆ หลายวันติดกัน ฉันจะเริ่มอึดอัด'},
+{ax:'EI',k:-1,t:'ในวงสนทนา ฉันสังเกตคนอื่นมากกว่าจะเป็นคนนำวง'},
+{ax:'EI',k:1, t:'ฉันทำงานได้ดีในที่ที่มีคนพลุกพล่านมากกว่าห้องเงียบ'},
+{ax:'EI',k:-1,t:'เวลามีเรื่องหนักใจ ฉันจัดการกับมันในใจก่อนจะเล่าให้ใครฟัง'},
+{ax:'EI',k:1, t:'คนรอบตัวมักบอกว่าฉันเข้าถึงง่ายและคุยสนุก'},
+{ax:'EI',k:-1,t:'วันหยุดในอุดมคติของฉันคือวันที่ไม่ต้องนัดใครเลย'},
+{ax:'EI',k:1, t:'ฉันรู้สึกสนุกทุกครั้งที่ได้ทำความรู้จักคนใหม่'},
+/* S–N */
+{ax:'SN',k:1, t:'ฉันเชื่อสิ่งที่จับต้องได้และพิสูจน์แล้ว มากกว่าทฤษฎีที่ยังไม่ได้ทดลอง'},
+{ax:'SN',k:-1,t:'ฉันมักคิดต่อไปถึงความเป็นไปได้ที่ยังไม่เกิดขึ้น'},
+{ax:'SN',k:1, t:'ฉันจำรายละเอียดเล็กๆ ของสิ่งที่เคยเห็นได้แม่น'},
+{ax:'SN',k:-1,t:'ฉันสนใจความหมายที่อยู่เบื้องหลัง มากกว่าตัวเหตุการณ์ที่เกิดขึ้นจริง'},
+{ax:'SN',k:1, t:'เวลาเรียนอะไรใหม่ ฉันอยากรู้ก่อนว่าเอาไปใช้จริงยังไง'},
+{ax:'SN',k:-1,t:'ฉันชอบคิดเรื่องอนาคตไกลๆ มากกว่าจัดการเรื่องตรงหน้า'},
+{ax:'SN',k:1, t:'คำแนะนำที่เป็นขั้นตอนชัดเจนใช้กับฉันได้ดีกว่าคำแนะนำกว้างๆ'},
+{ax:'SN',k:-1,t:'ฉันมักเห็นรูปแบบหรือความเชื่อมโยงที่คนอื่นยังไม่ทันเห็น'},
+{ax:'SN',k:1, t:'ฉันไว้ใจประสบการณ์ตรงมากกว่าลางสังหรณ์'},
+{ax:'SN',k:-1,t:'ความคิดของฉันมักกระโดดจากเรื่องหนึ่งไปอีกเรื่องอย่างรวดเร็ว'},
+{ax:'SN',k:1, t:'ฉันอธิบายเรื่องต่างๆ ด้วยข้อเท็จจริง มากกว่าเปรียบเทียบเป็นภาพ'},
+{ax:'SN',k:-1,t:'ฉันสนุกกับการคิดว่า “ถ้าเป็นอีกแบบหนึ่งจะเป็นยังไง”'},
+{ax:'SN',k:1, t:'ฉันสังเกตเห็นทันทีเวลาของในบ้านถูกย้ายที่'},
+{ax:'SN',k:-1,t:'ฉันเบื่อเร็วกับงานที่ทำซ้ำเดิมทุกวัน'},
+{ax:'SN',k:1, t:'ฉันเลือกทำตามวิธีที่พิสูจน์แล้วว่าได้ผล มากกว่าลองวิธีใหม่'},
+/* T–F */
+{ax:'TF',k:1, t:'เวลาตัดสินใจ ฉันชั่งเหตุผลก่อนความรู้สึกของคนที่เกี่ยวข้อง'},
+{ax:'TF',k:-1,t:'ฉันรับรู้อารมณ์ของคนในห้องได้เร็ว'},
+{ax:'TF',k:1, t:'ฉันพูดความจริงตรงๆ แม้รู้ว่าอีกฝ่ายอาจไม่อยากได้ยิน'},
+{ax:'TF',k:-1,t:'เวลาเพื่อนมาเล่าปัญหา ฉันอยากให้เขารู้สึกดีขึ้นก่อน แล้วค่อยหาทางแก้'},
+{ax:'TF',k:1, t:'ความยุติธรรมสำคัญกว่าความเกรงใจ'},
+{ax:'TF',k:-1,t:'ก่อนตัดสินใจ ฉันคิดถึงว่าใครจะเดือดร้อนบ้าง'},
+{ax:'TF',k:1, t:'ฉันวิจารณ์งานคนอื่นได้โดยไม่รู้สึกว่ากำลังทำร้ายเขา'},
+{ax:'TF',k:-1,t:'คำชมและการยอมรับจากคนรอบตัวมีผลกับฉันมาก'},
+{ax:'TF',k:1, t:'ในการถกเถียง ฉันสนใจว่าใครมีเหตุผลหนักแน่นกว่า มากกว่าใครเสียความรู้สึก'},
+{ax:'TF',k:-1,t:'ฉันมักเป็นคนที่คนอื่นเลือกมาเล่าเรื่องหนักใจให้ฟัง'},
+{ax:'TF',k:1, t:'ฉันถอยออกมามองปัญหาของคนแบบไม่เอาอารมณ์เข้าไปปนได้ไม่ยาก'},
+{ax:'TF',k:-1,t:'ฉันรู้สึกไม่สบายใจไปด้วยเวลาเห็นคนรอบตัวทะเลาะกัน'},
+{ax:'TF',k:1, t:'กฎควรใช้เหมือนกันกับทุกคน แม้บางกรณีจะดูใจร้าย'},
+{ax:'TF',k:-1,t:'ฉันเลือกคำพูดอย่างระวังเพื่อไม่ให้ใครเสียความรู้สึก'},
+{ax:'TF',k:1, t:'คำติที่ตรงไปตรงมามีค่ากับฉันมากกว่าคำปลอบใจ'},
+/* J–P */
+{ax:'JP',k:1, t:'ฉันรู้สึกดีทุกครั้งที่ได้ขีดฆ่ารายการที่ทำเสร็จออกจากลิสต์'},
+{ax:'JP',k:-1,t:'ฉันมักเริ่มลงมือจริงจังตอนใกล้เส้นตาย'},
+{ax:'JP',k:1, t:'ก่อนไปเที่ยว ฉันวางแผนล่วงหน้ามากกว่าไปถึงแล้วค่อยดูหน้างาน'},
+{ax:'JP',k:-1,t:'ฉันชอบเปิดทางเลือกไว้ มากกว่ารีบตัดสินใจให้จบ'},
+{ax:'JP',k:1, t:'ของในที่ทำงานของฉันมีที่ทางของมันชัดเจน'},
+{ax:'JP',k:-1,t:'แผนที่เปลี่ยนกะทันหันไม่ค่อยทำให้ฉันหงุดหงิด'},
+{ax:'JP',k:1, t:'ฉันอึดอัดเวลามีงานค้างที่ยังไม่ได้สะสาง'},
+{ax:'JP',k:-1,t:'ฉันทำงานออกมาดีเวลาปล่อยให้ไหลไปตามจังหวะของวันนั้น'},
+{ax:'JP',k:1, t:'ฉันชอบรู้ล่วงหน้าว่าพรุ่งนี้จะมีอะไรเกิดขึ้นบ้าง'},
+{ax:'JP',k:-1,t:'ฉันมักมีหลายอย่างทำค้างไว้พร้อมกัน'},
+{ax:'JP',k:1, t:'ฉันมักไปถึงก่อนเวลานัด'},
+{ax:'JP',k:-1,t:'ฉันตัดสินใจเรื่องเล็กๆ ช้ากว่าคนอื่น เพราะอยากดูตัวเลือกให้ครบก่อน'},
+{ax:'JP',k:1, t:'เมื่อเริ่มอะไรแล้ว ฉันอยากทำให้จบก่อนไปเริ่มอย่างอื่น'},
+{ax:'JP',k:-1,t:'ตารางที่แน่นเกินไปทำให้ฉันรู้สึกอึดอัด'},
+{ax:'JP',k:1, t:'ฉันตั้งเส้นตายให้ตัวเองแม้ไม่มีใครกำหนดให้'}
+];
+
+const AXES = [
+  {id:'EI', a:'E', b:'I', an:'ได้พลังจากภายนอก', bn:'ได้พลังจากภายใน',
+   cap:'E คือชาร์จพลังจากคนและเหตุการณ์รอบตัว · I คือชาร์จพลังจากเวลาส่วนตัว'},
+  {id:'SN', a:'S', b:'N', an:'รับข้อมูลจากของจริง', bn:'รับข้อมูลจากความเป็นไปได้',
+   cap:'S คือเชื่อสิ่งที่เห็นและพิสูจน์ได้ · N คือสนใจภาพรวมและสิ่งที่ยังไม่เกิด'},
+  {id:'TF', a:'T', b:'F', an:'ตัดสินด้วยตรรกะ', bn:'ตัดสินด้วยคุณค่าและคน',
+   cap:'T คือชั่งด้วยเหตุผลและความสมเหตุสมผล · F คือชั่งด้วยผลกระทบต่อคน'},
+  {id:'JP', a:'J', b:'P', an:'ใช้ชีวิตแบบวางแผน', bn:'ใช้ชีวิตแบบยืดหยุ่น',
+   cap:'J คือสบายใจเมื่อเรื่องถูกตัดสินแล้ว · P คือสบายใจเมื่อยังเปิดทางเลือกไว้'}
+];
+
+/* ============ ข้อมูล 16 ไทป์ ============ */
+const TYPES = {
+ISTJ:{n:'ผู้รักษาระบบ',m:'พูดแล้วทำ ทำแล้วเสร็จ',w:['เชื่อถือได้','ละเอียด','ตรงเวลา'],
+ d:'คุณเป็นคนที่คนอื่นวางใจได้ว่าอะไรที่รับปากไว้จะเสร็จ คุณทำงานจากข้อเท็จจริงและวิธีที่พิสูจน์แล้วว่าใช้ได้ ไม่ชอบการเดา สิ่งที่คุณให้คุณค่ามากคือความสม่ำเสมอและความรับผิดชอบ จุดที่มักทำให้เหนื่อยคือคุณแบกงานไว้เองเพราะรู้สึกว่าคนอื่นทำได้ไม่เนี้ยบพอ และเวลาต้องเปลี่ยนแผนกะทันหันคุณจะรู้สึกเสียหลักมากกว่าที่แสดงออก'},
+ISFJ:{n:'ผู้ดูแลเงียบๆ',m:'จำได้ทุกอย่างที่คนอื่นลืม',w:['ใส่ใจ','อดทน','จำแม่น'],
+ d:'คุณสังเกตเห็นสิ่งเล็กๆ ที่คนอื่นต้องการโดยที่เขาไม่ต้องบอก และมักลงมือช่วยเงียบๆ โดยไม่เรียกร้องคำขอบคุณ คุณให้ความสำคัญกับความมั่นคงของความสัมพันธ์และรายละเอียดของชีวิตประจำวัน จุดที่มักเป็นภาระคือคุณปฏิเสธไม่ค่อยเป็น จนสุดท้ายเหลือเวลาให้ตัวเองน้อยเกินไป และเก็บความน้อยใจไว้นานกว่าที่ควร'},
+INFJ:{n:'ผู้มองทะลุใจคน',m:'เข้าใจคนก่อนที่เขาจะเข้าใจตัวเอง',w:['ลึกซึ้ง','มีอุดมคติ','ตั้งใจจริง'],
+ d:'คุณอ่านคนออกเร็วและมักเห็นแรงจูงใจที่อยู่ใต้คำพูด คุณอยากให้สิ่งที่ทำมีความหมาย ไม่ใช่แค่เสร็จไป และจะทุ่มเต็มที่กับสิ่งที่เชื่อ จุดที่ต้องระวังคือคุณตั้งมาตรฐานกับตัวเองสูงมาก แบกความรู้สึกคนอื่นจนล้น และเมื่อผิดหวังกับใครสักคนอย่างแรง คุณมักตัดขาดเงียบๆ แทนที่จะบอกกันตรงๆ'},
+INTJ:{n:'สถาปนิกความคิด',m:'มีแผนสำรองให้แผนสำรองอีกที',w:['คิดยาว','อิสระ','ตรงประเด็น'],
+ d:'คุณมองเห็นปลายทางก่อนคนอื่นและถอยกลับมาวางลำดับขั้นเอง คุณไม่ชอบทำอะไรเพราะ “เขาทำกันมาแบบนี้” ถ้าเหตุผลไม่ดีพอคุณจะเปลี่ยนวิธี จุดที่มักสร้างปัญหาคือคุณเร่งข้ามขั้นตอนเรื่องความรู้สึกของคน และพูดตรงจนคนฟังคิดว่าคุณกำลังตำหนิ ทั้งที่คุณแค่กำลังปรับปรุงระบบ'},
+ISTP:{n:'ช่างซ่อมสถานการณ์',m:'ลงมือดูก่อน เดี๋ยวก็รู้',w:['ใจเย็น','แก้ปัญหาไว','ไม่ดราม่า'],
+ d:'คุณสงบมากเวลาคนอื่นตื่นตระหนก เพราะหัวคุณกำลังไล่ดูว่าอะไรพังตรงไหนและซ่อมยังไง คุณเรียนรู้จากการลงมือมากกว่าการอ่านคู่มือ และไม่ชอบกฎที่ไม่มีเหตุผลรองรับ จุดที่คนใกล้ตัวมักบ่นคือคุณเก็บความรู้สึกไว้กับตัว และหายไปเงียบๆ เวลาต้องการพื้นที่ จนอีกฝ่ายไม่แน่ใจว่าเกิดอะไรขึ้น'},
+ISFP:{n:'ศิลปินใจอ่อน',m:'ไม่พูดมาก แต่รู้สึกลึก',w:['อ่อนโยน','จริงใจ','มีรสนิยม'],
+ d:'คุณใช้ชีวิตตามสิ่งที่รู้สึกว่าใช่ ไม่ใช่ตามที่ควรจะเป็น คุณสังเกตความงามในเรื่องธรรมดาและใส่ใจคนตรงหน้ามากกว่าภาพใหญ่ จุดที่มักทำให้อึดอัดคือคุณหลีกเลี่ยงการปะทะจนบางครั้งยอมกลืนความรู้สึกตัวเอง และตัดสินใจเรื่องระยะยาวช้าเพราะไม่อยากผูกมัดตัวเองไว้กับอะไร'},
+INFP:{n:'นักฝันมีหลักการ',m:'ยอมลำบากได้ ถ้าไม่ต้องขัดกับสิ่งที่เชื่อ',w:['มีจินตนาการ','เห็นใจคน','ยึดคุณค่า'],
+ d:'คุณมีชุดคุณค่าในใจที่ชัดเจนมาก และรู้ทันทีเวลาต้องทำอะไรที่ขัดกับมัน คุณเข้าใจความรู้สึกคนอื่นได้ลึก และมักเป็นคนที่มองเห็นด้านดีของคนที่คนอื่นมองข้าม จุดที่มักติดคือคุณคิดกับตัวเองแรงเวลาทำได้ไม่ถึงมาตรฐานในหัว และมีไอเดียหลายอย่างที่ยังไม่ได้เริ่ม เพราะกลัวว่าทำออกมาแล้วจะไม่ดีอย่างที่คิดไว้'},
+INTP:{n:'นักตั้งคำถาม',m:'เดี๋ยว ขอถามก่อนว่าทำไม',w:['ช่างสงสัย','คิดเป็นระบบ','ไม่ตามกระแส'],
+ d:'คุณสนุกกับการแยกชิ้นส่วนความคิดออกมาดูว่ามันประกอบกันยังไง และมักเจอช่องโหว่ในข้อสรุปที่คนอื่นยอมรับไปแล้ว คุณให้ค่ากับความแม่นยำของความคิดมากกว่าความราบรื่นของบทสนทนา จุดที่มักเสียโอกาสคือคุณคิดจนเกินจุดที่ควรลงมือ และเรื่องรายละเอียดชีวิตประจำวันมักถูกเลื่อนออกไปเรื่อยๆ'},
+ESTP:{n:'นักลงมือทันที',m:'คิดไปทำไป เดี๋ยวก็ได้คำตอบ',w:['ตัดสินใจไว','กล้า','อ่านสถานการณ์ขาด'],
+ d:'คุณอ่านสถานการณ์ตรงหน้าได้เร็วและกล้าตัดสินใจในจังหวะที่คนอื่นยังลังเล คุณเบื่อการประชุมที่ไม่นำไปสู่การลงมือ และเรียนรู้ได้ดีที่สุดจากของจริง จุดที่ต้องระวังคือความเร็วของคุณบางครั้งข้ามผลระยะยาว และคำพูดที่ตรงเกินไปในจังหวะร้อนๆ มักทิ้งรอยไว้กับคนที่ทำงานด้วยนานกว่าที่คุณคิด'},
+ESFP:{n:'ตัวจุดพลุ',m:'ที่ไหนมีคุณ ที่นั่นไม่เงียบ',w:['สนุก','อบอุ่น','อยู่กับปัจจุบัน'],
+ d:'คุณทำให้บรรยากาศรอบตัวเบาลงได้โดยไม่ต้องพยายาม คุณเก่งเรื่องอยู่กับปัจจุบันและทำให้คนรอบตัวรู้สึกได้รับการต้อนรับ จุดที่มักเป็นปัญหาคือเรื่องที่ต้องวางแผนยาวและเอกสารที่ต้องนั่งทำคนเดียว มักถูกเลื่อนจนกระชั้น และเวลาเสียใจจริงๆ คุณมักกลบด้วยการทำให้ทุกอย่างดูโอเค'},
+ENFP:{n:'นักจุดประกาย',m:'ไอเดียเยอะกว่าเวลาที่มี',w:['กระตือรือร้น','เชื่อมคนเก่ง','ยืดหยุ่น'],
+ d:'คุณมองเห็นความเป็นไปได้ในคนและในโปรเจกต์ได้เร็ว และพูดจนคนอื่นเห็นภาพตามได้ คุณให้ค่ากับอิสระและความหมาย มากกว่าตำแหน่งหรือความมั่นคง จุดที่มักติดคือของที่เริ่มไว้มีมากกว่าของที่ทำจบ และเวลาความตื่นเต้นช่วงแรกหมดลง คุณต้องใช้แรงเยอะกว่าคนอื่นในการทำให้มันเดินต่อจนเสร็จ'},
+ENTP:{n:'นักท้าทายความคิด',m:'ลองมองอีกมุมสิ',w:['ไหวพริบดี','กล้าเถียง','เห็นทางเลือก'],
+ d:'คุณสนุกกับการพลิกมุมมองและมักตั้งคำถามกับข้อสรุปที่ทุกคนยอมรับไปแล้ว คุณคิดเร็ว ต่อยอดเก่ง และทนกับความน่าเบื่อได้น้อย จุดที่มักทำให้เข้าใจผิดคือคุณเถียงเพื่อสำรวจความคิด ไม่ได้เถียงเพื่อเอาชนะ แต่คนฟังมักรู้สึกว่าโดนท้าทาย และงานช่วงปลายที่ต้องเก็บรายละเอียดมักไม่สนุกสำหรับคุณ'},
+ESTJ:{n:'ผู้จัดระเบียบ',m:'ใครทำอะไร ส่งเมื่อไหร่ พูดให้ชัด',w:['เด็ดขาด','จัดการเก่ง','รับผิดชอบ'],
+ d:'คุณเปลี่ยนความวุ่นวายให้กลายเป็นตารางที่ทุกคนรู้ว่าต้องทำอะไร คุณตรงไปตรงมาเรื่องความคาดหวังและไม่ปล่อยให้เรื่องคาราคาซัง จุดที่มักกระทบคนรอบตัวคือมาตรฐานของคุณสูงและคุณพูดออกมาทันทีเมื่อเห็นว่าไม่ได้ตามนั้น บางครั้งเร็วเกินกว่าที่อีกฝ่ายจะได้อธิบายเหตุผลของเขา'},
+ESFJ:{n:'ผู้ประสานใจ',m:'ทุกคนกินอิ่มหรือยัง',w:['ใจกว้าง','ประสานงานเก่ง','นึกถึงคนอื่น'],
+ d:'คุณดูแลให้กลุ่มคนอยู่ด้วยกันได้อย่างราบรื่น จำวันสำคัญของคนอื่นได้ และมักเป็นคนที่ลงแรงจริงเวลามีงานส่วนรวม คุณรู้สึกดีเมื่อคนรอบตัวรู้สึกดี จุดที่มักทำให้เหนื่อยคือคุณผูกความสบายใจของตัวเองไว้กับการยอมรับของคนอื่นมาก และเวลามีความขัดแย้ง คุณจะรีบเข้าไปประสานจนลืมถามว่าตัวเองต้องการอะไร'},
+ENFJ:{n:'โค้ชหัวใจ',m:'เห็นศักยภาพในคนก่อนเจ้าตัวจะเห็น',w:['สร้างแรงบันดาลใจ','สื่อสารเก่ง','ใส่ใจ'],
+ d:'คุณดึงคนให้ก้าวไปข้างหน้าได้ เพราะคุณมองเห็นสิ่งที่เขาเป็นได้และพูดออกมาในจังหวะที่เขาต้องการได้ยิน คุณอ่านห้องเก่งและปรับตัวเข้ากับคนได้หลากหลาย จุดที่ต้องระวังคือคุณให้จนเกินกำลังและคาดหวังกับคนที่คุณช่วยสูงตามไปด้วย เวลาเขาไม่ไปในทางที่คุณเห็นว่าดีกับเขา คุณจะเจ็บมากกว่าที่ควร'},
+ENTJ:{n:'นักขับเคลื่อน',m:'ถ้าไม่มีใครนำ เดี๋ยวนำเอง',w:['เป้าหมายชัด','ตัดสินใจเร็ว','ผลักงานเป็น'],
+ d:'คุณเห็นเป้าหมายชัดและจัดคนจัดทรัพยากรให้ไปถึงได้จริง คุณไม่กลัวการตัดสินใจยากๆ และรับผลของมันได้ จุดที่มักสร้างระยะห่างคือคุณเดินเร็วกว่าทีมและคาดหวังให้ทุกคนตามให้ทัน เวลากดดัน คำพูดของคุณจะสั้นและแข็งขึ้นจนคนรอบตัวอ่านว่าเป็นความไม่พอใจ ทั้งที่คุณแค่กำลังโฟกัส'}
+};
+
+/* ============ storage ============ */
+const KEY = 'ptx_results_v1';
+const mem = {};
+function loadAll(){ try{ const r=localStorage.getItem(KEY); return r?JSON.parse(r):{}; }catch(e){ return mem.data||{}; } }
+function saveAll(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){ mem.data=o; } }
+function saveResult(res){
+  const all = loadAll();
+  all[TEST_ID] = Object.assign({savedAt:new Date().toISOString(), name:TEST_NAME}, res);
+  saveAll(all);
+}
+const DRAFT = 'ptx_draft_' + TEST_ID;
+function saveDraft(){ try{ localStorage.setItem(DRAFT, JSON.stringify({answers,page})); }catch(e){} }
+function loadDraft(){ try{ const r=localStorage.getItem(DRAFT); return r?JSON.parse(r):null; }catch(e){ return null; } }
+function clearDraft(){ try{ localStorage.removeItem(DRAFT); }catch(e){} }
+
+/* ============ state ============ */
+let answers = new Array(ITEMS.length).fill(null);
+let page = 0;
+const totalPages = Math.ceil(ITEMS.length / PER_PAGE);
+const $ = id => document.getElementById(id);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+/* ============ คำถาม ============ */
+function renderPage(){
+  const start = page*PER_PAGE, end = Math.min(start+PER_PAGE, ITEMS.length);
+  let h = '';
+  for(let i=start;i<end;i++){
+    h += '<div class="qcard"><div class="qn">ข้อ '+(i+1)+' / '+ITEMS.length+'</div>'+
+         '<div class="qt">'+ITEMS[i].t+'</div><div class="lk" data-i="'+i+'">';
+    for(let v=1;v<=5;v++){
+      h += '<button type="button" data-v="'+v+'"'+(answers[i]===v?' class="sel"':'')+'>'+v+'</button>';
+    }
+    h += '</div><div class="lkcap"><span>ไม่ใช่ฉันเลย</span><span>ใช่ฉันมาก</span></div></div>';
+  }
+  $('qList').innerHTML = h;
+  $('qList').querySelectorAll('.lk').forEach(g=>{
+    g.addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      const i = +g.dataset.i;
+      answers[i] = +b.dataset.v;
+      g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      saveDraft(); updateProgress(); $('qWarn').textContent='';
+    });
+  });
+  $('pLabel').textContent = 'หน้า '+(page+1)+' จาก '+totalPages;
+  $('prevBtn').style.display = page===0 ? 'none' : 'flex';
+  $('nextBtn').textContent = page===totalPages-1 ? 'ดูผลลัพธ์' : 'ถัดไป';
+  updateProgress();
+  window.scrollTo({top:0, behavior:'instant'});
+}
+function updateProgress(){
+  const done = answers.filter(x=>x!==null).length;
+  $('pCount').textContent = done+' / '+ITEMS.length;
+  $('pFill').style.width = (done/ITEMS.length*100)+'%';
+}
+
+$('nextBtn').addEventListener('click', ()=>{
+  const start = page*PER_PAGE, end = Math.min(start+PER_PAGE, ITEMS.length);
+  for(let i=start;i<end;i++){
+    if(answers[i]===null){ $('qWarn').textContent='ยังตอบไม่ครบในหน้านี้ (ข้อ '+(i+1)+')'; return; }
+  }
+  if(page < totalPages-1){ page++; saveDraft(); renderPage(); }
+  else { finish(); }
+});
+$('prevBtn').addEventListener('click', ()=>{ if(page>0){ page--; saveDraft(); renderPage(); } });
+$('startBtn').addEventListener('click', ()=>{ show('quiz'); renderPage(); });
+
+/* ============ คำนวณผล ============ */
+function compute(){
+  /* แยกค่าเฉลี่ยของข้อทางบวกกับข้อกลับด้านคนละกอง แล้วค่อยเฉลี่ยรวม
+     เพื่อไม่ให้จำนวนข้อสองฝั่งที่ไม่เท่ากันดันจุดกึ่งกลางเพี้ยน */
+  const bag = {};
+  AXES.forEach(ax=>{ bag[ax.id] = {f:[], r:[]}; });
+  ITEMS.forEach((it,i)=>{
+    const v = answers[i];
+    if(it.k===1) bag[it.ax].f.push(v);
+    else         bag[it.ax].r.push(6-v);
+  });
+  const avg = a => a.reduce((x,y)=>x+y,0)/a.length;
+  const pct = {}, code = [];
+  AXES.forEach(ax=>{
+    const b = bag[ax.id];
+    const mean = (b.f.length && b.r.length) ? (avg(b.f)+avg(b.r))/2
+               : avg(b.f.concat(b.r));
+    let p = Math.round((mean-1)/4*100);            /* 1..5 -> 0..100 */
+    p = Math.max(0, Math.min(100, p));
+    pct[ax.id] = p;
+    code.push(p>=50 ? ax.a : ax.b);
+  });
+  return {code:code.join(''), pct:pct};
+}
+
+function finish(){
+  const r = compute();
+  saveResult({code:r.code, pct:r.pct, raw:answers.join('')});
+  clearDraft();
+  location.hash = 'r=' + answers.join('');
+  renderResult(r);
+  show('result');
+}
+
+/* ============ แสดงผล ============ */
+function renderResult(r){
+  const T = TYPES[r.code];
+  $('rTiles').innerHTML = r.code.split('').map((L,i)=>{
+    const ax = AXES[i];
+    return '<div class="tile"><div class="l">'+L+'</div><div class="s">'+
+      (L===ax.a ? r.pct[ax.id] : 100-r.pct[ax.id])+'%</div></div>';
+  }).join('');
+  $('rName').textContent  = T.n;
+  $('rMotto').textContent = '“'+T.m+'”';
+  $('rWords').innerHTML   = T.w.map(w=>'<span>'+w+'</span>').join('');
+  $('rDesc').textContent  = T.d;
+  $('rSellCode').textContent = r.code + ' · ' + T.n;
+
+  $('rAxes').innerHTML = AXES.map(ax=>{
+    const p = r.pct[ax.id];
+    const leftOn = p>=50;
+    return '<div class="axmeter">'+
+      '<div class="head">'+
+        '<span class="'+(leftOn?'on':'off')+'">'+ax.a+' · '+ax.an+' '+p+'%</span>'+
+        '<span class="'+(leftOn?'off':'on')+'">'+(100-p)+'% '+ax.bn+' · '+ax.b+'</span>'+
+      '</div>'+
+      '<div class="track"><div class="fill" style="width:'+p+'%"></div><div class="mid"></div></div>'+
+      '<div class="cap">'+ax.cap+(Math.abs(p-50)<=6 ? ' — ของคุณเกือบกึ่งกลาง แปลว่าคุณสลับใช้ทั้งสองด้านตามสถานการณ์' : '')+'</div>'+
+    '</div>';
+  }).join('');
+
+  $('rTease').textContent = 'เวลาที่กดดันมากๆ คน '+r.code+' มักหลุดไปอยู่ในโหมดที่ตัวเองไม่คุ้นเคย สิ่งที่เคยเป็นจุดแข็งจะกลับด้านและกลายเป็นสิ่งที่ทำร้ายทั้งตัวเองและคนรอบข้าง สัญญาณแรกที่สังเกตได้คือ… และวิธีดึงตัวเองกลับที่ได้ผลกับไทป์นี้มากที่สุดคือการเริ่มจาก… ส่วนสิ่งที่ไม่ควรทำเลยในช่วงนั้นคือ… เพราะมันจะยิ่งผลักให้คุณจมลงไปอีกชั้น';
+
+  renderJourney('resultJourney', true);
+}
+
+/* ============ เส้นทางแบบทดสอบ ============ */
+function summaryLine(rec, id){
+  if(!rec) return '';
+  if(id==='enneagram' && rec.main) return 'Type '+rec.main+(rec.wing?('w'+rec.wing):'');
+  if(id==='sixteen' && rec.code) return rec.code+' · '+(TYPES[rec.code]?TYPES[rec.code].n:'');
+  if(rec.scores){ const k=Object.keys(rec.scores).sort((a,b)=>rec.scores[b]-rec.scores[a])[0]; return 'เด่นที่ '+k; }
+  return 'ทำแล้ว';
+}
+function renderJourney(elId, isResult){
+  const all = loadAll(), el = $(elId);
+  if(!el) return;
+  let h = '<h2 style="margin-bottom:5px;">'+(isResult?'แบบทดสอบอื่นในชุดนี้':'แบบทดสอบในชุดเดียวกัน')+'</h2>'+
+    '<p class="lead" style="font-size:13.5px;margin-bottom:14px;">แต่ละอันมองคุณคนละมุม 16 ตัวตนบอกว่าคุณคิดและตัดสินใจด้วยวิธีไหน อีกสามอันบอกว่าคุณเข้มข้นแค่ไหนในแต่ละลักษณะ</p>';
+  NAV.forEach(n=>{
+    const done = !!all[n.id], isSelf = n.id===TEST_ID;
+    const sub = done ? ('ทำแล้ว · '+summaryLine(all[n.id], n.id)) : (isSelf ? 'คุณอยู่ที่นี่' : 'ยังไม่ได้ทำ');
+    h += '<a class="jrow '+(done?'done':'todo')+'" href="'+n.file+'"><div class="mark">'+(done?'✓':'→')+'</div>'+
+      '<div class="txt"><div class="a">'+n.name+'</div><div class="b">'+sub+'</div></div><div class="arrow">›</div></a>';
+  });
+  el.innerHTML = h;
+}
+
+/* ============ ปุ่มสั่งซื้อ ============ */
+function buildProfile(){
+  const all = loadAll(), p = {};
+  if(all.bigfive && all.bigfive.scores) p.bigfive = all.bigfive.scores;
+  if(all.hexaco && all.hexaco.scores) p.hexaco = all.hexaco.scores;
+  if(all.enneagram && all.enneagram.main){
+    p.enneagram = {type: all.enneagram.main};
+    if(all.enneagram.wing) p.enneagram.wing = all.enneagram.wing;
+  }
+  if(all.sixteen && all.sixteen.code) p.sixteen = {code: all.sixteen.code, pct: all.sixteen.pct};
+  return p;
+}
+function goBuy(edition){
+  const all = loadAll();
+  const code = (all.sixteen && all.sixteen.code) || '';
+  if(READER_READY){
+    const f = document.createElement('form');
+    f.method='POST'; f.action = READER_URL + '/buy';
+    [['book','sixteen'],['edition',edition],['profile',JSON.stringify(buildProfile())]]
+      .forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; f.appendChild(i); });
+    document.body.appendChild(f); f.submit();
+  }else{
+    const msg = 'สั่งซื้อคู่มือ 16 ตัวตน\nแพ็กเกจ: '+EDNAMES[edition]+' ฿'+PRICES[edition]+
+                (code ? ('\nไทป์ของฉัน: '+code+' ('+TYPES[code].n+')') : '');
+    window.open('https://line.me/R/oaMessage/'+OA+'/?'+encodeURIComponent(msg), '_blank');
+  }
+}
+document.querySelectorAll('.buyrow .btn').forEach(b=>{
+  b.addEventListener('click', ()=>goBuy(b.dataset.ed));
+});
+
+/* ============ ปุ่มอื่น ============ */
+$('copyBtn').addEventListener('click', ()=>{
+  const url = location.origin + location.pathname + '#r=' + answers.join('');
+  const done = ()=>{ $('copyBtn').textContent='คัดลอกแล้ว'; setTimeout(()=>$('copyBtn').textContent='คัดลอกลิงก์ผลของฉัน',1800); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(done, ()=>prompt('คัดลอกลิงก์นี้',url)); }
+  else prompt('คัดลอกลิงก์นี้', url);
+});
+$('againBtn').addEventListener('click', ()=>{
+  answers = new Array(ITEMS.length).fill(null); page = 0;
+  clearDraft(); history.replaceState(null,'',location.pathname);
+  show('quiz'); renderPage();
+});
+
+/* ============ เริ่มต้น ============ */
+(function init(){
+  renderJourney('introJourney', false);
+
+  /* อ่านผลจาก URL hash */
+  const m = location.hash.match(/#r=([1-5]{60})/);
+  if(m){
+    answers = m[1].split('').map(Number);
+    const r = compute();
+    saveResult({code:r.code, pct:r.pct, raw:m[1]});
+    renderResult(r); show('result'); return;
+  }
+
+  /* ทำค้างไว้ */
+  const d = loadDraft();
+  if(d && d.answers && d.answers.some(x=>x!==null) && d.answers.filter(x=>x!==null).length < ITEMS.length){
+    const doneN = d.answers.filter(x=>x!==null).length;
+    const rb = $('resumeBtn');
+    rb.style.display = 'flex';
+    rb.textContent = 'ทำต่อจากที่ค้างไว้ ('+doneN+' / '+ITEMS.length+' ข้อ)';
+    rb.addEventListener('click', ()=>{ answers = d.answers; page = d.page||0; show('quiz'); renderPage(); });
+    $('startBtn').textContent = 'เริ่มใหม่ตั้งแต่ต้น';
+    $('startBtn').addEventListener('click', clearDraft);
+  }else{
+    /* เคยทำจบแล้ว */
+    const all = loadAll();
+    if(all.sixteen && all.sixteen.raw && /^[1-5]{60}$/.test(all.sixteen.raw)){
+      const rb = $('resumeBtn');
+      rb.style.display = 'flex';
+      rb.textContent = 'ดูผลครั้งล่าสุดของฉัน ('+all.sixteen.code+')';
+      rb.addEventListener('click', ()=>{
+        answers = all.sixteen.raw.split('').map(Number);
+        renderResult(compute()); show('result');
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>
