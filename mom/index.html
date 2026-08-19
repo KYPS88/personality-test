@@ -256,7 +256,7 @@ footer{text-align:center;margin-top:40px;color:var(--ink-soft);font-size:.85rem}
     </ul>
     <p class="price"><s>฿199</s> ฿129</p>
     <a class="btn pink" id="buyBtn" href="#">สั่งซื้อคู่มือไทป์นี้</a>
-    <p class="tiny">ปุ่มจะเปิดแชท LINE พร้อมข้อความสั่งซื้อให้อัตโนมัติ · ถ้ายังไม่เคยเป็นเพื่อนกัน <a href="https://line.me/R/ti/p/%40000tkljp" style="color:var(--grape)">กดเพิ่มเพื่อนที่นี่ก่อน</a></p>
+    <p class="tiny">กดปุ่มแล้วไปหน้าชำระเงินได้เลย · โอนธนาคารแล้วอัปโหลดสลิปในหน้านั้น · ได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส</p>
   </div>
 
   <!-- ---- ส่งให้คุณพ่อ ---- -->
@@ -268,7 +268,7 @@ footer{text-align:center;margin-top:40px;color:var(--ink-soft);font-size:.85rem}
       <button class="btn small green" id="copyBtn">คัดลอกลิงก์</button>
     </div>
     <a class="btn small ghost" id="lineShare" target="_blank" rel="noopener">ส่งทาง LINE</a>
-    <p class="note">พอทำเสร็จทั้งคู่ คุณจะรู้ไทป์ของทั้งสองคน แล้วค่อยสั่ง <b>แพ็กคู่ 2 ไทป์ ฿219</b> ซึ่งมีบทเทียบว่าไทป์ของคุณกับไทป์ของเขาอยู่ด้วยกันแล้วชนกันตรงไหน และแบ่งหน้าที่กับลูกยังไงให้ไปทางเดียวกัน</p>
+    <p class="note">พอทำเสร็จทั้งคู่ คุณจะรู้ไทป์ของทั้งสองคน แล้วค่อยสั่ง <b>แพ็กคู่ 2 ไทป์ ฿219</b> ซึ่งมีบทเทียบว่าไทป์ของคุณกับไทป์ของเขาอยู่ด้วยกันแล้วชนกันตรงไหน และแบ่งหน้าที่กับลูกยังไงให้ไปทางเดียวกัน · กรอกไทป์ของคุณพ่อในหน้าสั่งซื้อได้เลย</p>
     <a class="btn small pink" id="buyPairBtn" href="#">สั่งแพ็กคู่ ฿219</a>
   </div>
 
@@ -475,11 +475,9 @@ function finish(){
   $("rBuyName").textContent=T.name;
   $("rGood").innerHTML=T.good.map(x=>`<li>${x}</li>`).join("");
   $("rWatch").innerHTML=T.watch.map(x=>`<li>${x}</li>`).join("");
-  const OA="%40000tkljp";
-  const oa=t=>"https://line.me/R/oaMessage/"+OA+"/?"+encodeURIComponent(t);
-  $("buyBtn").href=oa("สั่งซื้อคู่มือแม่ 9 แบบ ฿129\nเล่ม: "+T.name+" (ไทป์ "+top+")");
-  $("buyPairBtn").href=oa("สั่งซื้อแพ็กคู่ แม่+พ่อ ฿219\nไทป์แม่: "+T.name+" (ไทป์ "+top+")\nไทป์พ่อ: (กรอกหลังคุณพ่อทำแบบทดสอบ)");
-  $("buyAllBtn").href=oa("สั่งซื้อชุดครบ 9 ไทป์ ฿390");
+  BUY_STATE.type   = top;
+  BUY_STATE.name   = T.name;
+  BUY_STATE.scores = s;
 
   $("rRanks").innerHTML=ranked.map(r=>{
     const pct=Math.round(r.v/20*100);
@@ -498,6 +496,49 @@ function finish(){
   show("result");
   window.scrollTo({top:0});
 }
+
+/* ---------------- สั่งซื้อ: ส่งผลไปหน้าชำระเงินบน Railway ---------------- */
+const READER_URL = "https://whoyouare-production.up.railway.app";
+const BUY_STATE = { type:null, name:"", scores:null };
+
+function buildProfile(){
+  const p = {};
+  if(BUY_STATE.type){
+    p.mom = { type: BUY_STATE.type, name: BUY_STATE.name };
+    if(BUY_STATE.scores) p.mom.scores = BUY_STATE.scores;
+  }
+  /* ผลแบบทดสอบชุดเดิมถ้ามีในเครื่องเดียวกัน */
+  try{
+    const all = JSON.parse(localStorage.getItem("ptx_results_v1") || "{}");
+    if(all.bigfive   && all.bigfive.scores)   p.bigfive   = all.bigfive.scores;
+    if(all.hexaco    && all.hexaco.scores)    p.hexaco    = all.hexaco.scores;
+    if(all.enneagram && all.enneagram.main){
+      p.enneagram = { type: all.enneagram.main };
+      if(all.enneagram.wing) p.enneagram.wing = all.enneagram.wing;
+    }
+  }catch(e){}
+  return p;
+}
+
+function goBuy(book, edition){
+  const f = document.createElement('form');
+  f.method = 'POST';
+  f.action = READER_URL + '/buy';
+  [['book',book],['edition',edition],['profile',JSON.stringify(buildProfile())]]
+    .forEach(([k,v])=>{
+      const i=document.createElement('input');
+      i.type='hidden'; i.name=k; i.value=v; f.appendChild(i);
+    });
+  document.body.appendChild(f);
+  f.submit();
+}
+
+(function(){
+  const bind=(id,fn)=>{ const el=$(id); if(el) el.onclick=e=>{ e.preventDefault(); fn(); }; };
+  bind("buyBtn",     ()=>goBuy('mom', 'type' + BUY_STATE.type));
+  bind("buyPairBtn", ()=>goBuy('mom', 'pair'));
+  bind("buyAllBtn",  ()=>goBuy('mom', 'all'));
+})();
 
 /* ---------------- SHARE LINK ---------------- */
 function attachCopy(btnId,getText,label){
