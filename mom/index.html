@@ -460,7 +460,7 @@ function render(){
 }
 function next(){ if(idx<Q.length-1){idx++;render();} else finish(); }
 
-$("startBtn").onclick=()=>{show("quiz");render();};
+$("startBtn").onclick=()=>{ev('mom_start');show("quiz");render();};
 $("backBtn").onclick=()=>{if(idx>0){idx--;render();}};
 $("againBtn").onclick=()=>{
   idx=0;answers.fill(null);lsClear();
@@ -481,6 +481,7 @@ function score(){
 }
 
 function finish(){
+  ev('mom_done');
   const s=score();
   const ranked=Object.entries(s).map(([t,v])=>({t:+t,v})).sort((a,b)=>b.v-a.v);
   const top=ranked[0].t, T=TYPES[top];
@@ -529,6 +530,22 @@ function finish(){
 
 /* ---------------- สั่งซื้อ: ส่งผลไปหน้าชำระเงินบน Railway ---------------- */
 const READER_URL = "https://whoyouare-production.up.railway.app";
+
+/* ---- ตัวนับรวม ----
+   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
+   ใช้ sendBeacon เพื่อไม่ให้หน่วงหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
+function ev(name){
+  try{
+    const url = READER_URL + '/api/ev';
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
+    }else{
+      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
+                  keepalive:true}).catch(()=>{});
+    }
+  }catch(e){}
+}
+ev('mom_view');
 const BUY_STATE = { type:null, name:"", scores:null };
 
 function buildProfile(){
@@ -551,6 +568,7 @@ function buildProfile(){
 }
 
 function goBuy(book, edition){
+  ev('mom_buy_' + edition);
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';
