@@ -312,6 +312,20 @@ h1{font-size:34px;}
   <div class="foot">ทุกแบบทดสอบฟรี ไม่ต้องสมัครสมาชิก ผลลัพธ์ถูกบันทึกไว้ในเบราว์เซอร์ของคุณเอง ไม่ถูกส่งไปที่ไหน · ผลลัพธ์เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา</div>
 </div>
 <script>
+/* ---- ตัวนับรวม ---- ส่งแค่ชื่อเหตุการณ์ ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ */
+const READER_URL = "https://whoyouare-production.up.railway.app";
+function ev(name){
+  try{
+    const url = READER_URL + '/api/ev';
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
+    }else{
+      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
+                  keepalive:true}).catch(()=>{});
+    }
+  }catch(e){}
+}
+ev('home_view');
 const TESTS = [
  {id:'bigfive', file:'bigfive.html', name:'Big Five (OCEAN)', desc:'5 มิติ · 50 ข้อ · มาตรฐานงานวิจัยจิตวิทยาทั่วโลก', color:'#3E8E7E', label:'5'},
  {id:'hexaco', file:'hexaco.html', name:'HEXACO', desc:'6 มิติ · 60 ข้อ · เพิ่มมิติความซื่อสัตย์ที่ Big Five มองไม่เห็น', color:'#D9A441', label:'6'},

@@ -248,6 +248,22 @@ function saveAll(o){
 
 /* ---------- ส่งผลแบบทดสอบไปหน้าชำระเงิน ---------- */
 const READER_URL = "https://whoyouare-production.up.railway.app";
+
+/* ---- ตัวนับรวม ----
+   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
+   ใช้ sendBeacon เพื่อไม่ให้หน่วงหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
+function ev(name){
+  try{
+    const url = READER_URL + '/api/ev';
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
+    }else{
+      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
+                  keepalive:true}).catch(()=>{});
+    }
+  }catch(e){}
+}
+ev('hexaco_view');
 function buildProfile(){
   const all = loadAll();
   const p = {};
@@ -260,6 +276,7 @@ function buildProfile(){
   return p;
 }
 function goBuy(book, edition){
+  ev('hexaco_buy_' + book);
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';
@@ -303,6 +320,7 @@ if(d && d.answers && d.answers.some(x=>x!==null) && d.answers.filter(x=>x!==null
   document.getElementById('startBtn').textContent = 'ทำต่อจากข้อที่ค้างไว้';
 }
 document.getElementById('startBtn').addEventListener('click', ()=>{
+  ev('hexaco_start');
   const dd = loadDraft();
   if(dd && dd.answers && dd.answers.length === ITEMS.length){ answers = dd.answers; page = dd.page || 0; }
   show('s-quiz'); renderPage(page);
@@ -386,6 +404,7 @@ function level(v){ return v>=65 ? 'high' : (v>=40 ? 'mid' : 'low'); }
 const LEVEL_TH = {high:'สูง', mid:'ปานกลาง', low:'ต่ำ'};
 
 function finish(){
+  ev('hexaco_done');
   const scores = computeScores();
   let payload = { scores: scores };
   if(MODE === 'enneagram'){
