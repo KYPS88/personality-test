@@ -289,6 +289,21 @@ const PLANS = {
   bundle4: {book:'complete4', edition:'full',     price:690, name:'บันเดิลสี่ระบบ'}
 };
 
+/* ---- ตัวนับรวม ----
+   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
+   ใช้ sendBeacon เพื่อไม่ให้หน่วงการโหลดหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
+function ev(name){
+  try{
+    const url = READER_URL + '/api/ev';
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
+    }else{
+      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
+                  keepalive:true}).catch(()=>{});
+    }
+  }catch(e){}
+}
+
 const NAV = [
   {id:'bigfive',   file:'bigfive.html',   name:'Big Five (OCEAN)'},
   {id:'hexaco',    file:'hexaco.html',    name:'HEXACO'},
@@ -483,7 +498,7 @@ $('nextBtn').addEventListener('click', ()=>{
   else { finish(); }
 });
 $('prevBtn').addEventListener('click', ()=>{ if(page>0){ page--; saveDraft(); renderPage(); } });
-$('startBtn').addEventListener('click', ()=>{ show('quiz'); renderPage(); });
+$('startBtn').addEventListener('click', ()=>{ ev('sixteen_start'); show('quiz'); renderPage(); });
 
 /* ============ คำนวณผล ============ */
 function compute(){
@@ -511,6 +526,7 @@ function compute(){
 }
 
 function finish(){
+  ev('sixteen_done');
   const r = compute();
   saveResult({code:r.code, pct:r.pct, raw:answers.join('')});
   clearDraft();
@@ -603,6 +619,7 @@ function buildProfile(){
 function goBuy(planKey, btn){
   const plan = PLANS[planKey];
   if(!plan) return;
+  ev('sixteen_buy_' + planKey);
   if(btn){
     btn.disabled = true;
     const cta = btn.querySelector('.cta');
@@ -635,6 +652,7 @@ $('againBtn').addEventListener('click', ()=>{
 
 /* ============ เริ่มต้น ============ */
 (function init(){
+  ev('sixteen_view');
   renderJourney('introJourney', false);
 
   /* อ่านผลจาก URL hash */
