@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>16 ตัวตน — แบบทดสอบบุคลิกภาพ 4 แกน</title>
 <meta name="description" content="แบบทดสอบ 16 ตัวตน 60 ข้อ วัด 4 แกนของบุคลิกภาพ อ่านผลได้ทันที ฟรี">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kyps88.github.io/personality-test/sixteen.html">
 <meta property="og:title" content="16 ตัวตน — คุณเป็นแบบไหนใน 16 แบบ">
 <meta property="og:description" content="60 ข้อ ใช้เวลา 8-10 นาที รู้รหัส 4 ตัวอักษรของคุณและความเข้มของแต่ละแกน">
+<meta property="og:image" content="https://kyps88.github.io/personality-test/sixteen-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyps88.github.io/personality-test/sixteen-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -98,15 +105,23 @@ a{color:var(--accent2);}
 .blur{position:relative;margin-top:16px;border-radius:12px;overflow:hidden;}
 .blur .inner{filter:blur(5px);opacity:.55;font-size:13.5px;color:var(--dim);line-height:1.8;padding:2px;user-select:none;pointer-events:none;}
 .blur .veil{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(26,33,64,0) 20%,rgba(26,33,64,.92) 92%);font-size:12px;color:var(--paper);padding-bottom:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;}
-.tiers{margin-top:20px;border-top:1px solid var(--line);}
-.tier{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid var(--line);}
+.tiers{margin-top:12px;}
+.tier{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:15px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(241,237,228,.03);color:var(--paper);font-family:'IBM Plex Sans Thai',sans-serif;cursor:pointer;transition:border-color .15s ease,transform .15s ease,background .15s ease;}
+.tier:hover{border-color:#D9A441;background:rgba(217,164,65,.09);}
+.tier:active{transform:scale(.995);}
+.tier:disabled{opacity:.55;cursor:progress;}
+.tier:focus-visible{outline:2px solid #E8C275;outline-offset:2px;}
 .tier .ti{flex:1;}
 .tier .ti .a{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .tier .ti .b{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6;}
-.tier .pp{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#E8C275;flex-shrink:0;}
-.tier.best{background:rgba(217,164,65,.08);margin:0 -10px;padding-left:10px;padding-right:10px;border-radius:10px;}
+.tier .pp{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#E8C275;flex-shrink:0;text-align:right;}
+.tier .cta{display:block;font-family:'IBM Plex Sans Thai',sans-serif;font-size:11.5px;color:var(--dim);margin-top:3px;}
+.tier.best{background:linear-gradient(135deg,rgba(217,164,65,.18),rgba(217,164,65,.05));border-color:rgba(217,164,65,.55);}
 .hot{font-size:10px;background:#D9A441;color:#241804;padding:2px 8px;border-radius:99px;font-weight:600;}
-.buyrow{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.soonbox{margin-top:16px;border:1px dashed rgba(217,164,65,.5);border-radius:14px;padding:20px 18px;background:rgba(217,164,65,.06);}
+.soonbox .soon-h{font-family:'Noto Serif Thai',serif;font-size:17px;margin-bottom:8px;}
+.soonbox .soon-p{font-size:13.5px;color:var(--dim);line-height:1.75;margin:0 0 16px;}
+.buyrow{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
 .locknote{font-size:12.5px;color:var(--dim);margin-top:12px;line-height:1.65;}
 /* journey */
 .journey{margin:34px 0 0;}
@@ -164,7 +179,7 @@ a{color:var(--accent2);}
 
   <div class="foot">
     ผลของคุณถูกเก็บไว้ในเครื่องคุณเองเท่านั้น ไม่มีการส่งขึ้นเซิร์ฟเวอร์และไม่มีการเก็บสถิติผู้ทำ<br>
-    แบบทดสอบนี้พัฒนาขึ้นเองทั้งหมด ทั้งข้อคำถาม รหัสตัวตน และคำอธิบายผล โดยอ้างอิงแนวคิดบุคลิกภาพ 4 แกนที่เผยแพร่เป็นสาธารณะ ไม่ได้ใช้และไม่มีความเกี่ยวข้องกับเครื่องมือประเมินบุคลิกภาพเชิงพาณิชย์ของผู้ใด
+    แบบทดสอบนี้พัฒนาขึ้นเองโดยอ้างอิงแนวคิดบุคลิกภาพ 4 แกนที่เผยแพร่เป็นสาธารณะ ไม่ใช่ MBTI® และไม่มีความเกี่ยวข้องกับ The Myers-Briggs Company
   </div>
 </section>
 
@@ -225,39 +240,36 @@ a{color:var(--accent2);}
       <div class="veil">อ่านต่อได้เมื่อสั่งซื้อ</div>
     </div>
 
-    <div class="tiers">
-      <div class="tier">
+    <h3 style="margin:22px 0 2px;">เลือกแพ็กเกจ</h3>
+    <div class="tiers buyrow">
+      <button type="button" class="tier" data-ed="personal">
         <div class="ti"><div class="a">ฉบับส่วนตัว</div><div class="b">เฉพาะไทป์ของคุณ ประมาณ 15 หน้า</div></div>
-        <div class="pp">฿90</div>
-      </div>
-      <div class="tier">
+        <div class="pp">฿90 <span class="cta">สั่งซื้อ ›</span></div>
+      </button>
+      <button type="button" class="tier" data-ed="full">
         <div class="ti"><div class="a">ฉบับเต็ม</div><div class="b">ไทป์คุณ + เรื่องงาน + ความรัก + โหมดตอนเครียด + แผนพัฒนา</div></div>
-        <div class="pp">฿190</div>
-      </div>
-      <div class="tier best">
-        <div class="ti"><div class="a">ฉบับคู่สัมพันธ์ <span class="hot">คนเลือกมากที่สุด</span></div><div class="b">ฉบับเต็ม + วิเคราะห์การเข้ากันกับอีก 15 ไทป์ ทีละคู่ พร้อมประโยคที่ควรใช้เวลาคุยกันไม่รู้เรื่อง</div></div>
-        <div class="pp">฿290</div>
-      </div>
-      <div class="tier">
+        <div class="pp">฿190 <span class="cta">สั่งซื้อ ›</span></div>
+      </button>
+      <button type="button" class="tier best" data-ed="pair">
+        <div class="ti"><div class="a">ฉบับคู่ สองไทป์ <span class="hot">แนะนำ</span></div><div class="b">ได้ฉบับเต็มสองเล่ม เล่มของคุณและเล่มของอีกคนที่คุณเลือก อ่านเทียบกันได้ว่าทำไมสองคนถึงคิดคนละแบบ</div></div>
+        <div class="pp">฿290 <span class="cta">สั่งซื้อ ›</span></div>
+      </button>
+      <!-- บันเดิลสี่ระบบ ฿690 ยังไม่เปิดขาย เพราะ book 'complete4' ยังไม่มีเนื้อหาใน content.json
+           เขียนบทเทียบสี่ระบบเสร็จเมื่อไหร่ ค่อยเอาคอมเมนต์นี้ออก
+      <button type="button" class="tier" data-ed="bundle4">
         <div class="ti"><div class="a">บันเดิลสี่ระบบ</div><div class="b">16 ตัวตน + Big Five + HEXACO + Enneagram รวม 53 บทของชุดเดิม พร้อมบทเทียบสี่ระบบว่าตรงกันหรือขัดกันตรงไหน</div></div>
-        <div class="pp">฿690</div>
-      </div>
+        <div class="pp">฿690 <span class="cta">สั่งซื้อ ›</span></div>
+      </button>
+      -->
     </div>
-
-    <div class="buyrow">
-      <button class="btn gold" data-ed="pair">สั่งซื้อฉบับคู่สัมพันธ์ ฿290</button>
-      <button class="btn ghost" data-ed="full">ฉบับเต็ม ฿190</button>
-      <button class="btn ghost" data-ed="personal">ฉบับส่วนตัว ฿90</button>
-      <button class="btn ghost" data-ed="bundle4">บันเดิลสี่ระบบ ฿690</button>
-    </div>
-    <p class="locknote">ปุ่มจะเปิดแชท LINE พร้อมข้อความสั่งซื้อและรหัสไทป์ของคุณให้อัตโนมัติ · ถ้ายังไม่เคยเป็นเพื่อนกัน <a href="https://line.me/R/ti/p/%40000tkljp">กดเพิ่มเพื่อนที่นี่ก่อน</a> · ชำระเงินโดยโอนธนาคารแล้วส่งสลิป จากนั้นจะได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส</p>
+    <p class="locknote">กดแพ็กเกจที่ต้องการแล้วระบบจะพาไปหน้าชำระเงินบนเว็บทันที กรอกชื่อ โอนเงินตามเลขบัญชีที่ขึ้นในหน้านั้น แล้วอัปโหลดสลิปได้เลย ผลแบบทดสอบของคุณจะถูกส่งไปด้วยเพื่อให้เนื้อหาปรับตามคะแนนจริง เมื่อยืนยันการโอนแล้วจะได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส · ติดปัญหาระหว่างสั่งซื้อ ทักได้ที่ <a href="https://line.me/R/ti/p/%40000tkljp">LINE ตามใจแม่</a></p>
   </div>
 
   <div class="journey" id="resultJourney"></div>
 
   <div class="foot">
-    เก็บลิงก์ผลไว้ถ้าอยากกลับมาอ่านอีกเมื่อไหร่ก็ได้<br>
-    แบบทดสอบนี้พัฒนาขึ้นเองทั้งหมด ทั้งข้อคำถาม รหัสตัวตน และคำอธิบายผล โดยอ้างอิงแนวคิดบุคลิกภาพ 4 แกนที่เผยแพร่เป็นสาธารณะ ไม่ได้ใช้และไม่มีความเกี่ยวข้องกับเครื่องมือประเมินบุคลิกภาพเชิงพาณิชย์ของผู้ใด
+    ผลนี้อยู่ในเครื่องคุณเท่านั้น ถ้าล้างข้อมูลเบราว์เซอร์ ผลจะหายไป เก็บลิงก์ผลไว้ถ้าอยากกลับมาอ่านอีก<br>
+    ไม่ใช่ MBTI® และไม่มีความเกี่ยวข้องกับ The Myers-Briggs Company
   </div>
 </section>
 
@@ -268,11 +280,16 @@ a{color:var(--accent2);}
 const TEST_ID   = 'sixteen';
 const TEST_NAME = '16 ตัวตน';
 const PER_PAGE  = 6;
-const OA        = '%40000tkljp';
-const READER_READY = false;   /* เปลี่ยนเป็น true เมื่อเพิ่มหนังสือ sixteen ใน orders.py แล้ว */
-const READER_URL   = 'https://whoyouare-production.up.railway.app';
-const PRICES = {personal:90, full:190, pair:290, bundle4:690};
-const EDNAMES = {personal:'ฉบับส่วนตัว', full:'ฉบับเต็ม', pair:'ฉบับคู่สัมพันธ์', bundle4:'บันเดิลสี่ระบบ'};
+const READER_URL = 'https://whoyouare-production.up.railway.app';
+/* ไทป์ที่มีเนื้อหาคู่มือพร้อมขายแล้ว — ต้องตรงกับ available_types ใน content.json
+   เพิ่มรหัสตรงนี้ทุกครั้งที่เขียนเนื้อหาไทป์ใหม่เสร็จ */
+const AVAILABLE = ['ISTJ','ISFJ','INFJ','INTJ','ISTP','ISFP','INFP','INTP','ESTP','ESFP','ENFP','ENTP','ESTJ','ESFJ','ENFJ','ENTJ'];
+const PLANS = {
+  personal:{book:'sixteen',   edition:'personal', price:90,  name:'ฉบับส่วนตัว'},
+  full:    {book:'sixteen',   edition:'full',     price:190, name:'ฉบับเต็ม'},
+  pair:    {book:'sixteen',   edition:'pair',     price:290, name:'ฉบับคู่ 2 ไทป์'},
+  bundle4: {book:'complete4', edition:'full',     price:690, name:'บันเดิลสี่ระบบ'}
+};
 
 const NAV = [
   {id:'bigfive',   file:'bigfive.html',   name:'Big Five (OCEAN)'},
@@ -533,6 +550,21 @@ function renderResult(r){
 
   $('rTease').textContent = 'เวลาที่กดดันมากๆ คน '+r.code+' มักหลุดไปอยู่ในโหมดที่ตัวเองไม่คุ้นเคย สิ่งที่เคยเป็นจุดแข็งจะกลับด้านและกลายเป็นสิ่งที่ทำร้ายทั้งตัวเองและคนรอบข้าง สัญญาณแรกที่สังเกตได้คือ… และวิธีดึงตัวเองกลับที่ได้ผลกับไทป์นี้มากที่สุดคือการเริ่มจาก… ส่วนสิ่งที่ไม่ควรทำเลยในช่วงนั้นคือ… เพราะมันจะยิ่งผลักให้คุณจมลงไปอีกชั้น';
 
+  /* ไทป์ที่ยังไม่มีเนื้อหา ปิดการขายไว้ก่อน ไม่ให้คนจ่ายเงินแล้วไม่มีของอ่าน */
+  if(AVAILABLE.indexOf(r.code) === -1){
+    const box = document.querySelector('.tiers.buyrow');
+    if(box){
+      box.className = 'soonbox';
+      box.innerHTML = '<div class="soon-h">คู่มือฉบับ '+r.code+' ยังเขียนไม่เสร็จ</div>'+
+        '<p class="soon-p">ตอนนี้มีคู่มือพร้อมอ่านแล้ว '+AVAILABLE.length+' จาก 16 ไทป์ '+
+        'และกำลังทยอยเขียนที่เหลืออยู่ ยังไม่เปิดให้สั่งซื้อฉบับของคุณเพราะไม่อยากให้จ่ายเงินแล้วรอ '+
+        'ถ้าอยากให้แจ้งเมื่อฉบับ '+r.code+' เสร็จ ทักไปที่ LINE แล้วบอกรหัสไทป์ไว้ได้</p>'+
+        '<a class="btn ghost" href="https://line.me/R/ti/p/%40000tkljp">ฝากชื่อไว้ที่ LINE</a>';
+    }
+    const note = document.querySelector('.sell .locknote');
+    if(note) note.style.display = 'none';
+  }
+
   renderJourney('resultJourney', true);
 }
 
@@ -570,23 +602,24 @@ function buildProfile(){
   if(all.sixteen && all.sixteen.code) p.sixteen = {code: all.sixteen.code, pct: all.sixteen.pct};
   return p;
 }
-function goBuy(edition){
-  const all = loadAll();
-  const code = (all.sixteen && all.sixteen.code) || '';
-  if(READER_READY){
-    const f = document.createElement('form');
-    f.method='POST'; f.action = READER_URL + '/buy';
-    [['book','sixteen'],['edition',edition],['profile',JSON.stringify(buildProfile())]]
-      .forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; f.appendChild(i); });
-    document.body.appendChild(f); f.submit();
-  }else{
-    const msg = 'สั่งซื้อคู่มือ 16 ตัวตน\nแพ็กเกจ: '+EDNAMES[edition]+' ฿'+PRICES[edition]+
-                (code ? ('\nไทป์ของฉัน: '+code+' ('+TYPES[code].n+')') : '');
-    window.open('https://line.me/R/oaMessage/'+OA+'/?'+encodeURIComponent(msg), '_blank');
+function goBuy(planKey, btn){
+  const plan = PLANS[planKey];
+  if(!plan) return;
+  if(btn){
+    btn.disabled = true;
+    const cta = btn.querySelector('.cta');
+    if(cta) cta.textContent = 'กำลังเปิด…';
   }
+  const f = document.createElement('form');
+  f.method = 'POST';
+  f.action = READER_URL + '/buy';
+  [['book',plan.book],['edition',plan.edition],['profile',JSON.stringify(buildProfile())]]
+    .forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; f.appendChild(i); });
+  document.body.appendChild(f);
+  f.submit();
 }
-document.querySelectorAll('.buyrow .btn').forEach(b=>{
-  b.addEventListener('click', ()=>goBuy(b.dataset.ed));
+document.querySelectorAll('.buyrow .tier').forEach(b=>{
+  b.addEventListener('click', ()=>goBuy(b.dataset.ed, b));
 });
 
 /* ============ ปุ่มอื่น ============ */
