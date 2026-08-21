@@ -236,7 +236,9 @@ const GETS = ["<b>บทประเภทของคุณแบบเต็�
 const EBOOK_URL = "ebook.html";
 const SELF_BOOK = {"name": "แรงขับเบื้องหลัง", "sys": "ENNEAGRAM · 9 TYPES", "pages": 47, "tag": "อ่านประเภทของคุณแบบเต็ม", "pitch": "ผลที่คุณเพิ่งอ่านคือสรุปสั้นของประเภทหลัก ในเล่มนี้คือทั้งเก้าประเภทแบบละเอียด รวมถึงประเภทที่คะแนนคุณสูสีกับอันดับหนึ่ง", "bullets": ["ทั้ง 9 ประเภทเต็มรูปแบบ ความกลัวพื้นฐาน ความต้องการ จุดแข็ง และกับดัก", "พฤติกรรมของแต่ละประเภทในที่ทำงาน ในความสัมพันธ์ และตอนเลี้ยงลูก", "ประเภทเดียวกันแต่คนละระดับ ตารางเทียบตอนอยู่ในระดับดีกับตอนแย่", "ปีกทั้ง 18 แบบ และคู่ประเภทที่คนมักสับสน 8 คู่ พร้อมคำถามที่ใช้แยก", "ทิศทางเครียดและทิศทางเติบโตของทั้งเก้าประเภท พร้อมแผน 90 วัน"]};
 const PRICE_SINGLE = 190;
-const PRICE_SET = 490;
+const PRICE_SET = 590;
+const PRICE_SINGLES_ALL = 720;
+const CHAPTERS = 20;
 const HAS_PERSONAL = true;
 const PRICE_PERSONAL = 90;
 const PERSONAL = {"name": "ฉบับเฉพาะ Type ของคุณ", "desc": "เจาะเฉพาะประเภทของคุณ ปีก ทิศทางเครียด และทิศทางเติบโต ไม่ต้องอ่านประเภทที่ไม่เกี่ยวกับตัวเอง", "bullets": ["บทประเภทหลักของคุณแบบเต็ม พร้อมพฤติกรรมในที่ทำงานและความสัมพันธ์", "บทของปีกคุณ เพื่อเข้าใจสีสันที่ผสมอยู่", "บททิศทางเครียดและทิศทางเติบโต ซึ่งเป็นระบบเตือนภัยส่วนตัวของคุณ", "เปิดมาเจอบทสรุปผลของคุณเป็นหน้าแรก"]};
@@ -255,22 +257,6 @@ function saveAll(o){
 
 /* ---------- ส่งผลแบบทดสอบไปหน้าชำระเงิน ---------- */
 const READER_URL = "https://whoyouare-production.up.railway.app";
-
-/* ---- ตัวนับรวม ----
-   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
-   ใช้ sendBeacon เพื่อไม่ให้หน่วงหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
-function ev(name){
-  try{
-    const url = READER_URL + '/api/ev';
-    if(navigator.sendBeacon){
-      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
-    }else{
-      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
-                  keepalive:true}).catch(()=>{});
-    }
-  }catch(e){}
-}
-ev('enneagram_view');
 function buildProfile(){
   const all = loadAll();
   const p = {};
@@ -283,7 +269,6 @@ function buildProfile(){
   return p;
 }
 function goBuy(book, edition){
-  ev('enneagram_buy_' + edition);
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';
@@ -327,7 +312,6 @@ if(d && d.answers && d.answers.some(x=>x!==null) && d.answers.filter(x=>x!==null
   document.getElementById('startBtn').textContent = 'ทำต่อจากข้อที่ค้างไว้';
 }
 document.getElementById('startBtn').addEventListener('click', ()=>{
-  ev('enneagram_start');
   const dd = loadDraft();
   if(dd && dd.answers && dd.answers.length === ITEMS.length){ answers = dd.answers; page = dd.page || 0; }
   show('s-quiz'); renderPage(page);
@@ -411,7 +395,6 @@ function level(v){ return v>=65 ? 'high' : (v>=40 ? 'mid' : 'low'); }
 const LEVEL_TH = {high:'สูง', mid:'ปานกลาง', low:'ต่ำ'};
 
 function finish(){
-  ev('enneagram_done');
   const scores = computeScores();
   let payload = { scores: scores };
   if(MODE === 'enneagram'){
@@ -706,8 +689,8 @@ function renderClosing(title, body, note, book, edition){
 /* ---------- upsell ---------- */
 function renderSell(doneCount){
   const el = document.getElementById('sellBox');
-  const complete = doneCount >= 3;
-  const singlesTotal = PRICE_SINGLE * 3;
+  const complete3 = doneCount >= 3;
+  const has16 = !!loadAll()['sixteen'];
 
   let h = '';
   if(HAS_PERSONAL){
@@ -725,42 +708,46 @@ function renderSell(doneCount){
   h += '<div class="sell">' +
     '<div class="tagline">' + SELF_BOOK.tag + '</div>' +
     '<h2>' + SELF_BOOK.name + '</h2>' +
-    '<div class="bookmeta">' + SELF_BOOK.sys + ' · ' + SELF_BOOK.pages + ' หน้า · PDF</div>' +
+    '<div class="bookmeta">' + SELF_BOOK.sys + ' · ' + CHAPTERS + ' บท · อ่านออนไลน์</div>' +
     '<p style="font-size:14px;color:var(--dim);margin:10px 0 0;line-height:1.75;">' + SELF_BOOK.pitch + '</p>' +
     '<ul>' + SELF_BOOK.bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>' +
     '<div class="pricebox"><div class="now">฿' + PRICE_SINGLE + '</div></div>' +
-    '<p class="locknote">เล่มเดี่ยว เจาะเฉพาะระบบนี้ ดาวน์โหลดได้ทันทีหลังชำระเงิน</p>' +
+    '<p class="locknote">เล่มเดี่ยว เจาะเฉพาะระบบนี้ อ่านออนไลน์ได้ทันทีหลังยืนยันการโอน</p>' +
     '<button class="btn gold" style="margin-top:16px;" onclick="goBuy(\'enneagram\',\'full\')">สั่งซื้อเล่มนี้ ฿' + PRICE_SINGLE + '</button>' +
     '</div>';
 
   h += '<div class="pkg">' +
-    '<div class="pkgtag">อีกทางเลือกหนึ่ง</div>' +
-    '<h2 style="margin:0 0 3px;">ฉบับรวมสามระบบ</h2>' +
-    '<div class="bookmeta">BIG FIVE + HEXACO + ENNEAGRAM · 136 หน้า · ไฟล์เดียวจบ</div>' +
+    '<div class="pkgtag">คุ้มที่สุด</div>' +
+    '<h2 style="margin:0 0 3px;">บันเดิลสี่ระบบ</h2>' +
+    '<div class="bookmeta">BIG FIVE + HEXACO + ENNEAGRAM + 16 ตัวตน · 63 บท · อ่านออนไลน์</div>' +
     '<p style="font-size:13.5px;color:var(--dim);margin:12px 0 0;line-height:1.75;">' +
-      'รวมเนื้อหาทั้งสามเล่ม บวกอีก <b style="color:var(--paper)">19 บทที่ไม่มีในเล่มเดี่ยวเลย</b> เพราะเป็นบทที่ต้องใช้ผลจากทั้งสามระบบพร้อมกันถึงจะเขียนได้</p>' +
+      'สามระบบเดิม 53 บท บวก 16 ตัวตนฉบับเต็มอีกหนึ่งเล่ม ในนั้นมี <b style="color:var(--paper)">19 บทที่ไม่มีในเล่มเดี่ยวเลย</b> เพราะเป็นบทที่ต้องใช้ผลจากหลายระบบพร้อมกันถึงจะเขียนได้</p>' +
     '<div class="pkglist">' +
-      '<div class="pkgrow"><div class="pn">1</div><div class="pi"><div class="a">Big Five ทั้งห้ามิติ</div><div class="b">คุณเป็นคนแบบไหน · 9 บท</div></div></div>' +
-      '<div class="pkgrow"><div class="pn">2</div><div class="pi"><div class="a">HEXACO ทั้งหกมิติ</div><div class="b">คุณเล่นเกมแบบไหน · 7 บท</div></div></div>' +
-      '<div class="pkgrow"><div class="pn">3</div><div class="pi"><div class="a">Enneagram ทั้งเก้าประเภท</div><div class="b">ทำไมคุณถึงเป็นแบบนั้น · 16 บท</div></div></div>' +
-      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">อีก 19 บทที่ไม่มีในเล่มเดี่ยว<span class="freetag">มีเฉพาะในฉบับรวม</span></div><div class="b">เมื่อสามระบบขัดกัน 4 บท · อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ 5 บท · บริหารทีม 2 บท · ความสัมพันธ์และครอบครัว 3 บท · แผน 90 วัน 5 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">1</div><div class="pi"><div class="a">Big Five ทั้งห้ามิติ</div><div class="b">คุณเป็นคนแบบไหน · 14 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">2</div><div class="pi"><div class="a">HEXACO ทั้งหกมิติ</div><div class="b">คุณเล่นเกมแบบไหน · 11 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">3</div><div class="pi"><div class="a">Enneagram ทั้งเก้าประเภท</div><div class="b">ทำไมคุณถึงเป็นแบบนั้น · 20 บท</div></div></div>' +
+      '<div class="pkgrow"><div class="pn">4</div><div class="pi"><div class="a">16 ตัวตน ฉบับเต็ม</div><div class="b">ไทป์ของคุณแบบละเอียด · 10 บท</div></div></div>' +
+      '<div class="pkgrow bonus"><div class="pn">+</div><div class="pi"><div class="a">อีก 19 บทที่ไม่มีในเล่มเดี่ยว<span class="freetag">มีเฉพาะในฉบับรวม</span></div><div class="b">เมื่อสามระบบขัดกัน · อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ · บริหารทีมและการให้ฟีดแบค · ความสัมพันธ์และครอบครัว · แบบฝึกและแบบบันทึกรวมสามระบบ</div></div></div>' +
     '</div>' +
     '<div class="pkgmath">' +
-      '<div class="mrow"><span>ซื้อเล่มเดี่ยวครบ 3 เล่ม</span><span>34 บท · ฿' + singlesTotal + '</span></div>' +
-      '<div class="mrow"><span>ฉบับรวม</span><span>53 บท · ฿' + PRICE_SET + '</span></div>' +
-      '<div class="mrow total"><span>ได้เพิ่ม</span><span>+19 บท · ถูกกว่า ฿' + (singlesTotal - PRICE_SET) + '</span></div>' +
+      '<div class="mrow"><span>ซื้อแยกครบสี่เล่ม</span><span>฿' + PRICE_SINGLES_ALL + '</span></div>' +
+      '<div class="mrow"><span>บันเดิลสี่ระบบ</span><span>63 บท · ฿' + PRICE_SET + '</span></div>' +
+      '<div class="mrow total"><span>ประหยัด</span><span>฿' + (PRICE_SINGLES_ALL - PRICE_SET) + '</span></div>' +
     '</div>' +
     '<div class="pricebox" style="margin-top:16px;">' +
       '<div class="now">฿' + PRICE_SET + '</div>' +
-      '<div class="was">฿' + singlesTotal + '</div>' +
+      '<div class="was">฿' + PRICE_SINGLES_ALL + '</div>' +
       '<div class="save">+19 บทที่ไม่มีในเล่มเดี่ยว</div>' +
     '</div>' +
     '<p class="locknote">' +
-      (complete
-        ? 'คุณทำครบทั้ง 3 แบบทดสอบแล้ว ภาควิเคราะห์รวมในเล่มนี้จะใช้ได้เต็มที่ตั้งแต่หน้าแรก เพราะต้องใช้ผลทั้งสามชุดมาวางเทียบกัน'
-        : 'ซื้อได้เลยตอนนี้ แต่แนะนำให้ทำอีก ' + (3-doneCount) + ' แบบทดสอบให้ครบก่อน เพราะภาควิเคราะห์รวมต้องใช้ผลทั้งสามชุดมาวางเทียบกันจึงจะได้ประโยชน์เต็มที่') +
-      ' · อ่านออนไลน์ผ่านลิงก์ส่วนตัว จำไว้ว่าอ่านถึงบทไหนแล้ว</p>' +
-    '<button class="btn gold" style="margin-top:16px;" onclick="goBuy(\'complete\',\'full\')">สั่งซื้อฉบับรวม ฿' + PRICE_SET + '</button>' +
+      (has16
+        ? 'คุณทำ 16 ตัวตนแล้ว เล่มที่สี่จะเขียนตามไทป์ที่คุณได้จริง'
+        : 'ยังไม่ได้ทำแบบทดสอบ 16 ตัวตน สั่งซื้อได้เลยแต่เล่มที่สี่จะเขียนให้ไม่ได้จนกว่าจะมีผล <a href="sixteen.html" style="color:var(--gold);">ทำเลย 60 ข้อ</a>') +
+      (complete3
+        ? ''
+        : ' · อีก ' + (3-doneCount) + ' แบบทดสอบในชุดเดิมยังไม่ได้ทำ ภาควิเคราะห์รวมต้องใช้ผลทั้งสามชุดจึงจะได้ประโยชน์เต็มที่') +
+      ' · อ่านออนไลน์ผ่านลิงก์ส่วนตัว ระบบจำว่าคุณอ่านถึงบทไหน</p>' +
+    '<button class="btn gold" style="margin-top:16px;" onclick="goBuy(\'complete4\',\'full\')">สั่งซื้อบันเดิลสี่ระบบ ฿' + PRICE_SET + '</button>' +
     '</div>';
   el.innerHTML = h;
 }

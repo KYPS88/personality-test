@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ร้านคู่มือ — คู่มือฉบับเต็มทุกเล่ม</title>
+<meta name="description" content="คู่มือฉบับเต็มจากแบบทดสอบ Big Five, HEXACO, Enneagram, 16 ตัวตน และคู่มือแม่ 9 แบบ เนื้อหาปรับตามคะแนนของคุณเอง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1428;--panel:#1A2140;--paper:#F1EDE4;--dim:#9DA3BD;--line:rgba(241,237,228,0.11);
+  --gold:#D9A441;--teal:#3E8E7E;--lilac:#B98CCE;--coral:#E5806F;--blue:#6FA8DC;}
+*{box-sizing:border-box;}
+body{margin:0;background:radial-gradient(circle at 15% -12%,#232C57 0%,var(--ink) 58%);
+  background-attachment:fixed;color:var(--paper);font-family:'IBM Plex Sans Thai',sans-serif;
+  min-height:100vh;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:680px;margin:0 auto;padding:34px 18px 80px;}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;margin:0 0 10px;line-height:1.35;}
+h1{font-size:30px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.lead{font-size:15px;line-height:1.85;color:var(--dim);margin:0 0 8px;}
+
+.howto{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;
+  padding:16px 16px;margin:22px 0 34px;}
+.howto .t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.howto ol{margin:0;padding-left:18px;}
+.howto li{font-size:13.5px;line-height:1.9;color:#C8CBDA;}
+
+.sec{margin-top:40px;}
+.sec .sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:5px;}
+.sec .sh h2{font-size:21px;margin:0;}
+.sec .sh .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--gold);
+  border:1px solid rgba(217,164,65,.4);border-radius:20px;padding:2px 9px;}
+.sec .sl{font-size:13.5px;color:var(--dim);line-height:1.75;margin:0 0 16px;}
+
+.item{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:18px 17px;margin-bottom:12px;border-left:3px solid var(--gold);}
+.item.g1{border-left-color:var(--teal);}
+.item.g2{border-left-color:var(--gold);}
+.item.g3{border-left-color:var(--lilac);}
+.item.g4{border-left-color:var(--blue);}
+.item.g5{border-left-color:var(--coral);}
+.item .top{display:flex;align-items:baseline;gap:12px;justify-content:space-between;}
+.item .top h3{font-size:17px;margin:0;flex:1;min-width:0;}
+.item .price{font-family:'IBM Plex Mono',monospace;font-size:17px;color:var(--gold);
+  white-space:nowrap;font-weight:600;}
+.item .price s{font-size:11.5px;color:#6E7699;margin-right:6px;font-weight:500;}
+.item .desc{font-size:13.5px;color:var(--dim);line-height:1.8;margin:9px 0 0;}
+.item ul{margin:10px 0 0;padding-left:17px;}
+.item li{font-size:13px;line-height:1.8;color:#C8CBDA;}
+.item .act{margin-top:14px;}
+
+.btn{display:block;width:100%;text-align:center;border:0;border-radius:11px;
+  padding:13px 14px;font-family:'IBM Plex Sans Thai',sans-serif;font-size:14.5px;font-weight:600;
+  cursor:pointer;text-decoration:none;line-height:1.4;}
+.btn.buy{background:linear-gradient(135deg,var(--gold),#E9BC63);color:#231803;}
+.btn.buy:active{filter:brightness(.93);}
+.btn.need{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--paper);}
+.state{font-family:'IBM Plex Mono',monospace;font-size:10.5px;margin-top:9px;text-align:center;color:#6E7699;}
+.state.ok{color:var(--teal);}
+
+.best{background:linear-gradient(140deg,rgba(217,164,65,.16),rgba(185,140,206,.06));
+  border:1px solid rgba(217,164,65,.42);border-left-width:3px;}
+.ribbon{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+
+.foot{margin-top:44px;border-top:1px solid var(--line);padding-top:22px;}
+.foot p{font-size:12.5px;color:#6E7699;line-height:1.85;margin:0 0 10px;}
+.foot a{color:var(--dim);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">ร้านคู่มือ</div>
+  <h1>คู่มือฉบับเต็ม ทุกเล่มในที่เดียว</h1>
+  <p class="lead">
+    แบบทดสอบฟรีให้คุณเห็นภาพกว้าง คู่มือคือส่วนที่ลงลึก — เขียนตามคะแนนที่คุณทำได้จริง
+    ไม่ใช่ข้อความสำเร็จรูปชุดเดียวส่งให้ทุกคน อ่านออนไลน์ ไม่มีวันหมดอายุ เข้าอ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส
+  </p>
+
+  <div class="howto">
+    <div class="t">ซื้ออย่างไร</div>
+    <ol>
+      <li>กดปุ่มสั่งซื้อ ระบบจะพาไปหน้าชำระเงิน</li>
+      <li>กรอกชื่อ โอนเงินตามเลขบัญชีที่ขึ้นในหน้านั้น แล้วอัปโหลดสลิป</li>
+      <li>เมื่อยืนยันการโอน จะได้รหัสเข้าอ่านทันที</li>
+    </ol>
+  </div>
+
+  <!-- ============ 1. คู่มือรายเล่ม ============ -->
+  <section class="sec">
+    <div class="sh"><h2>คู่มือรายเล่ม</h2><span class="tag">฿150–190</span></div>
+    <p class="sl">เจาะระบบเดียวให้ลึก ทุกบทเขียนตามระดับคะแนนของคุณเอง เหมาะถ้าคุณอยากเริ่มจากเล่มที่ตรงกับคำถามในใจตอนนี้</p>
+    <div id="single"></div>
+  </section>
+
+  <!-- ============ 2. ฉบับไทป์ส่วนตัว ============ -->
+  <section class="sec">
+    <div class="sh"><h2>ฉบับไทป์ส่วนตัว</h2><span class="tag">฿90</span></div>
+    <p class="sl">เล่มบางที่เขียนถึงไทป์ของคุณอย่างเดียว ไม่มีบทของไทป์อื่นให้ต้องข้าม เหมาะกับคนที่อยากอ่านจบในคืนเดียว</p>
+    <div id="personal"></div>
+  </section>
+
+  <!-- ============ 3. ฉบับคู่ ============ -->
+  <section class="sec">
+    <div class="sh"><h2>ฉบับคู่</h2><span class="tag">อ่านด้วยกันสองคน</span></div>
+    <p class="sl">เพิ่มบทที่เขียนถึงคู่ของคุณสองไทป์โดยเฉพาะ — จุดที่มักเข้าใจกันผิด ประโยคที่ควรเลี่ยง และวิธีคุยกันตอนที่ต่างคนต่างเครียด</p>
+    <div id="pair"></div>
+  </section>
+
+  <!-- ============ 4. บันเดิล ============ -->
+  <section class="sec">
+    <div class="sh"><h2>บันเดิล</h2><span class="tag">คุ้มที่สุด</span></div>
+    <p class="sl">
+      จุดขายของฉบับรวมไม่ใช่ราคา แต่คือ<b>บทที่มีเฉพาะในฉบับรวมเท่านั้น</b> —
+      บทที่เอาผลจากหลายระบบมาวางทับกัน แล้วอธิบายสิ่งที่ระบบเดียวมองไม่เห็น
+    </p>
+    <div id="bundle"></div>
+  </section>
+
+  <!-- ============ 5. คู่มือแม่ ============ -->
+  <section class="sec">
+    <div class="sh"><h2>คู่มือแม่ 9 แบบ</h2><span class="tag">กำลังเขียน</span></div>
+    <p class="sl">คนละชุดกับคู่มือด้านบน เขียนจากมุมการเลี้ยงลูก — ทำไมเราหลุดกับลูกในสถานการณ์เดิมซ้ำ ๆ และจะกลับมาตั้งหลักอย่างไร</p>
+    <div id="momsec"></div>
+  </section>
+
+  <div class="foot">
+    <p>คู่มือทุกเล่มเป็นเครื่องมือทำความเข้าใจตัวเอง <b>ไม่ใช่การวินิจฉัยทางจิตวิทยา</b> ไม่ได้ประเมินสุขภาพจิต ไม่ตัดสินว่าใครเลี้ยงลูกดีหรือไม่ดี และไม่ทำนายอนาคตของใคร</p>
+    <p>คะแนนที่ได้เป็นการเทียบภายในตัวคุณเอง ว่าด้านไหนเด่นกว่าด้านไหน ไม่ใช่การเทียบกับคนอื่น</p>
+    <p>ติดปัญหาระหว่างสั่งซื้อ ทักได้ที่ <a href="https://line.me/R/ti/p/%40000tkljp">LINE ตามใจแม่</a></p>
+  </div>
+
+</div>
+
+<script>
+/* =========================================================
+   shop.html — หน้าขายคู่มือรวมทุกเล่ม
+   อ่านผลจาก localStorage เพื่อบอกว่าเล่มไหนพร้อมซื้อแล้ว
+   ========================================================= */
+var READER_URL = "https://whoyouare-production.up.railway.app";
+var RESULT_KEY = 'ptx_results_v1';
+var MOM_KEY    = 'tjm_parent_enneagram_v1';
+
+function loadAll(){
+  try{ return JSON.parse(localStorage.getItem(RESULT_KEY) || '{}'); }catch(e){ return {}; }
+}
+function hasMom(){
+  try{ return !!localStorage.getItem(MOM_KEY); }catch(e){ return false; }
+}
+
+/* profile ชุดเดียวกับที่แบบทดสอบส่งไป เพื่อให้เนื้อหาปรับตามคะแนนจริง */
+function buildProfile(){
+  var all = loadAll(), p = {};
+  if(all.bigfive && all.bigfive.scores) p.bigfive = all.bigfive.scores;
+  if(all.hexaco  && all.hexaco.scores)  p.hexaco  = all.hexaco.scores;
+  if(all.enneagram && all.enneagram.main){
+    p.enneagram = {type: all.enneagram.main};
+    if(all.enneagram.wing) p.enneagram.wing = all.enneagram.wing;
+  }
+  if(all.sixteen && all.sixteen.code) p.sixteen = {code: all.sixteen.code, pct: all.sixteen.pct};
+  return p;
+}
+function goBuy(book, edition){
+  var f = document.createElement('form');
+  f.method = 'POST';
+  f.action = READER_URL + '/buy';
+  f.style.display = 'none';
+  [['book',book],['edition',edition],['profile',JSON.stringify(buildProfile())]]
+    .forEach(function(kv){
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = kv[0]; i.value = kv[1];
+      f.appendChild(i);
+    });
+  document.body.appendChild(f);
+  f.submit();
+}
+
+/* ---------- ตัวสร้างการ์ด ---------- */
+function card(o){
+  var ready = o.ready();
+  var html = '<div class="item ' + (o.cls||'') + (o.best?' best':'') + '">';
+  if(o.best) html += '<div class="ribbon">' + o.best + '</div>';
+  html += '<div class="top"><h3>' + o.title + '</h3>' +
+          '<div class="price">' + (o.was ? '<s>฿' + o.was + '</s>' : '') + '฿' + o.price + '</div></div>';
+  if(o.desc)  html += '<p class="desc">' + o.desc + '</p>';
+  if(o.bullets) html += '<ul><li>' + o.bullets.join('</li><li>') + '</li></ul>';
+  html += '<div class="act">';
+  if(ready){
+    html += '<button class="btn buy" data-book="' + o.book + '" data-ed="' + o.edition + '">สั่งซื้อ ฿' + o.price + '</button>' +
+            '<div class="state ok">' + (o.okNote || 'พร้อมสั่งซื้อ — เนื้อหาจะปรับตามคะแนนของคุณ') + '</div>';
+  }else if(o.link){
+    html += '<a class="btn need" href="' + o.link + '">' + o.needBtn + '</a>' +
+            '<div class="state">' + o.needNote + '</div>';
+  }
+  html += '</div></div>';
+  return html;
+}
+function paint(id, items){
+  document.getElementById(id).innerHTML = items.map(card).join('');
+}
+
+var all = loadAll();
+var has = {
+  bigfive:   !!(all.bigfive && all.bigfive.scores),
+  hexaco:    !!(all.hexaco && all.hexaco.scores),
+  enneagram: !!(all.enneagram && all.enneagram.main),
+  sixteen:   !!(all.sixteen && all.sixteen.code),
+  mom:       hasMom()
+};
+var doneCore = ['bigfive','hexaco','enneagram'].filter(function(k){ return has[k]; }).length;
+var doneAll  = doneCore + (has.sixteen ? 1 : 0);
+
+/* ---------- 1. รายเล่ม ---------- */
+paint('single', [
+  { title:'Big Five (OCEAN) ฉบับเต็ม · 14 บท', price:190, cls:'g1', book:'bigfive', edition:'full',
+    desc:'ห้ามิติหลักของบุคลิกภาพ แต่ละมิติเขียนแยกตามระดับคะแนนที่คุณได้ ไม่ใช่คำอธิบายกลาง ๆ ชุดเดียว',
+    bullets:['บทละมิติ พร้อมสิ่งที่คะแนนระดับนั้นมักทำให้เจอในชีวิตจริง','จุดแข็งที่มักถูกมองข้าม และกับดักที่มาคู่กัน'],
+    ready:function(){ return has.bigfive; },
+    link:'bigfive.html', needBtn:'ทำแบบทดสอบ Big Five ก่อน (50 ข้อ)', needNote:'ต้องมีคะแนนก่อน เนื้อหาถึงจะปรับให้คุณได้' },
+
+  { title:'HEXACO ฉบับเต็ม · 11 บท', price:150, cls:'g2', book:'hexaco', edition:'full',
+    desc:'หกมิติ เพิ่มมิติความซื่อตรง–ถ่อมตัวที่ Big Five ไม่ได้วัด เหมาะกับคนที่อยากเข้าใจตัวเองในเรื่องความสัมพันธ์และการทำงานร่วมกับคนอื่น',
+    bullets:['บทละมิติ แยกตามระดับคะแนนของคุณ','บทเปรียบเทียบกับผลของคุณเองในระบบอื่นถ้ามี'],
+    ready:function(){ return has.hexaco; },
+    link:'hexaco.html', needBtn:'ทำแบบทดสอบ HEXACO ก่อน (60 ข้อ)', needNote:'ต้องมีคะแนนก่อน เนื้อหาถึงจะปรับให้คุณได้' },
+
+  { title:'Enneagram ฉบับเต็ม · 20 บท', price:190, cls:'g3', book:'enneagram', edition:'full',
+    desc:'ครบทั้งเก้าไทป์ พร้อมปีก ทิศทางตอนเครียด และเส้นทางเติบโต โดยเริ่มจากไทป์ของคุณเป็นหลัก',
+    bullets:['บททุกไทป์ อ่านเข้าใจคนรอบตัวได้ด้วย','บทปีกและทิศทางเครียดของคุณโดยเฉพาะ'],
+    ready:function(){ return has.enneagram; },
+    link:'enneagram.html', needBtn:'ทำแบบทดสอบ Enneagram ก่อน (63 ข้อ)', needNote:'ต้องมีคะแนนก่อน เนื้อหาถึงจะปรับให้คุณได้' },
+
+  { title:'16 ตัวตน ฉบับเต็ม · 10 บท', price:190, cls:'g4', book:'sixteen', edition:'full',
+    desc:'สิบบทของตัวตนคุณ ตั้งแต่แกนหลัก ลำดับการใช้ความคิด จุดแข็ง กับดัก โหมดเครียด ไปจนถึงงาน ความรัก และแผนหกสิบวัน',
+    bullets:['เนื้อหาเปลี่ยนตามว่าคะแนนแต่ละแกนของคุณชัดหรือก้ำกึ่ง','บทแผนหกสิบวันที่ทำตามได้จริง','เขียนไว้ครบทั้งสิบหกไทป์แล้ว ไม่ว่าคุณได้ไทป์ไหนก็มีเล่มรออยู่'],
+    ready:function(){ return has.sixteen; },
+    link:'sixteen.html', needBtn:'ทำแบบทดสอบ 16 ตัวตนก่อน (60 ข้อ)', needNote:'ต้องมีคะแนนก่อน เนื้อหาถึงจะปรับให้คุณได้' }
+]);
+
+/* ---------- 2. ไทป์ส่วนตัว ---------- */
+paint('personal', [
+  { title:'Enneagram ฉบับไทป์ส่วนตัว', price:90, cls:'g3', book:'enneagram', edition:'personal',
+    desc:'เฉพาะไทป์ของคุณ พร้อมปีกและทิศทางเครียด ตัดบทของอีกแปดไทป์ออก',
+    ready:function(){ return has.enneagram; },
+    link:'enneagram.html', needBtn:'ทำแบบทดสอบ Enneagram ก่อน (63 ข้อ)', needNote:'ต้องรู้ไทป์ของคุณก่อน' },
+
+  { title:'16 ตัวตน ฉบับส่วนตัว', price:90, cls:'g4', book:'sixteen', edition:'personal',
+    desc:'เฉพาะตัวตนของคุณตัวเดียว สิบบท อ่านจบได้ในคืนเดียว',
+    ready:function(){ return has.sixteen; },
+    link:'sixteen.html', needBtn:'ทำแบบทดสอบ 16 ตัวตนก่อน (60 ข้อ)', needNote:'ต้องรู้ตัวตนของคุณก่อน' }
+]);
+
+/* ---------- 3. ฉบับคู่ ---------- */
+paint('pair', [
+  { title:'16 ตัวตน ฉบับคู่สัมพันธ์', price:290, cls:'g4', book:'sixteen', edition:'pair',
+    desc:'ได้ฉบับเต็มสองเล่ม ของคุณและของอีกคนที่เลือก บวกบทวิเคราะห์การเข้ากันกับอีก 15 ไทป์ ทีละไทป์ พร้อมจุดที่ต้องระวังของคู่นั้น',
+    bullets:['ต้องแจ้งไทป์ของอีกคนตอนสั่งซื้อ','เหมาะกับคู่รัก คู่ทำงาน หรือพ่อแม่ลูก'],
+    ready:function(){ return has.sixteen; },
+    link:'sixteen.html', needBtn:'ทำแบบทดสอบ 16 ตัวตนก่อน (60 ข้อ)', needNote:'ต้องรู้ตัวตนของคุณก่อน' }
+]);
+
+/* ---------- 4. บันเดิล ---------- */
+paint('bundle', [
+  { title:'บันเดิลสี่ระบบ · 63 บท', price:590, cls:'g2', book:'complete4', edition:'full',
+    best:'19 บทมีเฉพาะในฉบับรวม',
+    desc:'Big Five + HEXACO + Enneagram + 16 ตัวตน อยู่ในเล่มเดียว บวกอีกสิบเก้าบทที่เขียนได้ก็ต่อเมื่อมีผลจากหลายระบบพร้อมกัน',
+    bullets:['บทที่อธิบายว่าคะแนนสองระบบที่ดูขัดกันบอกอะไร','บทอ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ','ซื้อแยกครบสี่เล่ม ฿720 — บันเดิลประหยัด ฿130'],
+    okNote: doneAll >= 4 ? 'คุณทำครบทั้งสี่ระบบแล้ว จะได้เนื้อหาเต็มทุกบท' : 'คุณทำแล้ว ' + doneAll + ' จาก 4 ระบบ — ระบบที่ยังไม่ทำจะยังเขียนให้ไม่ได้',
+    ready:function(){ return doneAll >= 1; },
+    link:'bigfive.html', needBtn:'เริ่มจาก Big Five (50 ข้อ)', needNote:'ยังไม่มีผลแบบทดสอบในเครื่องนี้' }
+]);
+
+/* ---------- 5. คู่มือแม่ ---------- */
+/* คู่มือแม่ต้องรู้ไทป์ก่อน ซึ่งคำนวณอยู่ในหน้าแบบทดสอบแม่
+   จึงส่งกลับไปที่หน้านั้นแทนการคำนวณซ้ำ เพื่อไม่ให้สูตรคะแนนแตกเป็นสองที่ */
+paint('momsec', [
+  { title:'คู่มือแม่ 1 ไทป์', price:129, was:199, cls:'g5',
+    desc:'ไทป์ของคุณไทป์เดียว เขียนจากมุมการเลี้ยงลูก พร้อมสิ่งที่ลูกของแม่แบบนี้มักรู้สึกโดยไม่ได้พูดออกมา',
+    ready:function(){ return false; },
+    link:'mom/', needBtn:'ทำแบบทดสอบแม่ไว้ก่อน (36 ข้อ)',
+    needNote:'ยังเขียนเนื้อหาไม่เสร็จ ยังไม่เปิดขาย · ทำแบบทดสอบไว้ได้เลย ผลเก็บในเครื่องคุณ' },
+
+  { title:'คู่มือแม่ + พ่อ ฉบับคู่', price:219, cls:'g5',
+    desc:'สองไทป์ในเล่มเดียว พร้อมบทที่ว่าด้วยจังหวะที่พ่อกับแม่มักเห็นไม่ตรงกันเรื่องลูก',
+    ready:function(){ return false; },
+    link:'mom/', needBtn:'ทำแบบทดสอบแม่ไว้ก่อน (36 ข้อ)',
+    needNote:'ยังเขียนเนื้อหาไม่เสร็จ ยังไม่เปิดขาย' },
+
+  { title:'คู่มือแม่ครบ 9 ไทป์', price:290, cls:'g5',
+    desc:'ทั้งเก้าแบบในเล่มเดียว เหมาะถ้าอยากเข้าใจแม่คนอื่นในบ้านด้วย',
+    ready:function(){ return false; },
+    link:'mom/', needBtn:'ทำแบบทดสอบแม่ไว้ก่อน (36 ข้อ)',
+    needNote:'ยังเขียนเนื้อหาไม่เสร็จ ยังไม่เปิดขาย' }
+]);
+
+/* ---------- ผูกปุ่มสั่งซื้อ ---------- */
+document.addEventListener('click', function(e){
+  var b = e.target;
+  while(b && b.tagName !== 'BUTTON'){ b = b.parentNode; }
+  if(!b || !b.getAttribute || !b.getAttribute('data-book')) return;
+  goBuy(b.getAttribute('data-book'), b.getAttribute('data-ed'));
+});
+</script>
+</body>
+</html>

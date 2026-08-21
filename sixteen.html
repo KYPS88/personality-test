@@ -256,8 +256,8 @@ a{color:var(--accent2);}
         <div class="pp">฿290 <span class="cta">สั่งซื้อ ›</span></div>
       </button>
       <button type="button" class="tier" data-ed="bundle4">
-        <div class="ti"><div class="a">บันเดิลสี่ระบบ</div><div class="b">16 ตัวตน + Big Five + HEXACO + Enneagram รวม 53 บทของชุดเดิม พร้อมบทเทียบสี่ระบบว่าตรงกันหรือขัดกันตรงไหน</div></div>
-        <div class="pp">฿690 <span class="cta">สั่งซื้อ ›</span></div>
+        <div class="ti"><div class="a">บันเดิลสี่ระบบ</div><div class="b">16 ตัวตน + Big Five + HEXACO + Enneagram รวม 63 บท ในนั้นมี 19 บทที่ไม่มีในเล่มเดี่ยว พร้อมบทเทียบสี่ระบบว่าตรงกันหรือขัดกันตรงไหน</div></div>
+        <div class="pp">฿590 <span class="cta">สั่งซื้อ ›</span></div>
       </button>
     </div>
     <p class="locknote">กดแพ็กเกจที่ต้องการแล้วระบบจะพาไปหน้าชำระเงินบนเว็บทันที กรอกชื่อ โอนเงินตามเลขบัญชีที่ขึ้นในหน้านั้น แล้วอัปโหลดสลิปได้เลย ผลแบบทดสอบของคุณจะถูกส่งไปด้วยเพื่อให้เนื้อหาปรับตามคะแนนจริง เมื่อยืนยันการโอนแล้วจะได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส · ติดปัญหาระหว่างสั่งซื้อ ทักได้ที่ <a href="https://line.me/R/ti/p/%40000tkljp">LINE ตามใจแม่</a></p>
@@ -286,23 +286,8 @@ const PLANS = {
   personal:{book:'sixteen',   edition:'personal', price:90,  name:'ฉบับส่วนตัว'},
   full:    {book:'sixteen',   edition:'full',     price:190, name:'ฉบับเต็ม'},
   pair:    {book:'sixteen',   edition:'pair',     price:290, name:'ฉบับคู่สัมพันธ์'},
-  bundle4: {book:'complete4', edition:'full',     price:690, name:'บันเดิลสี่ระบบ'}
+  bundle4: {book:'complete4', edition:'full',     price:590, name:'บันเดิลสี่ระบบ'}
 };
-
-/* ---- ตัวนับรวม ----
-   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
-   ใช้ sendBeacon เพื่อไม่ให้หน่วงการโหลดหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
-function ev(name){
-  try{
-    const url = READER_URL + '/api/ev';
-    if(navigator.sendBeacon){
-      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
-    }else{
-      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
-                  keepalive:true}).catch(()=>{});
-    }
-  }catch(e){}
-}
 
 const NAV = [
   {id:'bigfive',   file:'bigfive.html',   name:'Big Five (OCEAN)'},
@@ -498,7 +483,7 @@ $('nextBtn').addEventListener('click', ()=>{
   else { finish(); }
 });
 $('prevBtn').addEventListener('click', ()=>{ if(page>0){ page--; saveDraft(); renderPage(); } });
-$('startBtn').addEventListener('click', ()=>{ ev('sixteen_start'); show('quiz'); renderPage(); });
+$('startBtn').addEventListener('click', ()=>{ show('quiz'); renderPage(); });
 
 /* ============ คำนวณผล ============ */
 function compute(){
@@ -526,7 +511,6 @@ function compute(){
 }
 
 function finish(){
-  ev('sixteen_done');
   const r = compute();
   saveResult({code:r.code, pct:r.pct, raw:answers.join('')});
   clearDraft();
@@ -619,7 +603,6 @@ function buildProfile(){
 function goBuy(planKey, btn){
   const plan = PLANS[planKey];
   if(!plan) return;
-  ev('sixteen_buy_' + planKey);
   if(btn){
     btn.disabled = true;
     const cta = btn.querySelector('.cta');
@@ -652,7 +635,6 @@ $('againBtn').addEventListener('click', ()=>{
 
 /* ============ เริ่มต้น ============ */
 (function init(){
-  ev('sixteen_view');
   renderJourney('introJourney', false);
 
   /* อ่านผลจาก URL hash */
