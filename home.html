@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รู้จักตัวเองใน 4 มุม — แบบทดสอบบุคลิกภาพฟรี</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1428;--panel:#1A2140;--paper:#F1EDE4;--dim:#9DA3BD;--line:rgba(241,237,228,0.11);--gold:#D9A441;}
+*{box-sizing:border-box;}
+body{margin:0;background:radial-gradient(circle at 15% -12%,#232C57 0%,var(--ink) 58%);background-attachment:fixed;color:var(--paper);font-family:'IBM Plex Sans Thai',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:660px;margin:0 auto;padding:36px 20px 70px;}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;margin:0 0 10px;line-height:1.35;}
+h1{font-size:34px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.lead{font-size:15.5px;line-height:1.8;color:var(--dim);margin:0 0 26px;}
+.prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);margin-bottom:8px;}
+.ptrack{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:30px;}
+.pfill{height:100%;background:linear-gradient(90deg,#3E8E7E,#D9A441,#B98CCE);width:0;transition:width .5s ease;}
+.card{display:flex;gap:16px;align-items:center;padding:20px 18px;border:1px solid var(--line);border-radius:15px;margin-bottom:12px;background:var(--panel);text-decoration:none;color:var(--paper);transition:transform .15s ease,border-color .15s ease;}
+.card:active{transform:scale(.99);}
+.card .n{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#0F1428;flex-shrink:0;}
+.card .t{flex:1;}
+.card .t .a{font-family:'Noto Serif Thai',serif;font-size:18px;}
+.card .t .b{font-size:12.5px;color:var(--dim);margin-top:3px;line-height:1.5;}
+.card .t .st{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;}
+.card .go{font-size:20px;color:var(--dim);}
+.note{background:linear-gradient(140deg,rgba(217,164,65,.14),rgba(217,164,65,.03));border:1px solid rgba(217,164,65,.4);border-radius:16px;padding:20px 18px;margin-top:26px;}
+.note p{font-size:14px;color:var(--dim);line-height:1.72;margin:8px 0 0;}
+
+.sec{margin-top:44px;}
+.sec > h2{font-family:'Noto Serif Thai',serif;font-size:22px;margin:0 0 6px;}
+.sec > .lead2{font-size:14px;color:var(--dim);line-height:1.75;margin:0 0 20px;}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:13px;border-left:3px solid var(--gold);}
+.tcard.t1{border-left-color:#3E8E7E;}
+.tcard.t4{border-left-color:#6FA8DC;}
+.tcard.t5{border-left-color:#E5806F;}
+.tcard.t4 .th .q{color:#9BC4E8;}
+.tcard.t5 .th .q{color:#F0A08F;}
+.golink{display:inline-flex;align-items:center;gap:7px;margin-top:15px;
+  font-size:13.5px;font-weight:600;color:var(--gold);text-decoration:none;
+  border:1px solid rgba(217,164,65,.38);background:rgba(217,164,65,.07);
+  padding:9px 15px;border-radius:99px;line-height:1.3;}
+.golink:hover{background:rgba(217,164,65,.15);}
+.golink .gm{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);font-weight:500;}
+.whyall{background:linear-gradient(150deg,rgba(217,164,65,.11),rgba(26,33,64,.9));
+  border:1px solid rgba(217,164,65,.3);border-radius:16px;padding:18px 17px;margin:0 0 18px;}
+.whyall .wt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+.whyall p{font-size:13.8px;line-height:1.85;color:var(--dim);margin:0 0 10px;}
+.whyall p:last-child{margin-bottom:0;}
+.whyall b{color:var(--paper);}
+.tcard.t3{border-left-color:#B98CCE;}
+.tcard .th{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;flex-wrap:wrap;}
+.tcard .th h3{font-family:'Noto Serif Thai',serif;font-size:18px;margin:0;}
+.tcard .th .q{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);}
+.tcard.t1 .th .q{color:#6FC3AE;}
+.tcard.t3 .th .q{color:#D6B6E4;}
+.tcard .desc{font-size:13.8px;color:var(--dim);line-height:1.8;margin:10px 0 0;}
+.tcard .why{font-size:13.5px;line-height:1.8;margin:12px 0 0;padding:13px 14px;background:rgba(255,255,255,.04);border-radius:10px;color:#C8CBDA;}
+.tcard .why b{color:var(--paper);font-weight:600;}
+.samp{margin-top:13px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:11px;padding:14px;}
+.samp .sl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:9px;}
+.samp .row{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:12px;}
+.samp .row:last-child{margin-bottom:0;}
+.samp .row .k{width:88px;color:var(--dim);flex-shrink:0;}
+.samp .row .bar{flex:1;height:6px;background:rgba(255,255,255,.09);border-radius:4px;overflow:hidden;}
+.samp .row .bar i{display:block;height:100%;border-radius:4px;}
+.samp .row .v{font-family:'IBM Plex Mono',monospace;width:26px;text-align:right;color:var(--paper);}
+.samp .txt{font-size:12.5px;color:#C8CBDA;line-height:1.75;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);}
+.combo2{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:12px;}
+.combo2 .ct{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.combo2 .cn{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--gold);flex-shrink:0;}
+.combo2 .ch2{font-size:15.5px;font-weight:600;}
+.combo2 p{font-size:13.3px;color:var(--dim);line-height:1.8;margin:0;}
+.combo2.best{border-color:rgba(217,164,65,.45);background:linear-gradient(150deg,rgba(217,164,65,.13),rgba(26,33,64,.95));}
+.combo2.best .cn{background:var(--gold);color:#241804;}
+.bk{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:11px;}
+.bk .bi{width:38px;height:52px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#0F1428;}
+.bk .bb{flex:1;}
+.bk .bb .bn{font-family:'Noto Serif Thai',serif;font-size:16px;margin-bottom:2px;}
+.bk .bb .bm{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--dim);margin-bottom:7px;}
+.bk .bb .bd{font-size:12.8px;color:var(--dim);line-height:1.7;}
+.bk .bb .bf{font-size:12px;color:var(--paper);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);}
+.bk .bb .bf span{color:var(--gold);}
+.bk .bp{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#E8C275;flex-shrink:0;}
+
+.useit{margin-top:12px;padding:15px 15px 13px;background:rgba(255,255,255,.03);border:1px dashed rgba(241,237,228,.18);border-radius:11px;}
+.useit .ut{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.useit ul{margin:0;padding-left:0;list-style:none;}
+.useit li{font-size:13px;line-height:1.75;color:#C8CBDA;padding:5px 0 5px 22px;position:relative;}
+.useit li::before{content:'→';position:absolute;left:2px;top:5px;color:var(--gold);font-size:12px;}
+.tcard.t1 .useit li::before{color:#6FC3AE;}
+.tcard.t3 .useit li::before{color:#D6B6E4;}
+.useit li b{color:var(--paper);font-weight:600;}
+.only19{margin-top:12px;padding:14px;background:rgba(217,164,65,.08);border:1px solid rgba(217,164,65,.28);border-radius:11px;}
+.o19h{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#E8C275;margin-bottom:10px;}
+.o19g div{font-size:12.5px;color:#C8CBDA;line-height:1.65;padding:5px 0;display:flex;gap:10px;align-items:baseline;}
+.o19g div span{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8C275;flex-shrink:0;width:38px;}
+.tobook{display:block;text-align:center;margin-top:20px;padding:15px;border:1px solid var(--line);border-radius:12px;color:var(--gold);text-decoration:none;font-size:14px;}
+.foot{font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:36px;padding-top:18px;border-top:1px solid var(--line);}
+
+.sixwrap{margin:20px 0 4px;}
+.sixtag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;color:#E0785E;border:1px solid rgba(224,120,94,.45);border-radius:999px;padding:3px 10px;margin-bottom:10px;}
+.sixcard{display:flex;gap:16px;align-items:center;padding:20px 18px;border:1px solid rgba(224,120,94,.42);border-radius:15px;background:linear-gradient(135deg,rgba(224,120,94,.11),var(--panel));text-decoration:none;color:var(--paper);transition:transform .15s ease,border-color .15s ease;}
+.sixcard:hover{border-color:#E0785E;transform:translateY(-2px);}
+.sixcard .sn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;background:#E0785E;color:#0F1428;flex-shrink:0;}
+.sixcard .stt{flex:1;}
+.sixcard .sa{font-size:15px;font-weight:600;}
+.sixcard .sb{font-size:12.5px;color:var(--dim);margin-top:4px;line-height:1.65;}
+.sixnote{font-size:11.5px;color:var(--dim);line-height:1.7;margin:11px 2px 0;}
+.momwrap{margin:20px 0 4px;}
+.momtag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;color:#F4A6B0;border:1px solid rgba(244,166,176,.45);border-radius:999px;padding:3px 10px;margin-bottom:10px;}
+.momcard{display:flex;gap:16px;align-items:center;padding:20px 18px;border:1px solid rgba(244,166,176,.42);border-radius:15px;background:linear-gradient(135deg,rgba(244,166,176,.11),var(--panel));text-decoration:none;color:var(--paper);transition:transform .15s ease,border-color .15s ease;}
+.momcard:hover{border-color:#F4A6B0;transform:translateY(-2px);}
+.momcard .mn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F4A6B0;color:#0F1428;flex-shrink:0;}
+.momcard .mt{flex:1;}
+.momcard .ma{font-size:15px;font-weight:600;}
+.momcard .mb{font-size:12.5px;color:var(--dim);margin-top:4px;line-height:1.65;}
+.momnote{font-size:11.5px;color:var(--dim);line-height:1.7;margin:11px 2px 0;}
+
+/* ---------- แถบนำทาง ---------- */
+.navbar{position:sticky;top:0;z-index:60;background:rgba(15,20,40,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(241,237,228,.09);}
+.navbar .nbin{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;gap:9px;align-items:center;}
+.navbar .nb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:13px;font-weight:600;
+  color:#F1EDE4;background:rgba(255,255,255,.06);border:1px solid rgba(241,237,228,.12);
+  padding:7px 13px;border-radius:99px;line-height:1.3;cursor:pointer;}
+.navbar .nb:hover{background:rgba(255,255,255,.12);}
+.navbar .nb.home{color:#D9A441;border-color:rgba(217,164,65,.35);background:rgba(217,164,65,.09);}
+.navbar .sp{flex:1;}
+.navbar .nb.hide{display:none;}
+</style>
+</head>
+<body>
+<div class="navbar"><div class="nbin">
+  <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
+  <span class="sp"></span>
+  
+</div></div>
+<script>
+(function(){
+  var b = document.getElementById('nbBack');
+  if(!b) return;
+  var deep = false;
+  try{ deep = window.history.length > 1; }catch(e){}
+  if(!deep) b.classList.add('hide');
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    try{ window.history.back(); }catch(err){ window.location.href = 'index.html'; }
+  });
+})();
+</script>
+
+<div class="wrap">
+  <div class="eyebrow">Personality Triangulation</div>
+  <h1>รู้จักตัวเองใน 4 มุม</h1>
+  <p class="lead">แบบทดสอบเดียวบอกคุณได้แค่ด้านเดียว ชุดนี้มี 4 แบบทดสอบที่มองคุณจากคนละมุม — <strong>Big Five</strong> บอกว่าคุณเป็นคนแบบไหน · <strong>HEXACO</strong> เพิ่มมิติที่บอกว่าคุณเล่นเกมแบบไหน · <strong>Enneagram</strong> บอกว่าทำไมคุณถึงเป็นแบบนั้น · <strong>16 ตัวตน</strong> บอกว่าคุณรับข้อมูลและตัดสินใจด้วยวิธีไหน</p>
+
+  <div class="prog" id="progText">ความคืบหน้า 0 จาก 4</div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+
+  <div id="cards"></div>
+
+  <div class="sixwrap">
+    <span class="sixtag">NEW · 4 แกน 16 แบบ</span>
+    <a class="sixcard" href="sixteen.html">
+      <div class="sn">16</div>
+      <div class="stt">
+        <div class="sa">16 ตัวตน</div>
+        <div class="sb">4 แกน · 60 ข้อ · 8–10 นาที — ได้รหัส 4 ตัวอักษรพร้อมความเข้มของแต่ละแกน บอกว่าคุณรับข้อมูลและตัดสินใจด้วยวิธีไหน</div>
+        <div class="st" id="sixSt"></div>
+      </div>
+      <div class="go">&rsaquo;</div>
+    </a>
+    <p class="sixnote">ชุดนี้นับรวมในความคืบหน้าและอยู่ในบันเดิลสี่ระบบ ทำก่อนหรือหลังสามชุดด้านบนก็ได้</p>
+  </div>
+
+  <div class="momwrap">
+    <span class="momtag">NEW · สำหรับพ่อแม่</span>
+    <a class="momcard" href="mom/">
+      <div class="mn">&#9825;</div>
+      <div class="mt">
+        <div class="ma">เราเป็นแม่ประเภทไหนกันนะ?</div>
+        <div class="mb">9 ประเภท · 36 ข้อ · 5 นาที — Enneagram เฉพาะเรื่องการเลี้ยงลูก บอกว่าอะไรคือแรงขับเบื้องหลังสิ่งที่คุณทำกับลูกทุกวัน</div>
+        <div class="st" id="momSt"></div>
+      </div>
+      <div class="go">&rsaquo;</div>
+    </a>
+    <p class="momnote">ชุดนี้แยกจากชุดด้านบน ไม่นับรวมในความคืบหน้า และไม่ต้องทำชุดอื่นก่อนก็ทำได้เลย</p>
+  </div>
+
+
+
+  <div class="sec">
+    <h2>แต่ละแบบทดสอบวัดอะไร</h2>
+    <p class="lead2">แต่ละชุดไม่ได้วัดเรื่องเดียวกันในมุมต่างกัน แต่ตอบคนละคำถามคนละชั้น อ่านตรงนี้ก่อนจะช่วยให้เลือกได้ว่าควรเริ่มจากอันไหน</p>
+
+    <div class="whyall">
+      <div class="wt">ทำไมถึงอยากให้ทำหลายชุด</div>
+      <p>แบบทดสอบทุกชุดในโลกนี้มีจุดบอดของตัวเอง เพราะแต่ละชุดถูกออกแบบมาตอบคำถามเดียว <b>Big Five กับ HEXACO ดูสิ่งที่คุณทำ</b> ส่วน <b>Enneagram ดูเหตุผลที่คุณทำ</b> และ <b>16 ตัวตนดูวิธีที่หัวคุณประมวลผล</b> ถามคนละคำถามกัน คำตอบจึงไม่ทับกัน</p>
+      <p>ทำชุดเดียวก็ได้ประโยชน์จริง แต่คุณจะได้ภาพด้านเดียว เหมือนดูรูปถ่ายคนคนหนึ่งจากมุมเดียว ทำหลายชุดแล้วเอามาวางทับกัน <b>จุดที่ผลไม่ตรงกันคือจุดที่บอกอะไรมากที่สุด</b> — เช่นคะแนนบอกว่าคุณเป็นคนเข้าสังคมเก่ง แต่แรงขับข้างในบอกว่าคุณกลัวถูกทิ้ง สองอย่างนี้อยู่ด้วยกันได้ และมันอธิบายความเหนื่อยที่หาสาเหตุไม่เจอ</p>
+      <p>ไม่ต้องทำรวดเดียว ทำทีละชุดคนละวันก็ได้ ผลเก่าถูกเก็บไว้ในเครื่องคุณเอง กลับมาทำต่อเมื่อไหร่ก็ได้</p>
+    </div>
+
+    <div class="tcard t1">
+      <div class="th"><h3>Big Five</h3><span class="q">คุณเป็นคนแบบไหน</span></div>
+      <p class="desc">วัดลักษณะนิสัยที่คนอื่นสังเกตเห็นได้จากพฤติกรรมประจำวันของคุณ 5 ด้าน คือการเปิดรับสิ่งใหม่ ความมีวินัย การแสดงออกทางสังคม ความเห็นอกเห็นใจ และความมั่นคงทางอารมณ์ เป็นโมเดลที่วงการวิจัยจิตวิทยาทั่วโลกใช้เป็นมาตรฐาน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">เปิดรับสิ่งใหม่</span><span class="bar"><i style="width:72%;background:#E8A87C"></i></span><span class="v">72</span></div>
+        <div class="row"><span class="k">ความมีวินัย</span><span class="bar"><i style="width:80%;background:#B98CCE"></i></span><span class="v">80</span></div>
+        <div class="row"><span class="k">การแสดงออก</span><span class="bar"><i style="width:45%;background:#3E8E7E"></i></span><span class="v">45</span></div>
+        <div class="txt">พร้อมคำอธิบายว่าคะแนนระดับนี้ทำให้คุณเก่งเรื่องอะไร ต้องระวังอะไร และควรอยู่ในงานแบบไหน</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> ความมีวินัยเป็นตัวทำนายผลงานและความสำเร็จในอาชีพได้ดีที่สุดในบรรดาห้าด้าน ส่วนความมั่นคงทางอารมณ์ทำนายความพึงพอใจในความสัมพันธ์ระยะยาวได้ดีที่สุด รู้คะแนนสองตัวนี้ก็อธิบายชีวิตตัวเองได้เยอะแล้ว</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าทำไมงานบางแบบเหนื่อยกว่าคนอื่นทั้งที่ทำได้</b> เพราะคะแนนบอกต้นทุนพลังงาน ไม่ใช่ความสามารถ ใช้ตัดสินใจว่าจะรับงานแบบไหนและปฏิเสธแบบไหน</li>
+          <li><b>รู้ว่าควรออกแรงพัฒนาตรงไหนถึงคุ้ม</b> แทนที่จะพยายามเก่งทุกด้าน ใช้จุดแข็งเป็นแกนหลักของอาชีพ แล้วพัฒนาจุดอ่อนแค่ให้ไม่เป็นอุปสรรค</li>
+          <li><b>เข้าใจว่าทำไมทะเลาะกับคนที่บ้านเรื่องเดิมซ้ำๆ</b> เรื่องของไม่เข้าที่หรือการวางแผนล่วงหน้า มักเป็นความต่างเรื่องความมีวินัย ไม่ใช่เรื่องใครรักใครน้อยกว่า</li>
+          <li><b>ใช้เลือกวิธีทำงานที่เข้ากับตัวเอง</b> เช่น คนคะแนนวินัยต่ำไม่ควรฝืนสร้างวินัย แต่ควรยืมโครงสร้างจากภายนอกมาช่วยแทน ซึ่งได้ผลกว่ามาก</li>
+        </ul>
+      </div>
+      <a class="golink" href="bigfive.html">ทำแบบทดสอบ Big Five <span class="gm">50 ข้อ · 10 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard">
+      <div class="th"><h3>HEXACO</h3><span class="q">คุณเล่นเกมแบบไหน</span></div>
+      <p class="desc">พัฒนาต่อจาก Big Five โดยเพิ่มด้านที่หกเข้ามาคือความซื่อสัตย์และความอ่อนน้อม ซึ่งวัดว่าคุณจะทำอะไรเมื่อไม่มีใครเห็นและมีโอกาสเอาเปรียบ เป็นด้านที่ Big Five ไม่ได้แยกไว้</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">ซื่อสัตย์-ถ่อมตัว</span><span class="bar"><i style="width:70%;background:#D9A441"></i></span><span class="v">70</span></div>
+        <div class="row"><span class="k">อ่อนไหวทางใจ</span><span class="bar"><i style="width:40%;background:#C1666B"></i></span><span class="v">40</span></div>
+        <div class="row"><span class="k">ประนีประนอม</span><span class="bar"><i style="width:55%;background:#7C9FD4"></i></span><span class="v">55</span></div>
+        <div class="txt">พร้อมคำอธิบายว่าคนคะแนนแบบนี้มักถูกเอาเปรียบตรงไหน และควรวางระบบป้องกันตัวเองอย่างไร</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> ถ้าคุณเคยเจอคนที่ดูดีทุกอย่างบนกระดาษ เก่ง ขยัน เข้ากับคนง่าย แต่ทำงานด้วยแล้วรู้สึกไม่ปลอดภัย นี่คือด้านที่อธิบายความรู้สึกนั้น และเป็นด้านที่การสัมภาษณ์งานจับไม่ได้</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณควรอยู่ในสภาพแวดล้อมแบบไหน</b> คนที่ซื่อตรงสูงจะทรมานมากในที่ที่คนเก่งการเมืองได้ดีกว่าคนเก่งงาน รู้ตรงนี้แล้วเลือกที่ทำงานได้ถูก</li>
+          <li><b>รู้ว่าตัวเองมักถูกเอาเปรียบตรงไหน</b> คนคะแนนสูงมักไม่ต่อรองค่าตอบแทนเพราะรู้สึกว่าการขอเพิ่มคือความโลภ ทั้งที่มันคือการรับเท่าที่สร้าง</li>
+          <li><b>ใช้ดูคนก่อนร่วมงานหรือร่วมลงทุน</b> มีสัญญาณที่สังเกตได้ในสามนาทีแรก เช่น เขาพูดถึงคนที่ไม่อยู่ในห้องอย่างไร</li>
+          <li><b>เข้าใจความรู้สึกไม่ปลอดภัยที่อธิบายไม่ถูก</b> เวลาอยู่กับบางคนแล้วรู้สึกเหมือนกำลังถูกจัดการอยู่ตลอด แต่จับผิดเป็นเรื่องๆ ไม่ได้ นี่คือด้านที่อธิบายมันได้</li>
+        </ul>
+      </div>
+      <a class="golink" href="hexaco.html">ทำแบบทดสอบ HEXACO <span class="gm">60 ข้อ · 13 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard t3">
+      <div class="th"><h3>Enneagram</h3><span class="q">ทำไมคุณถึงเป็นแบบนั้น</span></div>
+      <p class="desc">ไม่ได้วัดว่าคุณทำอะไร แต่ถามว่าอะไรคือสิ่งที่คุณกลัวและต้องการลึกที่สุด แบ่งคนเป็น 9 ประเภทตามแรงขับพื้นฐาน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="txt" style="margin:0;padding:0;border:none;"><b style="color:#D6B6E4;">Type 8 ผู้ท้าทาย · ปีก 8w9</b><br><br>ความกลัวพื้นฐาน กลัวการถูกควบคุมหรือถูกเห็นว่าอ่อนแอ<br>ทิศทางเครียด เคลื่อนไปทาง Type 5 คือตัดขาดและถอยไปอยู่คนเดียว<br>ทิศทางเติบโต เคลื่อนไปทาง Type 2 คือเปิดใจและยอมให้คนดูแลบ้าง</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> สองแบบทดสอบแรกบอกว่าคุณทำอะไร แต่ไม่บอกว่าทำไม คนสองคนที่ขยันเท่ากันอาจขยันเพราะกลัวคนละอย่าง เวลาเจอความเครียดพวกเขาจะพังคนละแบบและต้องการการช่วยเหลือคนละอย่างสิ้นเชิง</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>ได้ระบบเตือนภัยส่วนตัว</b> แต่ละประเภทมีพฤติกรรมเฉพาะที่จะโผล่มาเวลาเครียดเกินไป พอจับสัญญาณได้ก็รู้ว่าต้องพักก่อนที่จะพังจริง</li>
+          <li><b>รู้ว่าควรฝึกอะไรถึงจะโตขึ้นจริง</b> ไม่ใช่การพยายามเป็นคนอื่น แต่เป็นเส้นทางเติบโตที่เจาะจงกับประเภทของคุณโดยเฉพาะ</li>
+          <li><b>เข้าใจว่าทำไมถึงทำเรื่องเดิมซ้ำทั้งที่รู้ว่าไม่ดี</b> เพราะพฤติกรรมนั้นกำลังปกป้องคุณจากความกลัวบางอย่าง พอเห็นความกลัวชัดก็มีทางเลือก</li>
+          <li><b>ใช้กับคนใกล้ตัวได้ทันที</b> คนแต่ละประเภทต้องการคำพูดคนละแบบ เช่น คนที่ตอบว่าไม่เป็นไรทุกครั้งไม่ได้แปลว่าไม่เป็นไร และการกดดันให้พูดจะยิ่งทำให้เขาถอย</li>
+        </ul>
+      </div>
+      <a class="golink" href="enneagram.html">ทำแบบทดสอบ Enneagram <span class="gm">63 ข้อ · 12 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard t4">
+      <div class="th"><h3>16 ตัวตน</h3><span class="q">หัวคุณทำงานยังไง</span></div>
+      <p class="desc">วัดสี่แกนที่ประกอบกันเป็นวิธีคิดของคุณ คือรับพลังจากข้างนอกหรือข้างใน รับข้อมูลจากสิ่งที่จับต้องได้หรือจากภาพรวม ตัดสินใจด้วยเหตุผลหรือด้วยผลกระทบต่อคน และชอบวางแผนไว้ก่อนหรือเปิดทางเลือกไว้ ผลออกมาเป็นรหัสสี่ตัวอักษรพร้อมความเข้มของแต่ละแกน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">I ↔ E</span><span class="bar"><i style="width:68%;background:#6FA8DC"></i></span><span class="v">68</span></div>
+        <div class="row"><span class="k">N ↔ S</span><span class="bar"><i style="width:55%;background:#B98CCE"></i></span><span class="v">55</span></div>
+        <div class="row"><span class="k">F ↔ T</span><span class="bar"><i style="width:74%;background:#E8A87C"></i></span><span class="v">74</span></div>
+        <div class="txt">ความเข้มสำคัญพอกับตัวอักษร คนที่ได้ 51 กับคนที่ได้ 90 ในแกนเดียวกันใช้ชีวิตคนละแบบ ระบบจะบอกด้วยว่าแกนไหนของคุณก้ำกึ่ง</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> นี่คือชุดที่ตอบคำถามว่าทำไมบางคนต้องคิดจบก่อนถึงพูดได้ ขณะที่บางคนต้องพูดออกมาถึงจะรู้ว่าคิดอะไร ความต่างนี้ทำให้เข้าใจกันผิดในที่ประชุมและในบ้านมากที่สุดในบรรดาความต่างทั้งหมด</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณต้องการอะไรถึงจะคิดออก</b> บางคนต้องการความเงียบและเวลา บางคนต้องการคนคุยด้วย จัดสภาพแวดล้อมให้ตรงแล้วงานเดินขึ้นทันที</li>
+          <li><b>รู้ว่าทำไมคำแนะนำดี ๆ ถึงใช้กับคุณไม่ได้</b> เพราะคำแนะนำส่วนใหญ่เขียนโดยคนที่หัวทำงานคนละแบบกับคุณ</li>
+          <li><b>เข้าใจคู่หรือเพื่อนร่วมงานที่ต่างจากคุณ</b> คนที่วางแผนล่วงหน้ากับคนที่ตัดสินใจนาทีสุดท้ายไม่ได้มีใครผิด แค่คนละแกน</li>
+          <li><b>ใช้เลือกวิธีสื่อสารกับแต่ละคน</b> คนที่ตัดสินใจด้วยเหตุผลอยากได้ข้อมูล คนที่ตัดสินใจด้วยผลกระทบอยากได้ความรู้สึกก่อน</li>
+        </ul>
+      </div>
+      <a class="golink" href="sixteen.html">ทำแบบทดสอบ 16 ตัวตน <span class="gm">60 ข้อ · 10 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard t5">
+      <div class="th"><h3>แม่ 9 แบบ</h3><span class="q">คุณเลี้ยงลูกแบบไหน</span></div>
+      <p class="desc">เอาแนวคิด Enneagram มาใช้เฉพาะเรื่องการเลี้ยงลูก ไม่ได้ถามเรื่องงานหรือความสัมพันธ์ทั่วไป แต่ถามจากสถานการณ์จริงในบ้าน เช่นตอนลูกงอแงกลางห้าง ตอนลูกทำของพัง ตอนลูกไม่ยอมทำการบ้าน</p>
+      <p class="why"><b>สำคัญตรงไหน</b> พ่อแม่ส่วนใหญ่รู้อยู่แล้วว่าไม่อยากตะโกน แต่ก็ยังตะโกนอยู่ดี ชุดนี้ไม่ได้บอกว่าคุณควรทำอะไร แต่บอกว่าอะไรคือแรงขับที่ทำให้คุณตอบสนองแบบนั้นซ้ำ ๆ ซึ่งเป็นคนละเรื่องกับความรักที่มีต่อลูก</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณกำลังกลัวอะไรอยู่</b> เบื้องหลังการดุมักไม่ใช่ความโกรธ แต่เป็นความกลัวบางอย่างที่ยังไม่ได้เรียกชื่อ</li>
+          <li><b>เห็นว่าลูกได้ยินอะไรจากสิ่งที่คุณพูด</b> ซึ่งบางทีไม่ตรงกับสิ่งที่คุณตั้งใจสื่อเลย</li>
+          <li><b>เข้าใจว่าทำไมพ่อกับแม่เห็นไม่ตรงกัน</b> คนละแบบก็มองเรื่องเดียวกันคนละมุม ไม่ใช่ใครรักลูกน้อยกว่า</li>
+        </ul>
+      </div>
+      <p class="why" style="border-color:rgba(229,128,111,.3);">ชุดนี้ไม่นับรวมในความคืบหน้าและไม่ได้อยู่ในบันเดิล ทำเมื่อไหร่ก็ได้ ไม่ต้องทำชุดอื่นก่อน</p>
+      <a class="golink" href="mom/">ทำแบบทดสอบแม่ 9 แบบ <span class="gm">36 ข้อ · 5 นาที</span> &rsaquo;</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>ทำกี่ชุดดี</h2>
+    <p class="lead2">ทำชุดเดียวก็ได้ผลที่ใช้ได้จริง ไม่ต้องทำครบถึงจะมีประโยชน์ แต่ละทางเลือกให้อะไรต่างกันแบบนี้</p>
+
+    <div class="combo2">
+      <div class="ct"><div class="cn">1</div><div class="ch2">ทำ 1 ชุด</div></div>
+      <p>ได้ภาพของตัวเองในมุมนั้นครบถ้วน เห็นคะแนนทุกด้านพร้อมคำอธิบายว่าระดับที่คุณได้หมายความว่าอย่างไร เหมาะถ้าอยากลองก่อนหรือมีเรื่องที่สนใจเฉพาะ เช่น อยากรู้แรงขับเบื้องหลังก็ทำ Enneagram อย่างเดียวได้เลย</p>
+    </div>
+
+    <div class="combo2">
+      <div class="ct"><div class="cn">2</div><div class="ch2">ทำ 2 ชุด</div></div>
+      <p>เริ่มเห็นความสัมพันธ์ระหว่างมุมมอง เช่น ทำ Big Five คู่กับ HEXACO จะเทียบได้ว่าคะแนนที่ทับซ้อนกันตรงกันไหม ถ้าต่างกันมากแปลว่าพฤติกรรมคุณเปลี่ยนตามสถานการณ์มากกว่าคนทั่วไป หรือทำ Big Five คู่กับ Enneagram จะเห็นว่าแรงขับภายในตรงกับพฤติกรรมที่แสดงออกหรือเปล่า</p>
+    </div>
+
+    <div class="combo2 best">
+      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบสามชุดหลัก</div></div>
+      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ<br><br>ทำ 16 ตัวตนเพิ่มอีกชุดจะครบทั้งสี่ ซึ่งเป็นชุดที่บันเดิลสี่ระบบเขียนถึง</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>คู่มือมีกี่เล่ม ได้เล่มไหนบ้าง</h2>
+    <p class="lead2">แบบทดสอบทั้งหมดฟรี ส่วนคู่มือคือเนื้อหาฉบับเต็มที่ขายแยก ทำชุดไหนก็เลือกซื้อคู่มือของชุดนั้นได้ ไม่บังคับว่าต้องซื้อ</p>
+
+    <div class="bk">
+      <div class="bi" style="background:#3E8E7E">5</div>
+      <div class="bb">
+        <div class="bn">ห้าเสาหลัก</div>
+        <div class="bm">BIG FIVE · 14 บท · อ่านประมาณ 2 ชั่วโมงครึ่ง</div>
+        <div class="bd">ทั้งห้าด้านแบบเต็ม แยกคำอธิบายตามระดับคะแนนที่คุณได้จริง พร้อมคู่ผสมของสองด้าน โปรไฟล์กับสายอาชีพ 9 สาย และแผนพัฒนา 90 วัน</div>
+        <div class="bf">ได้จากการทำ <span>Big Five</span></div>
+      </div>
+      <div class="bp">฿190</div>
+    </div>
+
+    <div class="bk">
+      <div class="bi" style="background:#D9A441">6</div>
+      <div class="bb">
+        <div class="bn">หกด้านของตัวคุณ</div>
+        <div class="bm">HEXACO · 11 บท · อ่านประมาณ 1 ชั่วโมงครึ่ง</div>
+        <div class="bd">เจาะด้านความซื่อสัตย์ที่โมเดลอื่นวัดไม่ได้ ทำไมการสัมภาษณ์งานถึงจับด้านนี้ไม่ได้ การผสม 8 ชุดที่ต้องรู้จัก และรูปแบบการทะเลาะที่ทำนายได้จากคะแนน</div>
+        <div class="bf">ได้จากการทำ <span>HEXACO</span></div>
+      </div>
+      <div class="bp">฿150</div>
+    </div>
+
+    <div class="bk">
+      <div class="bi" style="background:#B98CCE">9</div>
+      <div class="bb">
+        <div class="bn">แรงขับเบื้องหลัง</div>
+        <div class="bm">ENNEAGRAM · 20 บท · อ่านประมาณ 2 ชั่วโมงครึ่ง</div>
+        <div class="bd">ครบทั้งเก้าประเภท ปีก ทิศทางเครียดและเติบโต ประเภทเดียวกันแต่คนละระดับ คู่ที่มักสับสน และประเภทกับการเลี้ยงลูก</div>
+        <div class="bf">ได้จากการทำ <span>Enneagram</span></div>
+      </div>
+      <div class="bp">฿190</div>
+    </div>
+
+    <div class="bk" style="border-color:rgba(185,140,206,.4);">
+      <div class="bi" style="background:#D6B6E4">8</div>
+      <div class="bb">
+        <div class="bn">ฉบับเฉพาะ Type ของคุณ</div>
+        <div class="bm">ENNEAGRAM · เฉพาะส่วนที่ตรงกับคุณ</div>
+        <div class="bd">ถ้าไม่อยากอ่านทั้งเก้าประเภท เล่มนี้ตัดเหลือเฉพาะประเภทของคุณ ปีกของคุณ และสองประเภทที่คุณจะเคลื่อนไปหาเวลาเครียดกับเวลาเติบโต</div>
+        <div class="bf">ได้จากการทำ <span>Enneagram</span></div>
+      </div>
+      <div class="bp">฿90</div>
+    </div>
+
+    <div class="bk" style="border-color:rgba(217,164,65,.45);background:linear-gradient(150deg,rgba(217,164,65,.12),rgba(26,33,64,.95));">
+      <div class="bi" style="background:linear-gradient(135deg,#E8C275,#D9A441)">∞</div>
+      <div class="bb">
+        <div class="bn">บันเดิลสี่ระบบ</div>
+        <div class="bm">รวมทุกเล่ม · 63 บท · อ่านประมาณ 9 ชั่วโมง</div>
+        <div class="bd">สามระบบเดิม 53 บท บวก 16 ตัวตนฉบับเต็มอีกหนึ่งเล่ม ในนั้นมี <b style="color:var(--paper);">19 บทที่ไม่มีในเล่มเดี่ยวเลยแม้แต่บทเดียว</b> เพราะเป็นบทที่ต้องใช้ผลจากหลายระบบพร้อมกันถึงจะเขียนได้</div>
+        <div class="only19">
+          <div class="o19h">19 บทที่มีเฉพาะในฉบับรวม</div>
+          <div class="o19g">
+            <div><span>4 บท</span>วิธีอ่านผลหลายชุดพร้อมกัน · ทำไมแบบทดสอบเดียวไม่พอ</div>
+            <div><span>3 บท</span>เมื่อสามระบบขัดกัน จุดที่ขัดบอกอะไร และภาพสามมุมของคุณ</div>
+            <div><span>3 บท</span>อ่านคนอื่นโดยไม่ต้องให้เขาทำแบบทดสอบ · สัญญาณใน 3 นาทีแรก</div>
+            <div><span>2 บท</span>บริหารทีมตามบุคลิกภาพ และการให้ฟีดแบคที่ตรงกับแต่ละคน</div>
+            <div><span>3 บท</span>ความสัมพันธ์และครอบครัว · ภาษาที่แต่ละคนได้ยิน · เมื่อลูกมีบุคลิกคนละแบบกับพ่อแม่</div>
+            <div><span>4 บท</span>เลือกจุดที่คุ้มที่สุด แบบฝึกรายมิติ และแบบบันทึกรวมสามระบบ</div>
+          </div>
+        </div>
+        <div class="bf">เหมาะกับคนที่ทำครบ <span>ทั้ง 4 ชุด</span> · ซื้อแยกสี่เล่ม ฿720</div>
+      </div>
+      <div class="bp">฿590</div>
+    </div>
+
+    <p class="lead2" style="margin-top:16px;margin-bottom:0;font-size:13px;">ทุกเล่มอ่านออนไลน์ ไม่มีวันหมดอายุ และเนื้อหาจะถูกปรับให้ตรงกับผลของคุณโดยอัตโนมัติ — เปิดมาเจอบทสรุปผลตัวเองเป็นหน้าแรก และในทุกบทจะไฮไลต์ระดับคะแนนที่ตรงกับคุณไว้ให้</p>
+  </div>
+
+  <a class="tobook" href="ebook.html">ดูรายละเอียดคู่มือฉบับเต็ม ›</a>
+
+  <div class="foot">ทุกแบบทดสอบฟรี ไม่ต้องสมัครสมาชิก ผลลัพธ์ถูกบันทึกไว้ในเบราว์เซอร์ของคุณเอง ไม่ถูกส่งไปที่ไหน · ผลลัพธ์เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา</div>
+</div>
+<script>
+const TESTS = [
+ {id:'bigfive', file:'bigfive.html', name:'Big Five (OCEAN)', desc:'5 มิติ · 50 ข้อ · มาตรฐานงานวิจัยจิตวิทยาทั่วโลก', color:'#3E8E7E', label:'5'},
+ {id:'hexaco', file:'hexaco.html', name:'HEXACO', desc:'6 มิติ · 60 ข้อ · เพิ่มมิติความซื่อสัตย์ที่ Big Five มองไม่เห็น', color:'#D9A441', label:'6'},
+ {id:'enneagram', file:'enneagram.html', name:'Enneagram', desc:'9 ประเภท · 63 ข้อ · ค้นหาแรงขับและความกลัวที่อยู่เบื้องหลัง', color:'#B98CCE', label:'9'},
+];
+function loadAll(){ try{ const r=localStorage.getItem('ptx_results_v1'); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+const all = loadAll();
+const doneCore = TESTS.filter(t=>all[t.id]).length;
+const done = doneCore + (all['sixteen'] ? 1 : 0);
+document.getElementById('progText').textContent = 'ความคืบหน้า ' + done + ' จาก 4' + (done>=4 ? ' · ครบทุกชุดแล้ว' : (doneCore>=3 ? ' · ปลดล็อกภาควิเคราะห์รวมแล้ว' : ''));
+document.getElementById('pfill').style.width = (done/4*100) + '%';
+document.getElementById('cards').innerHTML = TESTS.map(t=>{
+  const r = all[t.id];
+  let st = '';
+  if(r){
+    if(t.id==='enneagram' && r.main) st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · Type '+r.main+(r.wing?('w'+r.wing):'')+'</div>';
+    else if(r.scores){ const k=Object.keys(r.scores).sort((a,b)=>r.scores[b]-r.scores[a])[0]; st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · เด่นที่ '+k+' ('+r.scores[k]+')</div>'; }
+    else st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว</div>';
+  } else {
+    st = '<div class="st" style="color:var(--dim)">ยังไม่ได้ทำ</div>';
+  }
+  return '<a class="card" href="'+t.file+'"><div class="n" style="background:'+t.color+'">'+t.label+'</div>'+
+    '<div class="t"><div class="a">'+t.name+'</div><div class="b">'+t.desc+'</div>'+st+'</div>'+
+    '<div class="go">›</div></a>';
+}).join('');
+
+/* ---- การ์ด 16 ตัวตน ---- */
+(function(){
+  var NAMES={ISTJ:'ผู้รักษาระบบ',ISFJ:'ผู้ดูแลเงียบๆ',INFJ:'ผู้มองทะลุใจคน',INTJ:'สถาปนิกความคิด',
+             ISTP:'ช่างซ่อมสถานการณ์',ISFP:'ศิลปินใจอ่อน',INFP:'นักฝันมีหลักการ',INTP:'นักตั้งคำถาม',
+             ESTP:'นักลงมือทันที',ESFP:'ตัวจุดพลุ',ENFP:'นักจุดประกาย',ENTP:'นักท้าทายความคิด',
+             ESTJ:'ผู้จัดระเบียบ',ESFJ:'ผู้ประสานใจ',ENFJ:'โค้ชหัวใจ',ENTJ:'นักขับเคลื่อน'};
+  var el=document.getElementById('sixSt');
+  if(!el) return;
+  var r=all.sixteen;
+  if(r && r.code && NAMES[r.code]){
+    el.textContent='\u2713 ทำแล้ว · '+r.code+' '+NAMES[r.code];
+    el.style.color='#E0785E';
+  }else{
+    el.textContent='ยังไม่ได้ทำ';
+    el.style.color='var(--dim)';
+  }
+})();
+
+/* ---- การ์ดแบบทดสอบสำหรับพ่อแม่ ---- */
+(function(){
+  var NAMES={1:'แม่มาตรฐานสูง',2:'แม่ผู้ให้',3:'แม่นักผลักดัน',4:'แม่ผู้เข้าใจหัวใจ',
+             5:'แม่นักคิด',6:'แม่ผู้ปกป้อง',7:'แม่สายสนุก',8:'แม่ผู้คุ้มกัน',9:'แม่สายสงบ'};
+  var el=document.getElementById('momSt');
+  if(!el) return;
+  var code=null;
+  try{ code=localStorage.getItem('tjm_parent_enneagram_v1'); }catch(e){}
+  if(code && /^[1-5]{36}$/.test(code)){
+    var s={},t;
+    for(t=1;t<=9;t++) s[t]=0;
+    code.split('').forEach(function(v,i){ s[(i%9)+1]+=parseInt(v,10); });
+    var top=Object.keys(s).sort(function(a,b){ return s[b]-s[a]; })[0];
+    el.textContent='\u2713 ทำแล้ว · '+NAMES[top];
+    el.style.color='#F4A6B0';
+  }else{
+    el.textContent='ยังไม่ได้ทำ';
+    el.style.color='var(--dim)';
+  }
+})();
+</script>
+</body>
+</html>
