@@ -40,6 +40,11 @@ h1{font-size:34px;}
 .tcard.t5{border-left-color:#E5806F;}
 .tcard.t4 .th .q{color:#9BC4E8;}
 .tcard.t5 .th .q{color:#F0A08F;}
+.coreline{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:13px;
+  padding:13px 15px;margin:0 0 14px;font-size:13.5px;line-height:1.75;color:var(--paper);}
+.coreline .ct{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.coreline .cn2{display:block;font-size:12.5px;color:var(--dim);margin-top:7px;line-height:1.7;}
 .golink{display:inline-flex;align-items:center;gap:7px;margin-top:15px;
   font-size:13.5px;font-weight:600;color:var(--gold);text-decoration:none;
   border:1px solid rgba(217,164,65,.38);background:rgba(217,164,65,.07);
@@ -147,11 +152,21 @@ h1{font-size:34px;}
 (function(){
   var b = document.getElementById('nbBack');
   if(!b) return;
-  var deep = false;
-  try{ deep = window.history.length > 1; }catch(e){}
+  var shell = null;
+  try{ if(window.top !== window.self && window.top.shellBack) shell = window.top; }catch(e){}
+  var deep;
+  if(shell){
+    try{ deep = shell.shellCanBack(); }catch(e){ deep = false; }
+  }else{
+    deep = false;
+    try{ deep = window.history.length > 1; }catch(e){}
+  }
   if(!deep) b.classList.add('hide');
   b.addEventListener('click', function(e){
     e.preventDefault();
+    if(shell){
+      try{ if(shell.shellBack()) return; }catch(err){}
+    }
     try{ window.history.back(); }catch(err){ window.location.href = 'index.html'; }
   });
 })();
@@ -162,24 +177,17 @@ h1{font-size:34px;}
   <h1>รู้จักตัวเองใน 4 มุม</h1>
   <p class="lead">แบบทดสอบเดียวบอกคุณได้แค่ด้านเดียว ชุดนี้มี 4 แบบทดสอบที่มองคุณจากคนละมุม — <strong>Big Five</strong> บอกว่าคุณเป็นคนแบบไหน · <strong>HEXACO</strong> เพิ่มมิติที่บอกว่าคุณเล่นเกมแบบไหน · <strong>Enneagram</strong> บอกว่าทำไมคุณถึงเป็นแบบนั้น · <strong>16 ตัวตน</strong> บอกว่าคุณรับข้อมูลและตัดสินใจด้วยวิธีไหน</p>
 
-  <div class="prog" id="progText">ความคืบหน้า 0 จาก 4</div>
+  <div class="coreline">
+    <span class="ct">ชุดหลัก 4 ชุด</span>
+    <span>Big Five · HEXACO · Enneagram · 16 ตัวตน</span>
+    <span class="cn2">ทั้งสี่ชุดนี้คือชุดที่บันเดิลสี่ระบบเขียนถึง ส่วนแบบทดสอบแม่ 9 แบบเป็นชุดแยกสำหรับพ่อแม่โดยเฉพาะ</span>
+  </div>
+  <div class="prog" id="progText">ทำแล้ว 0 จาก 4 ชุดหลัก</div>
   <div class="ptrack"><div class="pfill" id="pfill"></div></div>
 
   <div id="cards"></div>
 
-  <div class="sixwrap">
-    <span class="sixtag">NEW · 4 แกน 16 แบบ</span>
-    <a class="sixcard" href="sixteen.html">
-      <div class="sn">16</div>
-      <div class="stt">
-        <div class="sa">16 ตัวตน</div>
-        <div class="sb">4 แกน · 60 ข้อ · 8–10 นาที — ได้รหัส 4 ตัวอักษรพร้อมความเข้มของแต่ละแกน บอกว่าคุณรับข้อมูลและตัดสินใจด้วยวิธีไหน</div>
-        <div class="st" id="sixSt"></div>
-      </div>
-      <div class="go">&rsaquo;</div>
-    </a>
-    <p class="sixnote">ชุดนี้นับรวมในความคืบหน้าและอยู่ในบันเดิลสี่ระบบ ทำก่อนหรือหลังสามชุดด้านบนก็ได้</p>
-  </div>
+  
 
   <div class="momwrap">
     <span class="momtag">NEW · สำหรับพ่อแม่</span>
@@ -192,7 +200,7 @@ h1{font-size:34px;}
       </div>
       <div class="go">&rsaquo;</div>
     </a>
-    <p class="momnote">ชุดนี้แยกจากชุดด้านบน ไม่นับรวมในความคืบหน้า และไม่ต้องทำชุดอื่นก่อนก็ทำได้เลย</p>
+    <p class="momnote">ชุดนี้ไม่ใช่หนึ่งในสี่ชุดหลัก เป็นชุดแยกสำหรับพ่อแม่ ทำได้เลยไม่ต้องทำชุดอื่นก่อน</p>
   </div>
 
 
@@ -309,7 +317,7 @@ h1{font-size:34px;}
           <li><b>เข้าใจว่าทำไมพ่อกับแม่เห็นไม่ตรงกัน</b> คนละแบบก็มองเรื่องเดียวกันคนละมุม ไม่ใช่ใครรักลูกน้อยกว่า</li>
         </ul>
       </div>
-      <p class="why" style="border-color:rgba(229,128,111,.3);">ชุดนี้ไม่นับรวมในความคืบหน้าและไม่ได้อยู่ในบันเดิล ทำเมื่อไหร่ก็ได้ ไม่ต้องทำชุดอื่นก่อน</p>
+      <p class="why" style="border-color:rgba(229,128,111,.3);">ชุดนี้ไม่ใช่หนึ่งในสี่ชุดหลัก และไม่ได้อยู่ในบันเดิล ทำเมื่อไหร่ก็ได้ ไม่ต้องทำชุดอื่นก่อน</p>
       <a class="golink" href="mom/">ทำแบบทดสอบแม่ 9 แบบ <span class="gm">36 ข้อ · 5 นาที</span> &rsaquo;</a>
     </div>
   </div>
@@ -329,8 +337,8 @@ h1{font-size:34px;}
     </div>
 
     <div class="combo2 best">
-      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบสามชุดหลัก</div></div>
-      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ<br><br>ทำ 16 ตัวตนเพิ่มอีกชุดจะครบทั้งสี่ ซึ่งเป็นชุดที่บันเดิลสี่ระบบเขียนถึง</p>
+      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบทั้งสี่ชุดหลัก</div></div>
+      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ<br><br>ภาควิเคราะห์รวมจะปลดล็อกทันทีที่ทำ Big Five · HEXACO · Enneagram ครบสามชุด ส่วน 16 ตัวตนเพิ่มมุมที่สี่เข้ามา คือวิธีที่หัวคุณรับข้อมูลและตัดสินใจ ซึ่งอีกสามชุดไม่ได้วัด</p>
     </div>
   </div>
 
@@ -416,18 +424,22 @@ const TESTS = [
  {id:'bigfive', file:'bigfive.html', name:'Big Five (OCEAN)', desc:'5 มิติ · 50 ข้อ · มาตรฐานงานวิจัยจิตวิทยาทั่วโลก', color:'#3E8E7E', label:'5'},
  {id:'hexaco', file:'hexaco.html', name:'HEXACO', desc:'6 มิติ · 60 ข้อ · เพิ่มมิติความซื่อสัตย์ที่ Big Five มองไม่เห็น', color:'#D9A441', label:'6'},
  {id:'enneagram', file:'enneagram.html', name:'Enneagram', desc:'9 ประเภท · 63 ข้อ · ค้นหาแรงขับและความกลัวที่อยู่เบื้องหลัง', color:'#B98CCE', label:'9'},
+ {id:'sixteen', file:'sixteen.html', name:'16 ตัวตน', desc:'4 แกน · 60 ข้อ · รหัสสี่ตัวอักษรพร้อมความเข้มของแต่ละแกน', color:'#6FA8DC', label:'16'},
 ];
+/* ภาควิเคราะห์รวมเขียนจากสามระบบแรก จึงนับแยกจากจำนวนชุดหลัก */
+const CORE3 = ['bigfive','hexaco','enneagram'];
 function loadAll(){ try{ const r=localStorage.getItem('ptx_results_v1'); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
 const all = loadAll();
-const doneCore = TESTS.filter(t=>all[t.id]).length;
-const done = doneCore + (all['sixteen'] ? 1 : 0);
-document.getElementById('progText').textContent = 'ความคืบหน้า ' + done + ' จาก 4' + (done>=4 ? ' · ครบทุกชุดแล้ว' : (doneCore>=3 ? ' · ปลดล็อกภาควิเคราะห์รวมแล้ว' : ''));
+const done = TESTS.filter(t=>all[t.id]).length;
+const doneCore = CORE3.filter(id=>all[id]).length;
+document.getElementById('progText').textContent = 'ทำแล้ว ' + done + ' จาก 4 ชุดหลัก' + (done>=4 ? ' · ครบแล้ว' : (doneCore>=3 ? ' · ปลดล็อกภาควิเคราะห์รวมแล้ว' : ''));
 document.getElementById('pfill').style.width = (done/4*100) + '%';
 document.getElementById('cards').innerHTML = TESTS.map(t=>{
   const r = all[t.id];
   let st = '';
   if(r){
     if(t.id==='enneagram' && r.main) st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · Type '+r.main+(r.wing?('w'+r.wing):'')+'</div>';
+    else if(t.id==='sixteen' && r.code) st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · '+r.code+'</div>';
     else if(r.scores){ const k=Object.keys(r.scores).sort((a,b)=>r.scores[b]-r.scores[a])[0]; st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว · เด่นที่ '+k+' ('+r.scores[k]+')</div>'; }
     else st = '<div class="st" style="color:'+t.color+'">✓ ทำแล้ว</div>';
   } else {
@@ -437,24 +449,6 @@ document.getElementById('cards').innerHTML = TESTS.map(t=>{
     '<div class="t"><div class="a">'+t.name+'</div><div class="b">'+t.desc+'</div>'+st+'</div>'+
     '<div class="go">›</div></a>';
 }).join('');
-
-/* ---- การ์ด 16 ตัวตน ---- */
-(function(){
-  var NAMES={ISTJ:'ผู้รักษาระบบ',ISFJ:'ผู้ดูแลเงียบๆ',INFJ:'ผู้มองทะลุใจคน',INTJ:'สถาปนิกความคิด',
-             ISTP:'ช่างซ่อมสถานการณ์',ISFP:'ศิลปินใจอ่อน',INFP:'นักฝันมีหลักการ',INTP:'นักตั้งคำถาม',
-             ESTP:'นักลงมือทันที',ESFP:'ตัวจุดพลุ',ENFP:'นักจุดประกาย',ENTP:'นักท้าทายความคิด',
-             ESTJ:'ผู้จัดระเบียบ',ESFJ:'ผู้ประสานใจ',ENFJ:'โค้ชหัวใจ',ENTJ:'นักขับเคลื่อน'};
-  var el=document.getElementById('sixSt');
-  if(!el) return;
-  var r=all.sixteen;
-  if(r && r.code && NAMES[r.code]){
-    el.textContent='\u2713 ทำแล้ว · '+r.code+' '+NAMES[r.code];
-    el.style.color='#E0785E';
-  }else{
-    el.textContent='ยังไม่ได้ทำ';
-    el.style.color='var(--dim)';
-  }
-})();
 
 /* ---- การ์ดแบบทดสอบสำหรับพ่อแม่ ---- */
 (function(){

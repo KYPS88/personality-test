@@ -191,17 +191,47 @@ p{line-height:1.75;}
 <div class="navbar"><div class="nbin">
   <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
   <span class="sp"></span>
-  <a class="nb home" href="index.html">หน้าหลัก</a>
+  <a class="nb home" id="nbHome" href="index.html">หน้าแรก</a>
 </div></div>
 <script>
 (function(){
   var b = document.getElementById('nbBack');
+  var h = document.getElementById('nbHome');
+  var shell = null;
+  try{ if(window.top !== window.self && window.top.shellBack) shell = window.top; }catch(e){}
+  var inShell = false;
+  try{ inShell = window.top !== window.self; }catch(e){ inShell = true; }
+  /* อยู่ในเชลล์แล้วเมนูซ้ายมีหน้าแรกอยู่ ไม่ต้องมีปุ่มซ้ำ */
+  if(h && inShell) h.classList.add('hide');
   if(!b) return;
-  var deep = false;
-  try{ deep = window.history.length > 1; }catch(e){}
+  /* ในเชลล์ให้เชลล์เป็นคนคุมลำดับหน้า ไม่ใช้ประวัติเบราว์เซอร์
+     เพราะทุกครั้งที่กรอบขวาเปลี่ยนหน้าจะถูกนับเป็นหนึ่งก้าว */
+  var deep;
+  if(shell){
+    try{ deep = shell.shellCanBack(); }catch(e){ deep = false; }
+  }else{
+    deep = false;
+    try{ deep = window.history.length > 1; }catch(e){}
+  }
   if(!deep) b.classList.add('hide');
+  /* กำลังตอบคำถามอยู่หรือเปล่า — ดูว่าหน้าจอคำถามแสดงอยู่ไหม */
+  function inQuiz(){
+    var ids = ['s-quiz','quiz'];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]);
+      if(el && el.offsetParent !== null) return true;
+    }
+    return false;
+  }
   b.addEventListener('click', function(e){
     e.preventDefault();
+    if(inQuiz()){
+      var ok = window.confirm('กำลังทำแบบทดสอบอยู่ ถ้าออกตอนนี้คำตอบที่ตอบไปแล้วจะถูกเก็บไว้เป็นร่าง กลับมาทำต่อได้\n\nต้องการออกไหม');
+      if(!ok) return;
+    }
+    if(shell){
+      try{ if(shell.shellBack()) return; }catch(err){}
+    }
     try{ window.history.back(); }catch(err){ window.location.href = 'index.html'; }
   });
 })();
@@ -210,7 +240,6 @@ p{line-height:1.75;}
 <div class="wrap">
 
 <div class="screen active" id="s-intro">
-  <a class="backtop" href="index.html">← กลับหน้าแรก</a>
   <div class="eyebrow">Nine Types</div>
   <h1>แรงขับที่อยู่เบื้องหลัง</h1>
   <p class="lead">แบบทดสอบ 63 ข้อ ค้นหาประเภทหลักของคุณจาก 9 ประเภทตามระบบ Enneagram — ระบบที่ไม่ได้ถามว่า 'คุณทำอะไร' แต่ถามว่า 'อะไรคือสิ่งที่คุณกลัวและต้องการลึกที่สุด'</p>
@@ -248,7 +277,6 @@ p{line-height:1.75;}
   <div id="closingBox"></div>
   <div class="saved" id="savedNote"></div>
   <button class="btn ghost" id="retakeBtn" style="margin-top:18px;">ทำแบบทดสอบนี้ใหม่</button>
-  <a class="backbot" href="index.html">← กลับหน้าแรก</a>
   <div class="foot">ผลลัพธ์นี้เป็นภาพรวมเชิงแนวโน้ม ไม่ใช่การวินิจฉัยทางจิตวิทยา ใช้เป็นจุดเริ่มต้นในการทำความเข้าใจตัวเองได้ แต่ไม่ควรใช้ตัดสินคุณค่าหรือความสามารถของใคร</div>
 </div>
 
@@ -590,9 +618,9 @@ function renderJourney(elId, isResult){
     (isResult
       ? (doneCount >= 3
           ? (all['sixteen']
-              ? 'คุณทำครบทั้งสี่ชุดแล้ว — ภาควิเคราะห์รวมและบันเดิลสี่ระบบใช้ได้เต็มที่'
-              : 'คุณทำครบสามชุดหลักแล้ว ภาควิเคราะห์รวมปลดล็อกเรียบร้อย — เหลือ 16 ตัวตนอีกชุดถึงจะครบบันเดิลสี่ระบบ')
-          : 'แต่ละแบบทดสอบมองคุณจากคนละมุม เมื่อครบสามชุดหลักจะวิเคราะห์ให้ว่ามุมเหล่านั้นสอดคล้องกันหรือขัดกันตรงไหน')
+              ? 'คุณทำครบทั้งสี่ชุดหลักแล้ว — ภาควิเคราะห์รวมและบันเดิลสี่ระบบใช้ได้เต็มที่'
+              : 'ภาควิเคราะห์รวมปลดล็อกแล้ว — เหลือ 16 ตัวตนอีกชุดถึงจะครบทั้งสี่ชุดหลัก')
+          : 'แต่ละแบบทดสอบมองคุณจากคนละมุม เมื่อทำ Big Five · HEXACO · Enneagram ครบ ระบบจะวิเคราะห์ให้ว่ามุมเหล่านั้นสอดคล้องกันหรือขัดกันตรงไหน')
       : 'ทำอันไหนก่อนก็ได้ ผลของแต่ละอันจะถูกเก็บไว้ให้อัตโนมัติ') +
     '</p>';
   NAV.forEach(n=>{

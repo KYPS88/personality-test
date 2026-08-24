@@ -95,17 +95,34 @@ p{line-height:1.78;}
 <div class="navbar"><div class="nbin">
   <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
   <span class="sp"></span>
-  <a class="nb home" href="index.html">หน้าหลัก</a>
+  <a class="nb home" id="nbHome" href="index.html">หน้าแรก</a>
 </div></div>
 <script>
 (function(){
   var b = document.getElementById('nbBack');
+  var h = document.getElementById('nbHome');
+  var shell = null;
+  try{ if(window.top !== window.self && window.top.shellBack) shell = window.top; }catch(e){}
+  var inShell = false;
+  try{ inShell = window.top !== window.self; }catch(e){ inShell = true; }
+  /* อยู่ในเชลล์แล้วเมนูซ้ายมีหน้าแรกอยู่ ไม่ต้องมีปุ่มซ้ำ */
+  if(h && inShell) h.classList.add('hide');
   if(!b) return;
-  var deep = false;
-  try{ deep = window.history.length > 1; }catch(e){}
+  /* ในเชลล์ให้เชลล์เป็นคนคุมลำดับหน้า ไม่ใช้ประวัติเบราว์เซอร์
+     เพราะทุกครั้งที่กรอบขวาเปลี่ยนหน้าจะถูกนับเป็นหนึ่งก้าว */
+  var deep;
+  if(shell){
+    try{ deep = shell.shellCanBack(); }catch(e){ deep = false; }
+  }else{
+    deep = false;
+    try{ deep = window.history.length > 1; }catch(e){}
+  }
   if(!deep) b.classList.add('hide');
   b.addEventListener('click', function(e){
     e.preventDefault();
+    if(shell){
+      try{ if(shell.shellBack()) return; }catch(err){}
+    }
     try{ window.history.back(); }catch(err){ window.location.href = 'index.html'; }
   });
 })();

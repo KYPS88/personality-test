@@ -130,7 +130,7 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
     </div>
 
     <div class="prog">
-      <div class="lab"><span>ความคืบหน้า</span><span id="progTxt">0 / 5</span></div>
+      <div class="lab"><span>ทำแล้ว</span><span id="progTxt">0 / 5</span></div>
       <div class="track"><div class="fill" id="progFill"></div></div>
     </div>
 
@@ -252,8 +252,10 @@ function bindNav(){
 }
 
 /* ---------- เปลี่ยนหน้า ---------- */
-function go(key, innerHash){
+var histStack = [];
+function go(key, innerHash, fromBack){
   if(!PAGES[key]) key = 'home';
+  if(!fromBack && current && current !== key) histStack.push(current);
   current = key;
   var p = PAGES[key];
   loading.classList.add('show');
@@ -340,6 +342,16 @@ function startMirror(){
     renderNav();
   }, 600);
 }
+
+/* ---------- ย้อนกลับที่เชลล์คุมเอง ----------
+   ไม่ใช้ history ของเบราว์เซอร์ เพราะทุกครั้งที่กรอบขวาเปลี่ยนหน้า
+   จะถูกนับเป็นหนึ่งก้าว ทำให้ย้อนแล้วกระโดดไปหน้าที่ไม่ได้ตั้งใจ */
+window.shellCanBack = function(){ return histStack.length > 0; };
+window.shellBack = function(){
+  if(!histStack.length) return false;
+  go(histStack.pop(), '', true);
+  return true;
+};
 
 /* ---------- เมนูบนมือถือ ---------- */
 function openMenu(){ document.body.classList.add('menu'); }
