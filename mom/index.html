@@ -199,9 +199,41 @@ svg.flower{width:100%;max-width:330px;height:auto;overflow:visible}
 footer{text-align:center;margin-top:40px;color:var(--ink-soft);font-size:.85rem}
 .hidden{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- แถบนำทาง ---------- */
+.navbar{position:sticky;top:0;z-index:60;background:rgba(255,251,244,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(120,80,60,.14);}
+.navbar .nbin{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;gap:9px;align-items:center;}
+.navbar .nb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+  font-size:13px;font-weight:600;color:#6B4A3A;background:rgba(120,80,60,.07);
+  border:1px solid rgba(120,80,60,.16);padding:7px 13px;border-radius:99px;
+  line-height:1.3;cursor:pointer;}
+.navbar .nb.home{color:#C1666B;border-color:rgba(193,102,107,.35);background:rgba(193,102,107,.09);}
+.navbar .sp{flex:1;}
+.navbar .nb.hide{display:none;}
 </style>
 </head>
 <body>
+<div class="navbar"><div class="nbin">
+  <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
+  <span class="sp"></span>
+  <a class="nb home" href="../index.html">หน้าหลัก</a>
+</div></div>
+<script>
+(function(){
+  var b = document.getElementById('nbBack');
+  if(!b) return;
+  var deep = false;
+  try{ deep = window.history.length > 1; }catch(e){}
+  if(!deep) b.classList.add('hide');
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    try{ window.history.back(); }catch(err){ window.location.href = '../index.html'; }
+  });
+})();
+</script>
+
 <div class="wrap">
 
 <!-- ============ COVER ============ -->
@@ -460,7 +492,7 @@ function render(){
 }
 function next(){ if(idx<Q.length-1){idx++;render();} else finish(); }
 
-$("startBtn").onclick=()=>{ev('mom_start');show("quiz");render();};
+$("startBtn").onclick=()=>{show("quiz");render();};
 $("backBtn").onclick=()=>{if(idx>0){idx--;render();}};
 $("againBtn").onclick=()=>{
   idx=0;answers.fill(null);lsClear();
@@ -481,7 +513,6 @@ function score(){
 }
 
 function finish(){
-  ev('mom_done');
   const s=score();
   const ranked=Object.entries(s).map(([t,v])=>({t:+t,v})).sort((a,b)=>b.v-a.v);
   const top=ranked[0].t, T=TYPES[top];
@@ -530,22 +561,6 @@ function finish(){
 
 /* ---------------- สั่งซื้อ: ส่งผลไปหน้าชำระเงินบน Railway ---------------- */
 const READER_URL = "https://whoyouare-production.up.railway.app";
-
-/* ---- ตัวนับรวม ----
-   ส่งแค่ชื่อเหตุการณ์เป็นข้อความล้วน ไม่มี ID ไม่มีคุกกี้ ไม่ส่งผลแบบทดสอบ
-   ใช้ sendBeacon เพื่อไม่ให้หน่วงหน้า และถ้าเซิร์ฟเวอร์ล่มก็ไม่กระทบอะไร */
-function ev(name){
-  try{
-    const url = READER_URL + '/api/ev';
-    if(navigator.sendBeacon){
-      navigator.sendBeacon(url, new Blob([name], {type:'text/plain'}));
-    }else{
-      fetch(url, {method:'POST', body:name, headers:{'Content-Type':'text/plain'},
-                  keepalive:true}).catch(()=>{});
-    }
-  }catch(e){}
-}
-ev('mom_view');
 const BUY_STATE = { type:null, name:"", scores:null };
 
 function buildProfile(){
@@ -568,7 +583,6 @@ function buildProfile(){
 }
 
 function goBuy(book, edition){
-  ev('mom_buy_' + edition);
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';

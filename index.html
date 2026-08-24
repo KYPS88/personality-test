@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>รู้จักตัวเองใน 3 มุม — แบบทดสอบบุคลิกภาพฟรี</title>
+<title>รู้จักตัวเองใน 4 มุม — แบบทดสอบบุคลิกภาพฟรี</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -36,6 +36,23 @@ h1{font-size:34px;}
 .sec > .lead2{font-size:14px;color:var(--dim);line-height:1.75;margin:0 0 20px;}
 .tcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:13px;border-left:3px solid var(--gold);}
 .tcard.t1{border-left-color:#3E8E7E;}
+.tcard.t4{border-left-color:#6FA8DC;}
+.tcard.t5{border-left-color:#E5806F;}
+.tcard.t4 .th .q{color:#9BC4E8;}
+.tcard.t5 .th .q{color:#F0A08F;}
+.golink{display:inline-flex;align-items:center;gap:7px;margin-top:15px;
+  font-size:13.5px;font-weight:600;color:var(--gold);text-decoration:none;
+  border:1px solid rgba(217,164,65,.38);background:rgba(217,164,65,.07);
+  padding:9px 15px;border-radius:99px;line-height:1.3;}
+.golink:hover{background:rgba(217,164,65,.15);}
+.golink .gm{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);font-weight:500;}
+.whyall{background:linear-gradient(150deg,rgba(217,164,65,.11),rgba(26,33,64,.9));
+  border:1px solid rgba(217,164,65,.3);border-radius:16px;padding:18px 17px;margin:0 0 18px;}
+.whyall .wt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+.whyall p{font-size:13.8px;line-height:1.85;color:var(--dim);margin:0 0 10px;}
+.whyall p:last-child{margin-bottom:0;}
+.whyall b{color:var(--paper);}
 .tcard.t3{border-left-color:#B98CCE;}
 .tcard .th{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;flex-wrap:wrap;}
 .tcard .th h3{font-family:'Noto Serif Thai',serif;font-size:18px;margin:0;}
@@ -104,15 +121,48 @@ h1{font-size:34px;}
 .momcard .ma{font-size:15px;font-weight:600;}
 .momcard .mb{font-size:12.5px;color:var(--dim);margin-top:4px;line-height:1.65;}
 .momnote{font-size:11.5px;color:var(--dim);line-height:1.7;margin:11px 2px 0;}
+
+/* ---------- แถบนำทาง ---------- */
+.navbar{position:sticky;top:0;z-index:60;background:rgba(15,20,40,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(241,237,228,.09);}
+.navbar .nbin{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;gap:9px;align-items:center;}
+.navbar .nb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:13px;font-weight:600;
+  color:#F1EDE4;background:rgba(255,255,255,.06);border:1px solid rgba(241,237,228,.12);
+  padding:7px 13px;border-radius:99px;line-height:1.3;cursor:pointer;}
+.navbar .nb:hover{background:rgba(255,255,255,.12);}
+.navbar .nb.home{color:#D9A441;border-color:rgba(217,164,65,.35);background:rgba(217,164,65,.09);}
+.navbar .sp{flex:1;}
+.navbar .nb.hide{display:none;}
 </style>
 </head>
 <body>
+<div class="navbar"><div class="nbin">
+  <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
+  <span class="sp"></span>
+  
+</div></div>
+<script>
+(function(){
+  var b = document.getElementById('nbBack');
+  if(!b) return;
+  var deep = false;
+  try{ deep = window.history.length > 1; }catch(e){}
+  if(!deep) b.classList.add('hide');
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    try{ window.history.back(); }catch(err){ window.location.href = 'index.html'; }
+  });
+})();
+</script>
+
 <div class="wrap">
   <div class="eyebrow">Personality Triangulation</div>
-  <h1>รู้จักตัวเองใน 3 มุม</h1>
-  <p class="lead">แบบทดสอบเดียวบอกคุณได้แค่ด้านเดียว ชุดนี้มี 3 แบบทดสอบที่มองคุณจากคนละมุม — <strong>Big Five</strong> บอกว่าคุณเป็นคนแบบไหน · <strong>HEXACO</strong> เพิ่มมิติที่บอกว่าคุณเล่นเกมแบบไหน · <strong>Enneagram</strong> บอกว่าทำไมคุณถึงเป็นแบบนั้น</p>
+  <h1>รู้จักตัวเองใน 4 มุม</h1>
+  <p class="lead">แบบทดสอบเดียวบอกคุณได้แค่ด้านเดียว ชุดนี้มี 4 แบบทดสอบที่มองคุณจากคนละมุม — <strong>Big Five</strong> บอกว่าคุณเป็นคนแบบไหน · <strong>HEXACO</strong> เพิ่มมิติที่บอกว่าคุณเล่นเกมแบบไหน · <strong>Enneagram</strong> บอกว่าทำไมคุณถึงเป็นแบบนั้น · <strong>16 ตัวตน</strong> บอกว่าคุณรับข้อมูลและตัดสินใจด้วยวิธีไหน</p>
 
-  <div class="prog" id="progText">ความคืบหน้า 0 จาก 3</div>
+  <div class="prog" id="progText">ความคืบหน้า 0 จาก 4</div>
   <div class="ptrack"><div class="pfill" id="pfill"></div></div>
 
   <div id="cards"></div>
@@ -128,7 +178,7 @@ h1{font-size:34px;}
       </div>
       <div class="go">&rsaquo;</div>
     </a>
-    <p class="sixnote">ชุดนี้แยกจากสามชุดด้านบน ไม่นับรวมในความคืบหน้า ทำเมื่อไหร่ก็ได้</p>
+    <p class="sixnote">ชุดนี้นับรวมในความคืบหน้าและอยู่ในบันเดิลสี่ระบบ ทำก่อนหรือหลังสามชุดด้านบนก็ได้</p>
   </div>
 
   <div class="momwrap">
@@ -142,14 +192,21 @@ h1{font-size:34px;}
       </div>
       <div class="go">&rsaquo;</div>
     </a>
-    <p class="momnote">ชุดนี้แยกจากสามชุดด้านบน ไม่นับรวมในความคืบหน้า และไม่ต้องทำสามชุดก่อนก็ทำได้เลย</p>
+    <p class="momnote">ชุดนี้แยกจากชุดด้านบน ไม่นับรวมในความคืบหน้า และไม่ต้องทำชุดอื่นก่อนก็ทำได้เลย</p>
   </div>
 
 
 
   <div class="sec">
     <h2>แต่ละแบบทดสอบวัดอะไร</h2>
-    <p class="lead2">ทั้งสามชุดไม่ได้วัดเรื่องเดียวกันในมุมต่างกัน แต่ตอบคนละคำถามคนละชั้น อ่านตรงนี้ก่อนจะช่วยให้เลือกได้ว่าควรเริ่มจากอันไหน</p>
+    <p class="lead2">แต่ละชุดไม่ได้วัดเรื่องเดียวกันในมุมต่างกัน แต่ตอบคนละคำถามคนละชั้น อ่านตรงนี้ก่อนจะช่วยให้เลือกได้ว่าควรเริ่มจากอันไหน</p>
+
+    <div class="whyall">
+      <div class="wt">ทำไมถึงอยากให้ทำหลายชุด</div>
+      <p>แบบทดสอบทุกชุดในโลกนี้มีจุดบอดของตัวเอง เพราะแต่ละชุดถูกออกแบบมาตอบคำถามเดียว <b>Big Five กับ HEXACO ดูสิ่งที่คุณทำ</b> ส่วน <b>Enneagram ดูเหตุผลที่คุณทำ</b> และ <b>16 ตัวตนดูวิธีที่หัวคุณประมวลผล</b> ถามคนละคำถามกัน คำตอบจึงไม่ทับกัน</p>
+      <p>ทำชุดเดียวก็ได้ประโยชน์จริง แต่คุณจะได้ภาพด้านเดียว เหมือนดูรูปถ่ายคนคนหนึ่งจากมุมเดียว ทำหลายชุดแล้วเอามาวางทับกัน <b>จุดที่ผลไม่ตรงกันคือจุดที่บอกอะไรมากที่สุด</b> — เช่นคะแนนบอกว่าคุณเป็นคนเข้าสังคมเก่ง แต่แรงขับข้างในบอกว่าคุณกลัวถูกทิ้ง สองอย่างนี้อยู่ด้วยกันได้ และมันอธิบายความเหนื่อยที่หาสาเหตุไม่เจอ</p>
+      <p>ไม่ต้องทำรวดเดียว ทำทีละชุดคนละวันก็ได้ ผลเก่าถูกเก็บไว้ในเครื่องคุณเอง กลับมาทำต่อเมื่อไหร่ก็ได้</p>
+    </div>
 
     <div class="tcard t1">
       <div class="th"><h3>Big Five</h3><span class="q">คุณเป็นคนแบบไหน</span></div>
@@ -171,6 +228,7 @@ h1{font-size:34px;}
           <li><b>ใช้เลือกวิธีทำงานที่เข้ากับตัวเอง</b> เช่น คนคะแนนวินัยต่ำไม่ควรฝืนสร้างวินัย แต่ควรยืมโครงสร้างจากภายนอกมาช่วยแทน ซึ่งได้ผลกว่ามาก</li>
         </ul>
       </div>
+      <a class="golink" href="bigfive.html">ทำแบบทดสอบ Big Five <span class="gm">50 ข้อ · 10 นาที</span> &rsaquo;</a>
     </div>
 
     <div class="tcard">
@@ -193,6 +251,7 @@ h1{font-size:34px;}
           <li><b>เข้าใจความรู้สึกไม่ปลอดภัยที่อธิบายไม่ถูก</b> เวลาอยู่กับบางคนแล้วรู้สึกเหมือนกำลังถูกจัดการอยู่ตลอด แต่จับผิดเป็นเรื่องๆ ไม่ได้ นี่คือด้านที่อธิบายมันได้</li>
         </ul>
       </div>
+      <a class="golink" href="hexaco.html">ทำแบบทดสอบ HEXACO <span class="gm">60 ข้อ · 13 นาที</span> &rsaquo;</a>
     </div>
 
     <div class="tcard t3">
@@ -212,6 +271,46 @@ h1{font-size:34px;}
           <li><b>ใช้กับคนใกล้ตัวได้ทันที</b> คนแต่ละประเภทต้องการคำพูดคนละแบบ เช่น คนที่ตอบว่าไม่เป็นไรทุกครั้งไม่ได้แปลว่าไม่เป็นไร และการกดดันให้พูดจะยิ่งทำให้เขาถอย</li>
         </ul>
       </div>
+      <a class="golink" href="enneagram.html">ทำแบบทดสอบ Enneagram <span class="gm">63 ข้อ · 12 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard t4">
+      <div class="th"><h3>16 ตัวตน</h3><span class="q">หัวคุณทำงานยังไง</span></div>
+      <p class="desc">วัดสี่แกนที่ประกอบกันเป็นวิธีคิดของคุณ คือรับพลังจากข้างนอกหรือข้างใน รับข้อมูลจากสิ่งที่จับต้องได้หรือจากภาพรวม ตัดสินใจด้วยเหตุผลหรือด้วยผลกระทบต่อคน และชอบวางแผนไว้ก่อนหรือเปิดทางเลือกไว้ ผลออกมาเป็นรหัสสี่ตัวอักษรพร้อมความเข้มของแต่ละแกน</p>
+      <div class="samp">
+        <div class="sl">ตัวอย่างผลลัพธ์</div>
+        <div class="row"><span class="k">I ↔ E</span><span class="bar"><i style="width:68%;background:#6FA8DC"></i></span><span class="v">68</span></div>
+        <div class="row"><span class="k">N ↔ S</span><span class="bar"><i style="width:55%;background:#B98CCE"></i></span><span class="v">55</span></div>
+        <div class="row"><span class="k">F ↔ T</span><span class="bar"><i style="width:74%;background:#E8A87C"></i></span><span class="v">74</span></div>
+        <div class="txt">ความเข้มสำคัญพอกับตัวอักษร คนที่ได้ 51 กับคนที่ได้ 90 ในแกนเดียวกันใช้ชีวิตคนละแบบ ระบบจะบอกด้วยว่าแกนไหนของคุณก้ำกึ่ง</div>
+      </div>
+      <p class="why"><b>สำคัญตรงไหน</b> นี่คือชุดที่ตอบคำถามว่าทำไมบางคนต้องคิดจบก่อนถึงพูดได้ ขณะที่บางคนต้องพูดออกมาถึงจะรู้ว่าคิดอะไร ความต่างนี้ทำให้เข้าใจกันผิดในที่ประชุมและในบ้านมากที่สุดในบรรดาความต่างทั้งหมด</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณต้องการอะไรถึงจะคิดออก</b> บางคนต้องการความเงียบและเวลา บางคนต้องการคนคุยด้วย จัดสภาพแวดล้อมให้ตรงแล้วงานเดินขึ้นทันที</li>
+          <li><b>รู้ว่าทำไมคำแนะนำดี ๆ ถึงใช้กับคุณไม่ได้</b> เพราะคำแนะนำส่วนใหญ่เขียนโดยคนที่หัวทำงานคนละแบบกับคุณ</li>
+          <li><b>เข้าใจคู่หรือเพื่อนร่วมงานที่ต่างจากคุณ</b> คนที่วางแผนล่วงหน้ากับคนที่ตัดสินใจนาทีสุดท้ายไม่ได้มีใครผิด แค่คนละแกน</li>
+          <li><b>ใช้เลือกวิธีสื่อสารกับแต่ละคน</b> คนที่ตัดสินใจด้วยเหตุผลอยากได้ข้อมูล คนที่ตัดสินใจด้วยผลกระทบอยากได้ความรู้สึกก่อน</li>
+        </ul>
+      </div>
+      <a class="golink" href="sixteen.html">ทำแบบทดสอบ 16 ตัวตน <span class="gm">60 ข้อ · 10 นาที</span> &rsaquo;</a>
+    </div>
+
+    <div class="tcard t5">
+      <div class="th"><h3>แม่ 9 แบบ</h3><span class="q">คุณเลี้ยงลูกแบบไหน</span></div>
+      <p class="desc">เอาแนวคิด Enneagram มาใช้เฉพาะเรื่องการเลี้ยงลูก ไม่ได้ถามเรื่องงานหรือความสัมพันธ์ทั่วไป แต่ถามจากสถานการณ์จริงในบ้าน เช่นตอนลูกงอแงกลางห้าง ตอนลูกทำของพัง ตอนลูกไม่ยอมทำการบ้าน</p>
+      <p class="why"><b>สำคัญตรงไหน</b> พ่อแม่ส่วนใหญ่รู้อยู่แล้วว่าไม่อยากตะโกน แต่ก็ยังตะโกนอยู่ดี ชุดนี้ไม่ได้บอกว่าคุณควรทำอะไร แต่บอกว่าอะไรคือแรงขับที่ทำให้คุณตอบสนองแบบนั้นซ้ำ ๆ ซึ่งเป็นคนละเรื่องกับความรักที่มีต่อลูก</p>
+      <div class="useit">
+        <div class="ut">ทำแล้วรู้อะไร เอาไปใช้ยังไง</div>
+        <ul>
+          <li><b>รู้ว่าคุณกำลังกลัวอะไรอยู่</b> เบื้องหลังการดุมักไม่ใช่ความโกรธ แต่เป็นความกลัวบางอย่างที่ยังไม่ได้เรียกชื่อ</li>
+          <li><b>เห็นว่าลูกได้ยินอะไรจากสิ่งที่คุณพูด</b> ซึ่งบางทีไม่ตรงกับสิ่งที่คุณตั้งใจสื่อเลย</li>
+          <li><b>เข้าใจว่าทำไมพ่อกับแม่เห็นไม่ตรงกัน</b> คนละแบบก็มองเรื่องเดียวกันคนละมุม ไม่ใช่ใครรักลูกน้อยกว่า</li>
+        </ul>
+      </div>
+      <p class="why" style="border-color:rgba(229,128,111,.3);">ชุดนี้ไม่นับรวมในความคืบหน้าและไม่ได้อยู่ในบันเดิล ทำเมื่อไหร่ก็ได้ ไม่ต้องทำชุดอื่นก่อน</p>
+      <a class="golink" href="mom/">ทำแบบทดสอบแม่ 9 แบบ <span class="gm">36 ข้อ · 5 นาที</span> &rsaquo;</a>
     </div>
   </div>
 
@@ -230,8 +329,8 @@ h1{font-size:34px;}
     </div>
 
     <div class="combo2 best">
-      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบ 3 ชุด</div></div>
-      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ</p>
+      <div class="ct"><div class="cn">3</div><div class="ch2">ทำครบสามชุดหลัก</div></div>
+      <p>ปลดล็อกการวิเคราะห์รวมที่ทำได้เฉพาะเมื่อมีครบ ระบบจะเทียบให้เห็นว่าทั้งสามมุมสอดคล้องหรือขัดกันตรงไหน<br><br><b style="color:var(--paper);">จุดที่ขัดกันคือสิ่งที่มีค่าที่สุด</b> เพราะมันคือช่องว่างระหว่างสิ่งที่คุณทำกับสิ่งที่คุณต้องการจริงๆ และช่องว่างนั้นมักเป็นที่มาของความเหนื่อยที่อธิบายไม่ถูก คนส่วนใหญ่ติดอยู่ตรงนี้นานหลายปีโดยไม่รู้สาเหตุ<br><br>ทำ 16 ตัวตนเพิ่มอีกชุดจะครบทั้งสี่ ซึ่งเป็นชุดที่บันเดิลสี่ระบบเขียนถึง</p>
     </div>
   </div>
 
@@ -320,9 +419,10 @@ const TESTS = [
 ];
 function loadAll(){ try{ const r=localStorage.getItem('ptx_results_v1'); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
 const all = loadAll();
-const done = TESTS.filter(t=>all[t.id]).length;
-document.getElementById('progText').textContent = 'ความคืบหน้า ' + done + ' จาก 3' + (done>=3 ? ' · ปลดล็อกครบแล้ว' : '');
-document.getElementById('pfill').style.width = (done/3*100) + '%';
+const doneCore = TESTS.filter(t=>all[t.id]).length;
+const done = doneCore + (all['sixteen'] ? 1 : 0);
+document.getElementById('progText').textContent = 'ความคืบหน้า ' + done + ' จาก 4' + (done>=4 ? ' · ครบทุกชุดแล้ว' : (doneCore>=3 ? ' · ปลดล็อกภาควิเคราะห์รวมแล้ว' : ''));
+document.getElementById('pfill').style.width = (done/4*100) + '%';
 document.getElementById('cards').innerHTML = TESTS.map(t=>{
   const r = all[t.id];
   let st = '';
