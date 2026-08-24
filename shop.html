@@ -68,6 +68,20 @@ h1{font-size:30px;}
 .ribbon{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
 
+.readbox{background:linear-gradient(140deg,rgba(62,142,126,.18),rgba(26,33,64,.9));
+  border:1px solid rgba(62,142,126,.42);border-radius:16px;padding:17px 16px;margin:0 0 26px;}
+.readbox .rt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:#6FC3AE;margin-bottom:8px;}
+.readbox h3{font-size:16.5px;margin:0 0 7px;}
+.readbox p{font-size:13px;color:var(--dim);line-height:1.75;margin:0 0 13px;}
+.readbox a{display:block;text-align:center;text-decoration:none;border-radius:11px;
+  padding:12px 14px;font-size:14.5px;font-weight:600;
+  background:rgba(62,142,126,.9);color:#F1EDE4;}
+.owned{background:rgba(62,142,126,.13);border:1px solid rgba(62,142,126,.4);
+  border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:12.5px;
+  color:#9FD8C8;line-height:1.65;}
+.owned a{color:#6FC3AE;font-weight:600;}
+.btn.again{background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--paper);}
 .foot{margin-top:44px;border-top:1px solid var(--line);padding-top:22px;}
 .foot p{font-size:12.5px;color:#6E7699;line-height:1.85;margin:0 0 10px;}
 .foot a{color:var(--dim);}
@@ -132,6 +146,13 @@ h1{font-size:30px;}
     แบบทดสอบฟรีให้คุณเห็นภาพกว้าง คู่มือคือส่วนที่ลงลึก — เขียนตามคะแนนที่คุณทำได้จริง
     ไม่ใช่ข้อความสำเร็จรูปชุดเดียวส่งให้ทุกคน อ่านออนไลน์ ไม่มีวันหมดอายุ เข้าอ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส
   </p>
+
+  <div class="readbox">
+    <div class="rt">ซื้อไปแล้ว</div>
+    <h3>มีรหัสเข้าอ่านอยู่แล้วใช่ไหม</h3>
+    <p>ถ้าเคยสั่งซื้อและได้รหัสแล้ว ไม่ต้องสั่งซื้อซ้ำ กดปุ่มนี้เพื่อเข้าอ่านได้เลย รหัสเดิมใช้ได้ตลอด ไม่มีวันหมดอายุ อ่านได้สูงสุด 2 เครื่อง</p>
+    <a href="https://whoyouare-production.up.railway.app" target="_blank" rel="noopener">เข้าอ่านด้วยรหัสของฉัน</a>
+  </div>
 
   <div class="howto">
     <div class="t">ซื้ออย่างไร</div>
@@ -216,7 +237,27 @@ function buildProfile(){
   if(all.sixteen && all.sixteen.code) p.sixteen = {code: all.sixteen.code, pct: all.sixteen.pct};
   return p;
 }
+var BOUGHT_KEY = 'ptx_bought_v1';
+function loadBought(){
+  try{ return JSON.parse(localStorage.getItem(BOUGHT_KEY) || '{}'); }catch(e){ return {}; }
+}
+function markBought(book, edition){
+  try{
+    var b = loadBought();
+    b[book + '/' + edition] = Date.now();
+    localStorage.setItem(BOUGHT_KEY, JSON.stringify(b));
+  }catch(e){}
+}
+function boughtWhen(book, edition){
+  var t = loadBought()[book + '/' + edition];
+  if(!t) return null;
+  var d = new Date(t);
+  var M = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  return d.getDate() + ' ' + M[d.getMonth()] + ' ' + (d.getFullYear() + 543 - 2500);
+}
+
 function goBuy(book, edition){
+  markBought(book, edition);
   var f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';
@@ -240,10 +281,17 @@ function card(o){
           '<div class="price">' + (o.was ? '<s>฿' + o.was + '</s>' : '') + '฿' + o.price + '</div></div>';
   if(o.desc)  html += '<p class="desc">' + o.desc + '</p>';
   if(o.bullets) html += '<ul><li>' + o.bullets.join('</li><li>') + '</li></ul>';
+  var when = o.book ? boughtWhen(o.book, o.edition) : null;
+  if(when){
+    html += '<div class="owned">คุณเคยกดสั่งซื้อเล่มนี้เมื่อ ' + when +
+            ' — ถ้าได้รหัสแล้ว <a href="' + READER_URL + '" target="_blank" rel="noopener">เข้าอ่านได้เลย</a>' +
+            ' ไม่ต้องสั่งซ้ำ</div>';
+  }
   html += '<div class="act">';
   if(ready){
-    html += '<button class="btn buy" data-book="' + o.book + '" data-ed="' + o.edition + '">สั่งซื้อ ฿' + o.price + '</button>' +
-            '<div class="state ok">' + (o.okNote || 'พร้อมสั่งซื้อ — เนื้อหาจะปรับตามคะแนนของคุณ') + '</div>';
+    html += '<button class="btn ' + (when ? 'again' : 'buy') + '" data-book="' + o.book + '" data-ed="' + o.edition + '">' +
+              (when ? 'สั่งซื้ออีกครั้ง ฿' + o.price : 'สั่งซื้อ ฿' + o.price) + '</button>' +
+            '<div class="state ok">' + (when ? 'ถ้ายังไม่ได้โอนหรือยังไม่ได้รหัส กดสั่งใหม่ได้' : (o.okNote || 'พร้อมสั่งซื้อ — เนื้อหาจะปรับตามคะแนนของคุณ')) + '</div>';
   }else if(o.link){
     html += '<a class="btn need" href="' + o.link + '">' + o.needBtn + '</a>' +
             '<div class="state">' + o.needNote + '</div>';
