@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เราเป็นแม่ประเภทไหนกันนะ? — แบบทดสอบสไตล์การเลี้ยงลูก 9 แบบ | ตามใจแม่</title>
+<meta name="description" content="แบบทดสอบฟรี 36 ข้อ ค้นหาแรงขับเบื้องหลังการเลี้ยงลูกของคุณ จากระบบ Enneagram 9 ไทป์">
+
+<!-- ภาพตัวอย่างตอนแชร์ลง Facebook / LINE — TODO: อัปโหลด og-cover.png ขนาด 1200x630 ไว้โฟลเดอร์เดียวกัน แล้วแก้ URL ให้ตรง -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="เราเป็นแม่ประเภทไหนกันนะ?">
+<meta property="og:description" content="แบบทดสอบฟรี 36 ข้อ ใช้เวลา 5 นาที รู้ว่าอะไรคือแรงขับเบื้องหลังสิ่งที่คุณทำกับลูกทุกวัน">
+<meta property="og:image" content="https://kyps88.github.io/personality-test/mom/og-cover.png">
+<meta property="og:url" content="https://kyps88.github.io/personality-test/mom/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,400;0,600;0,700;1,600&family=Sarabun:wght@400;500;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF6EC;
+  --cream-deep:#FBE9D8;
+  --lychee:#F4A6B0;
+  --lychee-soft:#FBD5D8;
+  --grape:#7B5EA7;
+  --mango:#F2B035;
+  --pandan:#7CB06B;
+  --ink:#4A3229;
+  --ink-soft:#8A6E5F;
+  --white:#fff;
+  --shadow:0 6px 0 rgba(74,50,41,.09);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--cream);
+  background-image:radial-gradient(circle at 12% 8%, rgba(244,166,176,.20) 0 22%, transparent 22.5%),
+                   radial-gradient(circle at 88% 92%, rgba(123,94,167,.13) 0 20%, transparent 20.5%);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:"Sarabun",system-ui,sans-serif;
+  font-size:17px;line-height:1.75;
+}
+.wrap{max-width:640px;margin:0 auto;padding:20px 18px 64px}
+h1,h2,h3,.mali{font-family:"Mali","Sarabun",sans-serif}
+
+/* ---------- pink band / english signature ---------- */
+.band{
+  display:inline-block;background:var(--lychee);color:var(--white);
+  font-family:"Caveat",cursive;font-weight:700;font-size:1.5rem;line-height:1;
+  padding:.35em .8em .5em;border-radius:999px;transform:rotate(-2deg);
+  box-shadow:0 4px 0 rgba(74,50,41,.12);
+}
+
+/* ---------- cover ---------- */
+.cover{text-align:center;padding:22px 0 10px}
+.cover h1{
+  font-size:2.3rem;font-weight:700;font-style:italic;line-height:1.25;
+  margin:18px 0 10px;letter-spacing:-.01em;
+}
+.heart{color:var(--lychee);font-style:normal}
+.cover p.lead{color:var(--ink-soft);margin:0 auto 22px;max-width:30em}
+.meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+.chip{
+  background:var(--white);border:2px solid var(--cream-deep);border-radius:999px;
+  padding:5px 14px;font-size:.85rem;color:var(--ink-soft);font-weight:500;
+}
+.btn{
+  display:inline-block;border:0;cursor:pointer;font-family:"Mali",sans-serif;
+  font-weight:600;font-size:1.1rem;color:var(--white);background:var(--grape);
+  padding:14px 40px;border-radius:999px;box-shadow:0 5px 0 #5d4482;
+  transition:transform .12s ease,box-shadow .12s ease;text-decoration:none;
+}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #5d4482}
+.btn.pink{background:var(--lychee);box-shadow:0 5px 0 #d4838e}
+.btn.pink:active{box-shadow:0 1px 0 #d4838e}
+.btn.ghost{background:var(--white);color:var(--grape);box-shadow:0 5px 0 var(--cream-deep)}
+.btn.ghost:active{box-shadow:0 1px 0 var(--cream-deep)}
+.btn:focus-visible{outline:3px solid var(--mango);outline-offset:3px}
+
+/* ---------- quiz ---------- */
+.progress-rail{height:10px;background:var(--white);border-radius:999px;overflow:hidden;margin:6px 0 6px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--lychee),var(--grape));border-radius:999px;transition:width .3s ease}
+.counter{font-size:.85rem;color:var(--ink-soft);text-align:right;margin-bottom:22px;font-weight:500}
+.qcard{
+  background:var(--white);border-radius:26px;padding:30px 22px 24px;
+  box-shadow:var(--shadow);border:2px solid var(--cream-deep);
+}
+.qnum{font-family:"Caveat",cursive;font-size:1.6rem;color:var(--lychee);line-height:1;display:block;margin-bottom:6px}
+.qtext{font-family:"Mali",sans-serif;font-size:1.35rem;font-weight:600;line-height:1.55;margin:0 0 22px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+  background:var(--cream);border:2px solid var(--cream-deep);border-radius:16px;
+  padding:12px 15px;font-family:"Sarabun",sans-serif;font-size:1rem;color:var(--ink);
+  transition:background .15s,border-color .15s,transform .1s;
+}
+.opt:hover{border-color:var(--lychee)}
+.opt:active{transform:scale(.985)}
+.opt:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
+.dot{width:16px;height:16px;border-radius:50%;flex:0 0 16px;background:var(--lychee-soft)}
+.opt[data-v="1"] .dot{background:#E4D7CB}
+.opt[data-v="2"] .dot{background:var(--lychee-soft)}
+.opt[data-v="3"] .dot{background:var(--mango)}
+.opt[data-v="4"] .dot{background:var(--lychee)}
+.opt[data-v="5"] .dot{background:var(--grape)}
+.backlink{display:block;margin:16px auto 0;background:none;border:0;color:var(--ink-soft);font-family:"Sarabun";font-size:.92rem;cursor:pointer;text-decoration:underline}
+
+/* ---------- result ---------- */
+.flowerwrap{text-align:center;margin:6px 0 0}
+svg.flower{width:100%;max-width:330px;height:auto;overflow:visible}
+.badge{
+  background:var(--white);border:2px solid var(--cream-deep);border-radius:26px;
+  padding:26px 22px;box-shadow:var(--shadow);text-align:center;margin-top:-6px;
+}
+.badge .tnum{font-family:"Caveat",cursive;font-size:2.6rem;color:var(--lychee);line-height:.9}
+.badge h2{font-size:1.9rem;font-style:italic;font-weight:700;margin:4px 0 2px}
+.badge .motto{color:var(--grape);font-family:"Mali";font-weight:600;margin:0 0 14px}
+.badge p{margin:0;color:var(--ink-soft);text-align:left}
+.split{margin-top:20px;display:grid;gap:14px}
+@media(min-width:520px){.split{grid-template-columns:1fr 1fr}}
+.panel{background:var(--white);border-radius:20px;padding:18px 18px 16px;border:2px solid var(--cream-deep)}
+.panel h3{margin:0 0 8px;font-size:1.08rem;font-weight:600}
+.panel.good h3{color:var(--pandan)}
+.panel.watch h3{color:var(--grape)}
+.panel ul{margin:0;padding-left:1.15em}
+.panel li{margin-bottom:5px;font-size:.97rem}
+.closebox{
+  margin-top:14px;background:var(--cream);border:2px dashed var(--lychee);
+  border-radius:16px;padding:13px 15px;text-align:left;font-size:.93rem;color:var(--ink-soft);
+}
+.closebox b{color:var(--ink)}
+.scopebox{
+  margin-top:16px;background:var(--white);border:2px solid var(--cream-deep);
+  border-radius:20px;padding:18px;font-size:.93rem;color:var(--ink-soft);line-height:1.8;
+}
+.scopebox b{color:var(--ink)}
+.ranks{margin-top:20px;background:var(--white);border-radius:20px;padding:18px;border:2px solid var(--cream-deep)}
+.ranks h3{margin:0 0 12px;font-size:1.05rem}
+.rrow{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:.92rem}
+.rrow b{flex:0 0 auto;width:1.6em;font-family:"Caveat";font-size:1.25rem;color:var(--ink-soft)}
+.rname{flex:0 0 7.2em;color:var(--ink-soft)}
+.rbar{flex:1;height:9px;background:var(--cream);border-radius:999px;overflow:hidden}
+.rbar span{display:block;height:100%;border-radius:999px}
+.rpct{flex:0 0 2.6em;text-align:right;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+/* ---------- offer ---------- */
+.offer{
+  margin-top:26px;background:linear-gradient(180deg,var(--cream-deep),var(--white));
+  border:2px dashed var(--lychee);border-radius:26px;padding:26px 20px;text-align:center;
+}
+.offer h3{font-size:1.5rem;font-style:italic;margin:10px 0 8px}
+.offer p{color:var(--ink-soft);margin:0 0 18px}
+.toc{text-align:left;max-width:26em;margin:0 auto 20px;padding-left:1.1em}
+.toc li{margin-bottom:6px;font-size:.96rem}
+.price{font-family:"Mali";font-size:1.35rem;font-weight:700;margin:0 0 4px}
+.price s{color:var(--ink-soft);font-weight:400;font-size:1rem;margin-right:8px}
+.tiny{font-size:.83rem;color:var(--ink-soft);margin-top:14px}
+
+/* ---------- extra boxes ---------- */
+.box{margin-top:20px;background:var(--white);border-radius:26px;padding:24px 20px;text-align:center}
+.box h3{font-family:"Mali",sans-serif;font-size:1.32rem;font-style:italic;margin:0 0 8px}
+.box p{color:var(--ink-soft);margin:0 0 16px;text-align:left;font-size:.97rem}
+.box.share{border:2px solid var(--pandan)}
+.box.share h3{color:var(--pandan)}
+.box.full{border:2px solid var(--mango)}
+.box.full h3{color:#C98B10}
+.box.keep{border:2px solid var(--cream-deep)}
+.box.keep h3{color:var(--grape)}
+.box.more{border:2px solid var(--grape)}
+.box.more h3{color:var(--grape)}
+.testlink{
+  display:flex;flex-direction:column;gap:2px;text-align:left;text-decoration:none;
+  background:var(--cream);border:2px solid var(--cream-deep);border-radius:16px;
+  padding:12px 16px;margin-bottom:9px;color:var(--ink);
+  transition:border-color .15s,transform .1s;
+}
+.testlink:hover{border-color:var(--grape)}
+.testlink:active{transform:scale(.99)}
+.testlink:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
+.testlink b{font-family:"Mali",sans-serif;font-size:1.03rem;font-weight:600}
+.testlink span{font-size:.87rem;color:var(--ink-soft)}
+.testlink.home{background:var(--white);border-style:dashed}
+.box .note{background:var(--cream);border-radius:14px;padding:12px 14px;margin:16px 0 14px;font-size:.92rem}
+.box .note b{color:var(--ink)}
+.linkrow{display:flex;gap:8px;margin-bottom:10px}
+.linkrow input{
+  flex:1;min-width:0;border:2px solid var(--cream-deep);border-radius:14px;
+  padding:10px 12px;font-family:"Sarabun",sans-serif;font-size:.86rem;
+  color:var(--ink-soft);background:var(--cream);
+}
+.linkrow input:focus{outline:3px solid var(--mango);outline-offset:1px}
+.btn.small{font-size:.98rem;padding:10px 22px;border-radius:16px;white-space:nowrap}
+.btn.green{background:var(--pandan);box-shadow:0 4px 0 #628f54}
+.btn.green:active{box-shadow:0 1px 0 #628f54}
+.btn.mango{background:var(--mango);color:#4A3229;box-shadow:0 4px 0 #cf951f}
+.btn.mango:active{box-shadow:0 1px 0 #cf951f}
+.price .per{font-family:"Sarabun";font-size:.85rem;font-weight:400;color:var(--ink-soft);margin-left:8px}
+footer{text-align:center;margin-top:40px;color:var(--ink-soft);font-size:.85rem}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- แถบนำทาง ---------- */
+.navbar{position:sticky;top:0;z-index:60;background:rgba(255,251,244,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(120,80,60,.14);}
+.navbar .nbin{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;gap:9px;align-items:center;}
+.navbar .nb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+  font-size:13px;font-weight:600;color:#6B4A3A;background:rgba(120,80,60,.07);
+  border:1px solid rgba(120,80,60,.16);padding:7px 13px;border-radius:99px;
+  line-height:1.3;cursor:pointer;}
+.navbar .nb.home{color:#C1666B;border-color:rgba(193,102,107,.35);background:rgba(193,102,107,.09);}
+.navbar .sp{flex:1;}
+.navbar .nb.hide{display:none;}
+</style>
+</head>
+<body>
+<div class="navbar"><div class="nbin">
+  <a class="nb" id="nbBack">&lsaquo; ย้อนกลับ</a>
+  <span class="sp"></span>
+  <a class="nb home" id="nbHome" href="../index.html">หน้าแรก</a>
+</div></div>
+<script>
+(function(){
+  var b = document.getElementById('nbBack');
+  var h = document.getElementById('nbHome');
+  var shell = null;
+  try{ if(window.top !== window.self && window.top.shellBack) shell = window.top; }catch(e){}
+  var inShell = false;
+  try{ inShell = window.top !== window.self; }catch(e){ inShell = true; }
+  /* อยู่ในเชลล์แล้วเมนูซ้ายมีหน้าแรกอยู่ ไม่ต้องมีปุ่มซ้ำ */
+  if(h && inShell) h.classList.add('hide');
+  if(!b) return;
+  /* ในเชลล์ให้เชลล์เป็นคนคุมลำดับหน้า ไม่ใช้ประวัติเบราว์เซอร์
+     เพราะทุกครั้งที่กรอบขวาเปลี่ยนหน้าจะถูกนับเป็นหนึ่งก้าว */
+  var deep;
+  if(shell){
+    try{ deep = shell.shellCanBack(); }catch(e){ deep = false; }
+  }else{
+    deep = false;
+    try{ deep = window.history.length > 1; }catch(e){}
+  }
+  if(!deep) b.classList.add('hide');
+  /* กำลังตอบคำถามอยู่หรือเปล่า — ดูว่าหน้าจอคำถามแสดงอยู่ไหม */
+  function inQuiz(){
+    var ids = ['s-quiz','quiz'];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]);
+      if(el && el.offsetParent !== null) return true;
+    }
+    return false;
+  }
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    if(inQuiz()){
+      var ok = window.confirm('กำลังทำแบบทดสอบอยู่ ถ้าออกตอนนี้คำตอบที่ตอบไปแล้วจะถูกเก็บไว้เป็นร่าง กลับมาทำต่อได้\n\nต้องการออกไหม');
+      if(!ok) return;
+    }
+    if(shell){
+      try{ if(shell.shellBack()) return; }catch(err){}
+    }
+    try{ window.history.back(); }catch(err){ window.location.href = '../index.html'; }
+  });
+})();
+</script>
+
+<div class="wrap">
+
+<!-- ============ COVER ============ -->
+<section id="cover" class="cover">
+  <span class="band">Whatever Mom Says</span>
+  <h1>เราเป็นแม่<span class="heart">♥</span><br>ประเภทไหนกันนะ?</h1>
+  <p class="lead">แบบทดสอบนี้ไม่ได้วัดว่าคุณเลี้ยงลูกเก่งแค่ไหน แต่พาไปดูว่า<b>อะไรคือแรงขับที่อยู่เบื้องหลังสิ่งที่คุณทำกับลูกทุกวัน</b> — ทำไมคุณถึงพูดประโยคเดิม หงุดหงิดเรื่องเดิม และใจอ่อนกับเรื่องเดิมทุกครั้ง<br><br>พอรู้แล้ว คุณจะเห็นชัดว่าควรปรับตรงไหน เพื่อให้แม่กับลูกเติบโตไปด้วยกัน</p>
+  <div class="meta">
+    <span class="chip">36 ข้อ</span>
+    <span class="chip">ใช้เวลา 5 นาที</span>
+    <span class="chip">ทำฟรี ไม่ต้องสมัคร</span>
+  </div>
+  <button class="btn" id="startBtn">เริ่มทำแบบทดสอบ</button>
+  <p id="resumeRow" class="hidden" style="margin-top:16px">
+    <button class="btn ghost small" id="resumeBtn">ดูผลลัพธ์ครั้งก่อนของฉัน</button>
+  </p>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="hidden">
+  <div class="progress-rail"><div class="progress-fill" id="bar"></div></div>
+  <div class="counter" id="counter">ข้อ 1 / 36</div>
+  <div class="qcard">
+    <span class="qnum" id="qnum">01</span>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+  </div>
+  <button class="backlink hidden" id="backBtn">← กลับข้อก่อนหน้า</button>
+</section>
+
+<!-- ============ RESULT ============ -->
+<section id="result" class="hidden">
+  <div class="flowerwrap"><svg class="flower" id="flower" viewBox="-160 -160 320 320" role="img" aria-label="แผนภาพดอกไม้ 9 กลีบแสดงคะแนนแต่ละไทป์"></svg></div>
+
+  <div class="badge">
+    <div class="tnum" id="rTnum">Type 1</div>
+    <h2 id="rName"></h2>
+    <p class="motto" id="rMotto"></p>
+    <p id="rSummary"></p>
+    <div id="rClose" class="closebox hidden"></div>
+  </div>
+
+  <div class="scopebox">
+    <b>แบบทดสอบนี้วัดเฉพาะตัวคุณในบทบาทของแม่</b> ไม่ใช่ไทป์หลักของคุณในฐานะคนคนหนึ่ง
+    ถ้าคุณเคยทำ Enneagram ฉบับเต็มแล้วได้คนละไทป์ นั่นไม่ใช่ความผิดพลาด — คนจำนวนมากแสดงออกในบ้านต่างจากที่แสดงออกในที่ทำงานหรือกับเพื่อน
+    และบางไทป์ก็มีเส้นทางที่เคลื่อนไปหากันตามธรรมชาติอยู่แล้ว
+    ให้ถือว่าผลนี้คือ<b>ประตูที่ใช้เข้าเรื่องการเลี้ยงลูก</b> ไม่ใช่คำตัดสินว่าคุณเป็นใคร
+
+  <div class="split">
+    <div class="panel good"><h3>สิ่งที่คุณให้ลูกได้ดีกว่าคนอื่น</h3><ul id="rGood"></ul></div>
+    <div class="panel watch"><h3>จุดที่มักมองไม่เห็น</h3><ul id="rWatch"></ul></div>
+  </div>
+
+  <div class="ranks">
+    <h3>คะแนนทั้ง 9 ไทป์ของคุณ</h3>
+    <div id="rRanks"></div>
+  </div>
+
+  <div class="offer">
+    <span class="band">Go deeper</span>
+    <h3>คู่มือเลี้ยงลูกฉบับ <span id="rBuyName"></span></h3>
+    <p>แบบทดสอบบอกว่าคุณเป็นแบบไหน — คู่มือบอกว่า<b>แล้วต้องทำยังไงต่อ</b></p>
+    <ul class="toc">
+      <li>ทำไมคุณถึงหงุดหงิดกับลูกในเรื่องเดิมซ้ำๆ</li>
+      <li>บทสนทนาจริง 12 สถานการณ์ พร้อมประโยคที่ควรพูดแทน</li>
+      <li>ลูกแต่ละวัย (2–6 / 7–12 / วัยรุ่น) รับมือกับแม่ไทป์นี้ยังไง</li>
+      <li>เวลาคุณเครียด คุณจะเปลี่ยนไปเป็นแบบไหน และวิธีดึงตัวเองกลับ</li>
+      <li>แผน 21 วัน ปรับทีละอย่างเล็กๆ</li>
+    </ul>
+    <p class="price"><s>฿199</s> ฿129</p>
+    <a class="btn pink" id="buyBtn" href="#">สั่งซื้อคู่มือไทป์นี้</a>
+    <p class="tiny">กดปุ่มแล้วไปหน้าชำระเงินได้เลย · โอนธนาคารแล้วอัปโหลดสลิปในหน้านั้น · ได้รหัสเข้าอ่านออนไลน์ อ่านได้สูงสุด 2 เครื่องต่อหนึ่งรหัส</p>
+  </div>
+
+  <!-- ---- ส่งให้คุณพ่อ ---- -->
+  <div class="box share">
+    <h3>ให้คุณพ่อทำด้วยสิ</h3>
+    <p>ไม่ได้มีแค่แม่ที่หล่อหลอมลูก — พ่อหรือคนที่ช่วยเลี้ยง ก็มีผลกับพฤติกรรมและการแสดงออกของลูกเหมือนกัน ส่งแบบทดสอบนี้ให้เขาทำ แล้วมาเรียนรู้และเติบโตไปพร้อมกัน</p>
+    <div class="linkrow">
+      <input id="shareUrl" readonly aria-label="ลิงก์แบบทดสอบ">
+      <button class="btn small green" id="copyBtn">คัดลอกลิงก์</button>
+    </div>
+    <a class="btn small ghost" id="lineShare" target="_blank" rel="noopener">ส่งทาง LINE</a>
+    <p class="note">พอทำเสร็จทั้งคู่ คุณจะรู้ไทป์ของทั้งสองคน แล้วค่อยสั่ง <b>แพ็กคู่ 2 ไทป์ ฿219</b> ซึ่งมีบทเทียบว่าไทป์ของคุณกับไทป์ของเขาอยู่ด้วยกันแล้วชนกันตรงไหน และแบ่งหน้าที่กับลูกยังไงให้ไปทางเดียวกัน · กรอกไทป์ของคุณพ่อในหน้าสั่งซื้อได้เลย</p>
+    <a class="btn small pink" id="buyPairBtn" href="#">สั่งแพ็กคู่ ฿219</a>
+  </div>
+
+  <!-- ---- ครบ 9 ไทป์ ---- -->
+  <div class="box full">
+    <h3>อยากเข้าใจทุกคนรอบตัวลูก</h3>
+    <p>ปู่ย่าตายาย พี่เลี้ยง คุณครู — ทุกคนที่อยู่กับลูกต่างก็มีไทป์ของตัวเอง และทุกไทป์ส่งผลกับลูกคนละแบบ ชุดครบ 9 ไทป์ อ่านได้ทั้งบ้าน และใช้ทำความเข้าใจตัวลูกเองได้เมื่อเขาโตขึ้น</p>
+    <p class="price">฿390 <span class="per">เฉลี่ยเล่มละ ฿43</span></p>
+    <a class="btn small mango" id="buyAllBtn" href="#">สั่งชุดครบ 9 ไทป์</a>
+  </div>
+
+  <div class="box keep">
+    <h3>เก็บผลลัพธ์นี้ไว้</h3>
+    <p>ลิงก์ข้างล่างนี้คือผลลัพธ์ของคุณโดยเฉพาะ บันทึกไว้หรือส่งเข้าแชทตัวเอง แล้วเปิดกลับมาดูได้ทุกเมื่อ โดยไม่ต้องทำใหม่ทั้ง 36 ข้อ</p>
+    <div class="linkrow">
+      <input id="resultLink" readonly aria-label="ลิงก์ผลลัพธ์ของคุณ">
+      <button class="btn small green" id="keepBtn">คัดลอก</button>
+    </div>
+    <p class="note">เครื่องนี้จะจำผลลัพธ์ล่าสุดไว้ให้อัตโนมัติด้วย แต่ถ้าเปลี่ยนเครื่อง เปลี่ยนเบราว์เซอร์ หรือล้างข้อมูลเว็บ จะหายไป — ลิงก์ข้างบนคือวิธีที่ปลอดภัยกว่า</p>
+  </div>
+
+  <div class="box more">
+    <h3>รู้จักตัวเองให้ลึกกว่านี้</h3>
+    <p>แบบทดสอบนี้ดูเฉพาะตัวคุณในบทบาทของแม่ ถ้าอยากรู้จักตัวเองในมุมอื่น ลองอีกสามชุดนี้ ทำฟรีทั้งหมดเหมือนกัน</p>
+    <a class="testlink" href="../bigfive.html">
+      <b>Big Five (OCEAN)</b><span>บุคลิกภาพ 5 ด้าน · 50 ข้อ</span>
+    </a>
+    <a class="testlink" href="../hexaco.html">
+      <b>HEXACO</b><span>เพิ่มมิติความซื่อตรง-ถ่อมตน · 60 ข้อ</span>
+    </a>
+    <a class="testlink" href="../enneagram.html">
+      <b>Enneagram ฉบับเต็ม</b><span>เจาะลึก 9 ไทป์ ทุกด้านของชีวิต · 63 ข้อ</span>
+    </a>
+    <a class="testlink home" href="../">
+      <b>หน้ารวมแบบทดสอบทั้งหมด</b><span>ดูภาพรวมและคู่มือฉบับเต็ม</span>
+    </a>
+  </div>
+
+  <p style="text-align:center;margin-top:26px">
+    <button class="btn ghost" id="againBtn">ทำแบบทดสอบใหม่</button>
+  </p>
+</section>
+
+<footer>
+  ตามใจแม่ | Whatever Mom Says<br>
+  แบบทดสอบนี้ใช้เพื่อความเข้าใจตัวเอง ไม่ใช่การวินิจฉัยทางจิตวิทยา
+</footer>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const TYPES = {
+ 1:{name:"แม่มาตรฐานสูง",motto:"“ทำให้ถูกต้องตั้งแต่แรก”",color:"#7CB06B",
+    sum:"คุณเลี้ยงลูกด้วยความรับผิดชอบสูงมาก อ่านมาเยอะ เตรียมมาดี และอยากมอบสิ่งที่ถูกต้องที่สุดให้ลูก บ้านของคุณมีกฎที่ชัดเจน และลูกรู้ว่าอะไรทำได้ไม่ได้ — แต่ความอยากให้ทุกอย่างเรียบร้อยนี่แหละ ที่บางครั้งกลายเป็นความกดดันที่ลูกรู้สึกได้",
+    good:["ลูกได้ขอบเขตที่ชัดเจนและมั่นคง","สอนเรื่องผิดชอบชั่วดีได้ดีมาก","ทำตามที่พูดเสมอ ลูกจึงไว้ใจได้"],
+    watch:["แก้ไขลูกบ่อยจนลูกกลัวทำผิด","ชมน้อยกว่าที่คิดว่าชม","โกรธตัวเองเงียบๆ เวลาเลี้ยงได้ไม่ดีอย่างที่ตั้งใจ"]},
+ 2:{name:"แม่ผู้ให้",motto:"“ขอแค่ลูกไม่ขาดอะไร”",color:"#F4A6B0",
+    sum:"คุณอ่านความรู้สึกลูกออกก่อนที่เขาจะพูด และพร้อมทุ่มเทให้ได้เกือบทุกอย่าง บ้านของคุณอบอุ่นมาก ลูกรู้ว่ามีคนอยู่ข้างๆ เสมอ — แต่การให้ที่ไม่มีขีดจำกัด บางครั้งทำให้ลูกไม่ได้เรียนรู้ที่จะช่วยตัวเอง และทำให้คุณเหนื่อยโดยไม่มีใครรู้",
+    good:["ลูกรู้สึกปลอดภัยทางใจสูงมาก","อ่านอารมณ์ลูกได้แม่นยำ","สร้างบ้านที่ใครก็อยากกลับ"],
+    watch:["ทำแทนลูกมากจนลูกไม่ได้ฝึก","น้อยใจเงียบๆ เวลาไม่มีใครเห็นค่า","ลืมความต้องการของตัวเองจนหมดพลัง"]},
+ 3:{name:"แม่นักผลักดัน",motto:"“ลูกทำได้ แม่รู้”",color:"#F2B035",
+    sum:"คุณมองเห็นศักยภาพในตัวลูกก่อนใคร และลงมือหาโอกาสให้เขาจริงๆ ลูกของคุณมักได้ลองอะไรมากกว่าเด็กคนอื่น และเติบโตมาพร้อมความเชื่อว่าตัวเองทำได้ — แต่เส้นแบ่งระหว่าง “ผลักดัน” กับ “กดดัน” นั้นบางมาก และคนที่รู้สึกก่อนคือลูก",
+    good:["เปิดโอกาสให้ลูกได้ลองเยอะ","สอนวิธีตั้งเป้าและไปให้ถึง","เป็นตัวอย่างของคนที่ลงมือทำ"],
+    watch:["เผลอเทียบลูกกับเด็กคนอื่น","ผูกคุณค่าของลูกไว้กับผลงาน","ลูกกลัวทำให้แม่ผิดหวังมากกว่ากลัวล้มเหลว"]},
+ 4:{name:"แม่ผู้เข้าใจหัวใจ",motto:"“ลูกไม่ต้องเหมือนใคร”",color:"#7B5EA7",
+    sum:"คุณให้พื้นที่กับความรู้สึกของลูกมากกว่ากฎ และเห็นความพิเศษในตัวเขาที่คนอื่นมองข้าม ลูกของคุณจึงกล้าเป็นตัวเอง — แต่ในวันที่อารมณ์คุณขึ้นลง ลูกก็รับรู้ได้ทั้งหมด และเด็กมักคิดว่าเป็นความผิดของเขา",
+    good:["ลูกได้รับอนุญาตให้รู้สึกทุกความรู้สึก","สนับสนุนความเป็นตัวเองของลูกเต็มที่","คุยเรื่องลึกๆ กับลูกได้ตั้งแต่เล็ก"],
+    watch:["อารมณ์ขึ้นลงจนลูกต้องคอยเดา","กฎในบ้านไม่คงเส้นคงวา","รู้สึกโดดเดี่ยวว่าไม่มีใครเลี้ยงลูกเหมือนเรา"]},
+ 5:{name:"แม่นักคิด",motto:"“เข้าใจก่อน แล้วค่อยทำ”",color:"#6E93B8",
+    sum:"คุณหาข้อมูลก่อนตัดสินใจเรื่องลูกเสมอ ใจเย็นเวลาคนอื่นตื่นตระหนก และอธิบายโลกให้ลูกฟังได้ดีมาก — แต่คุณต้องการพื้นที่ส่วนตัวเพื่อชาร์จพลัง และเวลาคุณถอยออกไป ลูกเล็กมักตีความว่าแม่ไม่อยากอยู่กับเขา",
+    good:["ตอบคำถามลูกได้ลึกและตรงไปตรงมา","ไม่ตื่นตระหนกเวลามีปัญหา","เคารพความคิดของลูกเหมือนผู้ใหญ่คนหนึ่ง"],
+    watch:["แสดงความรักออกมาเป็นคำพูดได้น้อย","ถอยไปอยู่คนเดียวโดยไม่บอกลูก","หมดพลังเร็วเมื่อเจอเสียงดังและความวุ่นวาย"]},
+ 6:{name:"แม่ผู้ปกป้อง",motto:"“ปลอดภัยไว้ก่อน”",color:"#5E8FA8",
+    sum:"คุณคิดล่วงหน้าเสมอว่ามีอะไรผิดพลาดได้บ้าง และนั่นทำให้ลูกของคุณเติบโตในบ้านที่มีคนคอยดูแลจริงๆ คุณคือคนที่ครอบครัวพึ่งได้ในวันแย่ๆ — แต่ความกังวลที่ส่งต่อโดยไม่รู้ตัว อาจกลายเป็นความกลัวที่ลูกแบกไปโดยไม่รู้ว่ามาจากไหน",
+    good:["ลูกรู้ว่ามีคนคอยระวังให้เสมอ","ซื่อสัตย์และอยู่เคียงข้างในวันที่แย่ที่สุด","เตรียมพร้อมรับมือปัญหาได้ดีมาก"],
+    watch:["ส่งต่อความกังวลให้ลูกโดยไม่ตั้งใจ","ห้ามไว้ก่อนจนลูกไม่ได้ลอง","ถามความเห็นคนอื่นจนลืมเชื่อสัญชาตญาณตัวเอง"]},
+ 7:{name:"แม่สายสนุก",motto:"“ชีวิตต้องมีเรื่องดีๆ”",color:"#EF8F5A",
+    sum:"บ้านของคุณมีเสียงหัวเราะเยอะ ลูกได้ลองอะไรใหม่ๆ ตลอด และโตมาเป็นคนมองโลกในแง่ดี — แต่เวลาลูกเศร้า คุณมักรีบพาเขาออกจากความรู้สึกนั้นเร็วเกินไป จนเขาไม่ได้เรียนรู้ว่าความเศร้าก็อยู่ด้วยกันได้",
+    good:["ลูกได้ประสบการณ์กว้างและกล้าลอง","บรรยากาศบ้านเบาสบาย","เปลี่ยนเรื่องน่าเบื่อให้สนุกได้"],
+    watch:["รีบปลอบจนลูกไม่ได้อยู่กับความรู้สึกตัวเอง","กิจวัตรไม่สม่ำเสมอ ลูกเล็กต้องการมากกว่านั้น","รับปากไว้เยอะกว่าที่ทำได้จริง"]},
+ 8:{name:"แม่ผู้คุ้มกัน",motto:"“ไม่มีใครแตะลูกฉันได้”",color:"#C05F5F",
+    sum:"คุณคือกำแพงที่ลูกยืนพิงได้ ใครทำอะไรลูก คุณลุกขึ้นสู้ทันที และคุณสอนให้ลูกยืนด้วยขาตัวเอง ไม่ยอมให้ใครเอาเปรียบ — แต่ความเด็ดขาดในน้ำเสียงของคุณ บางครั้งแรงกว่าที่ตั้งใจ และเด็กที่อ่อนไหวจะเงียบแทนที่จะเถียง",
+    good:["ลูกรู้ว่ามีคนสู้เพื่อเขาเสมอ","สอนให้กล้าและไม่ยอมถูกเอาเปรียบ","ตัดสินใจเร็วในสถานการณ์คับขัน"],
+    watch:["น้ำเสียงเด็ดขาดจนลูกไม่กล้าเถียง","ควบคุมมากจนลูกไม่ได้ตัดสินใจเอง","แสดงด้านอ่อนโยนให้ลูกเห็นน้อยเกินไป"]},
+ 9:{name:"แม่สายสงบ",motto:"“บ้านเราไม่ต้องมีเรื่อง”",color:"#9AB88A",
+    sum:"อยู่กับคุณแล้วสบายใจ คุณไม่ตัดสิน ไม่กดดัน และรับฟังลูกได้จริงๆ บ้านของคุณคือที่ที่ลูกได้พัก — แต่การเลี่ยงความขัดแย้งทำให้เรื่องที่ควรคุยถูกเลื่อนออกไปเรื่อยๆ และเด็กที่ไม่เคยเจอขอบเขต มักไม่รู้ว่าตัวเองยืนอยู่ตรงไหน",
+    good:["ลูกรู้สึกว่าถูกยอมรับอย่างที่เป็น","ใจเย็นมากเวลาลูกอาละวาด","เป็นที่พักใจของทุกคนในบ้าน"],
+    watch:["เลี่ยงการคุยเรื่องยากจนปัญหาสะสม","กฎยืดหยุ่นเกินจนลูกไม่รู้ขอบเขต","ไม่ค่อยบอกว่าตัวเองต้องการอะไร"]}
+};
+
+/* 36 statements, interleaved by type */
+const Q = [
+ [1,"ฉันรู้สึกไม่สบายใจถ้าบ้านรกหรือของไม่เข้าที่ ทั้งที่ลูกยังเล่นอยู่"],
+ [2,"ฉันจำได้ว่าใครในบ้านชอบอะไรไม่ชอบอะไร แม่นกว่าที่จำเรื่องของตัวเอง"],
+ [3,"ฉันภูมิใจมากเวลามีคนชมว่าลูกเก่งหรือเลี้ยงมาดี"],
+ [4,"มีบางอย่างในชีวิตครอบครัวที่ฉันรู้สึกว่ายังขาดไป แต่บอกไม่ถูกว่าคืออะไร"],
+ [5,"ก่อนตัดสินใจเรื่องลูก ฉันจะหาข้อมูลให้ครบก่อนเสมอ"],
+ [6,"ฉันคิดล่วงหน้าเสมอว่ามีอะไรเกิดขึ้นกับลูกได้บ้าง"],
+ [7,"บ้านเรามักมีเรื่องสนุกใหม่ๆ ให้ทำอยู่ตลอด"],
+ [8,"เวลาเกิดเรื่อง ฉันเป็นคนแรกที่ลงมือ ไม่ใช่คนที่รอดูก่อน"],
+ [9,"ฉันยอมตามลูกเพื่อไม่ให้เกิดการทะเลาะกัน"],
+ [1,"เวลาลูกทำผิด ฉันมักรีบอธิบายว่าสิ่งที่ถูกต้องคืออะไร"],
+ [2,"เวลาลูกทำอะไรเองได้แล้ว ฉันแอบใจหายที่เขาไม่ต้องการฉันเหมือนเดิม"],
+ [3,"ฉันหาคอร์สหรือกิจกรรมให้ลูกได้พัฒนาอยู่เรื่อยๆ"],
+ [4,"ฉันมองครอบครัวอื่นแล้วรู้สึกว่าเขาอบอุ่นกว่าหรือลงตัวกว่าของเรา"],
+ [5,"ฉันต้องมีเวลาอยู่เงียบๆ คนเดียว ถึงจะกลับมาเลี้ยงลูกไหว"],
+ [6,"ฉันเช็กความปลอดภัยซ้ำหลายรอบก่อนปล่อยให้ลูกทำอะไรเอง"],
+ [7,"ฉันเบื่อกิจวัตรซ้ำๆ และมักหาทางทำให้มันสนุกขึ้น"],
+ [8,"ถ้าลูกถูกทำไม่เป็นธรรม ฉันพร้อมเผชิญหน้ากับผู้ใหญ่คนนั้นทันที"],
+ [9,"ฉันไม่ค่อยได้บอกว่าตัวเองต้องการอะไรในบ้าน"],
+ [1,"ฉันตั้งกฎในบ้านไว้ชัดเจน และคาดหวังให้ทุกคนทำตาม"],
+ [2,"ฉันรู้สึกผิดเวลาปฏิเสธคำขอของลูก แม้จะเป็นเรื่องที่ควรปฏิเสธ"],
+ [3,"ฉันแอบเปรียบเทียบพัฒนาการของลูกกับเด็กคนอื่นในใจ"],
+ [4,"ความรู้สึกของฉันเปลี่ยนได้ในวันเดียว จากดีมากไปเป็นแย่มากโดยไม่มีเหตุชัดเจน"],
+ [5,"ฉันอธิบายเหตุผลให้ลูกฟังได้ดีกว่าการแสดงความรู้สึกออกมา"],
+ [6,"ฉันมักถามความเห็นคนที่ไว้ใจก่อนตัดสินใจเรื่องลูก"],
+ [7,"เวลาลูกเศร้า ฉันมักรีบเปลี่ยนเรื่องให้เขาอารมณ์ดีขึ้นเร็วๆ"],
+ [8,"คนอื่นมักบอกว่าน้ำเสียงฉันหนักแน่นกว่าที่ฉันตั้งใจ"],
+ [9,"ฉันมักผัดวันการคุยเรื่องยากๆ กับลูกออกไปเรื่อยๆ"],
+ [1,"ฉันรู้สึกผิดเวลาเลี้ยงลูกได้ไม่ดีเท่าที่ตั้งใจไว้"],
+ [2,"เวลามีคนเสนอจะช่วย ฉันมักบอกว่าไม่เป็นไร แล้วก็ทำเองอยู่ดี"],
+ [3,"ฉันอยากให้ลูกมีอะไรสักอย่างที่ทำได้โดดเด่นกว่าคนอื่น"],
+ [4,"เวลาลูกเศร้า ฉันอยู่กับความเศร้านั้นกับเขาได้นาน โดยไม่รีบทำให้มันหายไป"],
+ [5,"เสียงดังและความวุ่นวายในบ้านทำให้ฉันหมดพลังเร็วมาก"],
+ [6,"ฉันกังวลอยู่บ่อยๆ ว่าตัวเองจะเลี้ยงลูกผิดทาง"],
+ [7,"ฉันวางแผนเที่ยวหรือกิจกรรมไว้เยอะกว่าที่ทำได้จริง"],
+ [8,"ฉันไม่ค่อยให้ใครเห็นตอนที่ฉันอ่อนแอ แม้แต่คนในบ้าน"],
+ [9,"บรรยากาศที่สงบในบ้านสำคัญกับฉันมากที่สุด"]
+];
+
+const SCALE = [
+ [1,"ไม่ใช่ฉันเลย"],[2,"ไม่ค่อยใช่"],[3,"ก็มีบ้าง"],[4,"ค่อนข้างใช่"],[5,"ใช่เลย นี่แหละฉัน"]
+];
+
+/* ---------------- STATE ---------------- */
+let idx=0;
+const answers=new Array(Q.length).fill(null);
+const $=id=>document.getElementById(id);
+const LS_KEY="tjm_parent_enneagram_v1";
+
+/* ---------------- SAVE / RESTORE ---------------- */
+const CODE_RE=new RegExp("^[1-5]{"+Q.length+"}$");
+const encodeAns=()=>answers.join("");
+function decodeAns(s){
+  if(!s||!CODE_RE.test(s))return null;
+  return s.split("").map(Number);
+}
+function lsGet(){try{return localStorage.getItem(LS_KEY);}catch(e){return null;}}
+function lsSet(v){try{localStorage.setItem(LS_KEY,v);}catch(e){}}
+function lsClear(){try{localStorage.removeItem(LS_KEY);}catch(e){}}
+
+/* ---------------- QUIZ FLOW ---------------- */
+function show(sec){["cover","quiz","result"].forEach(s=>$(s).classList.toggle("hidden",s!==sec));}
+
+function render(){
+  const [type,text]=Q[idx];
+  $("qnum").textContent=String(idx+1).padStart(2,"0");
+  $("qtext").textContent=text;
+  $("counter").textContent=`ข้อ ${idx+1} / ${Q.length}`;
+  $("bar").style.width=((idx)/Q.length*100)+"%";
+  const box=$("opts");box.innerHTML="";
+  SCALE.forEach(([v,label])=>{
+    const b=document.createElement("button");
+    b.className="opt";b.dataset.v=v;b.type="button";
+    b.innerHTML=`<span class="dot"></span><span>${label}</span>`;
+    if(answers[idx]===v)b.style.borderColor="var(--grape)";
+    b.onclick=()=>{answers[idx]=v;next();};
+    box.appendChild(b);
+  });
+  $("backBtn").classList.toggle("hidden",idx===0);
+  window.scrollTo({top:0,behavior:"instant"});
+}
+function next(){ if(idx<Q.length-1){idx++;render();} else finish(); }
+
+$("startBtn").onclick=()=>{show("quiz");render();};
+$("backBtn").onclick=()=>{if(idx>0){idx--;render();}};
+$("againBtn").onclick=()=>{
+  idx=0;answers.fill(null);lsClear();
+  history.replaceState(null,"",location.pathname+location.search);
+  $("resumeRow").classList.add("hidden");
+  show("cover");window.scrollTo({top:0});
+};
+$("resumeBtn").onclick=()=>{
+  const a=decodeAns(lsGet());
+  if(a){a.forEach((v,i)=>answers[i]=v);finish();}
+};
+
+/* ---------------- SCORING ---------------- */
+function score(){
+  const s={};for(let t=1;t<=9;t++)s[t]=0;
+  Q.forEach(([t],i)=>{s[t]+=answers[i]||0;});
+  return s;
+}
+
+function finish(){
+  const s=score();
+  const ranked=Object.entries(s).map(([t,v])=>({t:+t,v})).sort((a,b)=>b.v-a.v);
+  const top=ranked[0].t, T=TYPES[top];
+
+  $("rTnum").textContent="Type "+top;
+  $("rName").textContent=T.name;
+  $("rMotto").textContent=T.motto;
+  $("rSummary").textContent=T.sum;
+  $("rBuyName").textContent=T.name;
+  $("rGood").innerHTML=T.good.map(x=>`<li>${x}</li>`).join("");
+  $("rWatch").innerHTML=T.watch.map(x=>`<li>${x}</li>`).join("");
+
+  /* ถ้าอันดับสองคะแนนใกล้กันมาก ให้บอกไปเลย ไม่งั้นคนจะเข้าใจว่าเป็นไทป์เดียวชัดเจน */
+  const gap = Math.round((ranked[0].v - ranked[1].v)/20*100);
+  const box = $("rClose");
+  if(gap <= 8){
+    const T2 = TYPES[ranked[1].t];
+    box.innerHTML = "คะแนนของคุณ<b>สูสีกันระหว่างสองแบบ</b> — " + T.name +
+      " กับ " + T2.name + " ต่างกันแค่ " + gap + "% " +
+      "แปลว่าคุณใช้ทั้งสองแบบสลับกันตามสถานการณ์ ลองอ่านจุดบอดของทั้งคู่ แล้วดูว่าอันไหนโดนกว่า";
+    box.classList.remove("hidden");
+  } else {
+    box.classList.add("hidden");
+  }
+  BUY_STATE.type   = top;
+  BUY_STATE.name   = T.name;
+  BUY_STATE.scores = s;
+
+  $("rRanks").innerHTML=ranked.map(r=>{
+    const pct=Math.round(r.v/20*100);
+    return `<div class="rrow"><b>${r.t}</b><span class="rname">${TYPES[r.t].name}</span>
+      <span class="rbar"><span style="width:${pct}%;background:${TYPES[r.t].color}"></span></span>
+      <span class="rpct">${pct}%</span></div>`;
+  }).join("");
+
+  drawFlower(s,top);
+
+  const code=encodeAns();
+  lsSet(code);
+  history.replaceState(null,"","#r="+code);
+  $("resultLink").value=location.href;
+
+  show("result");
+  window.scrollTo({top:0});
+}
+
+/* ---------------- สั่งซื้อ: ส่งผลไปหน้าชำระเงินบน Railway ---------------- */
+const READER_URL = "https://whoyouare-production.up.railway.app";
+const BUY_STATE = { type:null, name:"", scores:null };
+
+function buildProfile(){
+  const p = {};
+  if(BUY_STATE.type){
+    p.mom = { type: BUY_STATE.type, name: BUY_STATE.name };
+    if(BUY_STATE.scores) p.mom.scores = BUY_STATE.scores;
+  }
+  /* ผลแบบทดสอบชุดเดิมถ้ามีในเครื่องเดียวกัน */
+  try{
+    const all = JSON.parse(localStorage.getItem("ptx_results_v1") || "{}");
+    if(all.bigfive   && all.bigfive.scores)   p.bigfive   = all.bigfive.scores;
+    if(all.hexaco    && all.hexaco.scores)    p.hexaco    = all.hexaco.scores;
+    if(all.enneagram && all.enneagram.main){
+      p.enneagram = { type: all.enneagram.main };
+      if(all.enneagram.wing) p.enneagram.wing = all.enneagram.wing;
+    }
+  }catch(e){}
+  return p;
+}
+
+var BOUGHT_KEY = 'ptx_bought_v1';
+function markBought(book, edition){
+  try{
+    var b = {};
+    try{ b = JSON.parse(localStorage.getItem(BOUGHT_KEY) || '{}'); }catch(e){}
+    b[book + '/' + edition] = Date.now();
+    localStorage.setItem(BOUGHT_KEY, JSON.stringify(b));
+  }catch(e){}
+}
+function goBuy(book, edition){
+  markBought(book, edition);
+  const f = document.createElement('form');
+  f.method = 'POST';
+  f.action = READER_URL + '/buy';
+  [['book',book],['edition',edition],['profile',JSON.stringify(buildProfile())]]
+    .forEach(([k,v])=>{
+      const i=document.createElement('input');
+      i.type='hidden'; i.name=k; i.value=v; f.appendChild(i);
+    });
+  document.body.appendChild(f);
+  f.submit();
+}
+
+(function(){
+  const bind=(id,fn)=>{ const el=$(id); if(el) el.onclick=e=>{ e.preventDefault(); fn(); }; };
+  bind("buyBtn",     ()=>goBuy('mom', 'type' + BUY_STATE.type));
+  bind("buyPairBtn", ()=>goBuy('mom', 'pair'));
+  bind("buyAllBtn",  ()=>goBuy('mom', 'all'));
+})();
+
+/* ---------------- SHARE LINK ---------------- */
+function attachCopy(btnId,getText,label){
+  const b=$(btnId);
+  b.onclick=async()=>{
+    const txt=getText();
+    try{ await navigator.clipboard.writeText(txt); }
+    catch(err){
+      const t=document.createElement("textarea");
+      t.value=txt;t.style.position="fixed";t.style.opacity="0";
+      document.body.appendChild(t);t.select();
+      try{document.execCommand("copy");}catch(e2){}
+      document.body.removeChild(t);
+    }
+    b.textContent="คัดลอกแล้ว ✓";
+    setTimeout(()=>{b.textContent=label;},2000);
+  };
+}
+
+(function(){
+  const url=location.href.split("#")[0];
+  const msg="เราเป็นแม่ประเภทไหนกันนะ? ลองทำแบบทดสอบนี้ดู แล้วมาเทียบไทป์กัน "+url;
+  $("shareUrl").value=url;
+  $("lineShare").href="https://line.me/R/msg/text/?"+encodeURIComponent(msg);
+  $("shareUrl").onclick=e=>e.target.select();
+  $("resultLink").onclick=e=>e.target.select();
+  attachCopy("copyBtn",()=>url,"คัดลอกลิงก์");
+  attachCopy("keepBtn",()=>$("resultLink").value,"คัดลอก");
+})();
+
+/* ---------------- BOOT ---------------- */
+(function(){
+  const m=location.hash.match(/#r=([1-5]+)/);
+  const fromHash=m?decodeAns(m[1]):null;
+  if(fromHash){ fromHash.forEach((v,i)=>answers[i]=v); finish(); return; }
+  if(decodeAns(lsGet())) $("resumeRow").classList.remove("hidden");
+})();
+
+function drawFlower(s,top){
+  const svg=$("flower");svg.innerHTML="";
+  const ns="http://www.w3.org/2000/svg";
+  for(let t=1;t<=9;t++){
+    const ratio=Math.max(.28,(s[t]||0)/20);
+    const r=44+ratio*88, w=20+ratio*16;
+    const p=document.createElementNS(ns,"path");
+    p.setAttribute("d",`M0,0 C${w},${-r*.35} ${w*.85},${-r*.82} 0,${-r} C${-w*.85},${-r*.82} ${-w},${-r*.35} 0,0`);
+    p.setAttribute("transform",`rotate(${(t-1)*40})`);
+    p.setAttribute("fill",TYPES[t].color);
+    p.setAttribute("fill-opacity",t===top?".92":".42");
+    p.setAttribute("stroke",TYPES[t].color);
+    p.setAttribute("stroke-opacity",t===top?"1":".5");
+    p.setAttribute("stroke-width","2");
+    svg.appendChild(p);
+    const a=((t-1)*40-90)*Math.PI/180, lr=r+17;
+    const lb=document.createElementNS(ns,"text");
+    lb.setAttribute("x",Math.cos(a)*lr);lb.setAttribute("y",Math.sin(a)*lr+5);
+    lb.setAttribute("text-anchor","middle");
+    lb.setAttribute("font-family","Caveat, cursive");
+    lb.setAttribute("font-size",t===top?"26":"20");
+    lb.setAttribute("fill",t===top?TYPES[t].color:"#B9A392");
+    lb.textContent=t;
+    svg.appendChild(lb);
+  }
+  const c=document.createElementNS(ns,"circle");
+  c.setAttribute("r","23");c.setAttribute("fill","#FFF6EC");
+  c.setAttribute("stroke","#F4A6B0");c.setAttribute("stroke-width","3");
+  svg.appendChild(c);
+  const h=document.createElementNS(ns,"text");
+  h.setAttribute("text-anchor","middle");h.setAttribute("y","9");
+  h.setAttribute("font-size","24");h.setAttribute("fill","#F4A6B0");
+  h.textContent="♥";
+  svg.appendChild(h);
+}
+</script>
+</body>
+</html>

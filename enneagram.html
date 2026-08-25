@@ -186,10 +186,14 @@ p{line-height:1.75;}
 .navbar .sp{flex:1;}
 .navbar .nb.hide{display:none;}
 
-.qver{background:rgba(217,164,65,.13);border:1px solid rgba(217,164,65,.4);
-  border-radius:13px;padding:13px 15px;margin:0 0 16px;}
-.qver .qh{font-size:13.5px;font-weight:600;color:#F1EDE4;margin-bottom:5px;}
-.qver .qp{font-size:12.5px;color:#9DA3BD;line-height:1.7;}
+.histbox{background:rgba(255,255,255,.04);border:1px solid var(--line);
+  border-radius:14px;padding:15px 16px;margin-top:22px;}
+.histbox .hh{font-size:14px;font-weight:600;color:var(--paper);margin-bottom:5px;}
+.histbox .hp{font-size:12.5px;color:var(--dim);line-height:1.7;margin-bottom:11px;}
+.histbox .hrow{display:flex;justify-content:space-between;gap:12px;
+  padding:8px 0;border-top:1px solid var(--line);font-size:13px;}
+.histbox .hrow span{color:var(--dim);font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+.histbox .hrow b{color:var(--paper);}
 </style>
 </head>
 <body>
@@ -360,6 +364,7 @@ function goBuy(book, edition){
 }
 
 function saveResult(res){
+  pushHistory(res);
   const all = loadAll();
   all[TEST_ID] = Object.assign({ savedAt: new Date().toISOString(), name: TEST_NAME, v: ITEMS_VERSION }, res);
   saveAll(all);
@@ -486,6 +491,7 @@ function finish(){
   clearDraft();
   renderResult(payload);
   show('s-result');
+  try{ renderHistory(); }catch(e){}
 }
 
 /* ---------- results ---------- */
@@ -834,24 +840,77 @@ function renderSell(doneCount){
   el.innerHTML = h;
 }
 
-/* ---------- เลขรุ่นข้อคำถาม ----------
-   ถ้าผลที่เก็บไว้มาจากข้อคำถามรุ่นก่อน คะแนนจะเทียบกับรุ่นนี้ไม่ได้
-   ไม่ลบผลเก่าให้ แต่บอกให้รู้ว่าควรทำใหม่ */
+
+/* ---------- ประวัติผล ----------
+   ระบบเก็บผลล่าสุดไว้ที่เดียว ทำใหม่แล้วผลเก่าถูกทับ
+   จึงเก็บย้อนหลังไว้แยกเพื่อให้เทียบได้ว่าครั้งก่อนได้อะไร */
 const ITEMS_VERSION = 2;
-(function(){
-  var r = null;
-  try{ r = loadAll()[TEST_ID]; }catch(e){}
-  if(!r) return;
-  if(r.v === ITEMS_VERSION) return;
-  var host = document.querySelector('.screen.active') || document.querySelector('.wrap') || document.body;
+const HIST_KEY = 'ptx_history_v1';
+
+function pushHistory(res){
+  try{
+    var h = {};
+    try{ h = JSON.parse(localStorage.getItem(HIST_KEY) || '{}'); }catch(e){}
+    var list = h[TEST_ID] || [];
+    list.push({
+      at: Date.now(),
+      v: ITEMS_VERSION,
+      main: res.main || null,
+      wing: res.wing || null,
+      code: res.code || null,
+      scores: res.scores || null
+    });
+    if(list.length > 10) list = list.slice(-10);
+    h[TEST_ID] = list;
+    localStorage.setItem(HIST_KEY, JSON.stringify(h));
+  }catch(e){}
+}
+
+function historyList(){
+  try{
+    var h = JSON.parse(localStorage.getItem(HIST_KEY) || '{}');
+    return h[TEST_ID] || [];
+  }catch(e){ return []; }
+}
+
+function labelOf(r){
+  if(r.main) return 'Type ' + r.main + (r.wing ? 'w' + r.wing : '');
+  if(r.code) return r.code;
+  if(r.scores){
+    var ks = Object.keys(r.scores);
+    var top = ks.sort(function(a,b){ return r.scores[b]-r.scores[a]; })[0];
+    return 'เด่นที่ ' + top + ' (' + r.scores[top] + ')';
+  }
+  return 'ไม่มีข้อมูล';
+}
+
+function thaiDate(t){
+  var d = new Date(t);
+  var M = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  return d.getDate() + ' ' + M[d.getMonth()] + ' ' + (d.getFullYear() + 543 - 2500) +
+         ' ' + ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+}
+
+function renderHistory(){
+  var list = historyList();
+  if(list.length < 2) return;
+  var host = document.getElementById('s-result') || document.getElementById('result');
   if(!host) return;
+  var old = document.getElementById('histBox');
+  if(old) old.remove();
+  var prev = list.slice(0, -1).reverse().slice(0, 4);
+  var rows = prev.map(function(r){
+    return '<div class="hrow"><span>' + thaiDate(r.at) + '</span><b>' + labelOf(r) + '</b></div>';
+  }).join('');
   var d = document.createElement('div');
-  d.className = 'qver';
-  d.innerHTML = '<div class="qh">แบบทดสอบชุดนี้ปรับข้อคำถามแล้ว</div>' +
-    '<div class="qp">ผลที่คุณเก็บไว้มาจากข้อคำถามชุดก่อน บางข้อเคยถามสองเรื่องในประโยคเดียวจนตอบได้ไม่ตรง ' +
-    'ผลเดิมยังอยู่ ไม่ได้ถูกลบ แต่ถ้าอยากได้ผลที่แม่นกว่า แนะนำให้ทำใหม่อีกครั้ง</div>';
-  host.insertBefore(d, host.firstChild);
-})();
+  d.id = 'histBox';
+  d.className = 'histbox';
+  d.innerHTML = '<div class="hh">ครั้งก่อนคุณได้อะไร</div>' +
+    '<div class="hp">ผลแต่ละครั้งอาจต่างกันได้ถ้าคะแนนหลายด้านใกล้เคียงกัน ' +
+    'ถ้าได้ผลเดิมซ้ำหลายครั้งแปลว่าชัดจริง</div>' + rows;
+  host.appendChild(d);
+}
+
 </script>
 </body>
 </html>
