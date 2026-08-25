@@ -456,7 +456,7 @@ const Q = [
  [5,"ฉันต้องมีเวลาอยู่เงียบๆ คนเดียว ถึงจะกลับมาเลี้ยงลูกไหว"],
  [6,"ฉันเช็กความปลอดภัยซ้ำหลายรอบก่อนปล่อยให้ลูกทำอะไรเอง"],
  [7,"ฉันเบื่อกิจวัตรซ้ำๆ และมักหาทางทำให้มันสนุกขึ้น"],
- [8,"ถ้าต้องเถียงกับครูหรือผู้ใหญ่คนอื่นเพื่อลูก ฉันทำได้โดยไม่ลังเล"],
+ [8,"ถ้าลูกถูกทำไม่เป็นธรรม ฉันพร้อมเผชิญหน้ากับผู้ใหญ่คนนั้นทันที"],
  [9,"ฉันไม่ค่อยได้บอกว่าตัวเองต้องการอะไรในบ้าน"],
  [1,"ฉันตั้งกฎในบ้านไว้ชัดเจน และคาดหวังให้ทุกคนทำตาม"],
  [2,"ฉันรู้สึกผิดเวลาปฏิเสธคำขอของลูก แม้จะเป็นเรื่องที่ควรปฏิเสธ"],
@@ -612,7 +612,17 @@ function buildProfile(){
   return p;
 }
 
+var BOUGHT_KEY = 'ptx_bought_v1';
+function markBought(book, edition){
+  try{
+    var b = {};
+    try{ b = JSON.parse(localStorage.getItem(BOUGHT_KEY) || '{}'); }catch(e){}
+    b[book + '/' + edition] = Date.now();
+    localStorage.setItem(BOUGHT_KEY, JSON.stringify(b));
+  }catch(e){}
+}
 function goBuy(book, edition){
+  markBought(book, edition);
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = READER_URL + '/buy';

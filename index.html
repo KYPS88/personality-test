@@ -74,6 +74,8 @@ body{
 .sidefoot{border-top:1px solid var(--line);padding:10px;}
 .nav.shop{background:linear-gradient(135deg,rgba(217,164,65,.16),rgba(185,140,206,.10));border-color:rgba(217,164,65,.34);}
 .nav.shop.on{background:linear-gradient(135deg,rgba(217,164,65,.3),rgba(185,140,206,.18));}
+.nav.read{background:rgba(62,142,126,.12);border-color:rgba(62,142,126,.34);margin-top:5px;}
+.nav.read:hover{background:rgba(62,142,126,.2);}
 .sidefoot .tiny{font-size:10.5px;color:#6E7699;text-align:center;padding:8px 4px 2px;line-height:1.6;}
 
 /* ---------- main ---------- */
@@ -101,6 +103,48 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
 }
 .loading.show{opacity:1;}
 
+.fbmodal{display:none;position:fixed;inset:0;z-index:90;
+  background:rgba(6,9,20,.82);padding:20px;overflow-y:auto;}
+.fbmodal.show{display:flex;align-items:center;justify-content:center;}
+.fbmodal .box{background:#1E2648;border:1px solid rgba(217,164,65,.34);
+  border-radius:18px;max-width:420px;width:100%;padding:22px 20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.fbmodal .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+.fbmodal h2{font-family:'Noto Serif Thai',serif;font-size:19px;margin:0 0 10px;line-height:1.4;}
+.fbmodal p{font-size:13.5px;color:var(--dim);line-height:1.8;margin:0 0 14px;}
+.fbmodal ol{margin:0 0 16px;padding-left:20px;}
+.fbmodal li{font-size:13.5px;color:#C8CBDA;line-height:1.9;margin-bottom:4px;}
+.fbmodal li b{color:var(--paper);}
+.fbmodal .urlbox{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:10px;
+  padding:11px 12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  color:#9FD8C8;word-break:break-all;line-height:1.6;margin-bottom:14px;
+  -webkit-user-select:all;user-select:all;}
+.fbmodal .cp{display:block;width:100%;border:0;border-radius:11px;padding:13px;
+  background:linear-gradient(135deg,#D9A441,#E9BC63);color:#231803;
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+.fbmodal .cp.done{background:rgba(62,142,126,.9);color:#F1EDE4;}
+.fbmodal .skip{display:block;width:100%;margin-top:9px;border:0;background:transparent;
+  color:#6E7699;font-family:'IBM Plex Sans Thai',sans-serif;font-size:12.5px;
+  cursor:pointer;padding:8px;}
+.inapp{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:#2A2140;border-top:1px solid rgba(217,164,65,.4);
+  box-shadow:0 -8px 30px rgba(0,0,0,.45);}
+.inapp.show{display:block;}
+.inapp .ib{max-width:680px;margin:0 auto;padding:13px 14px;
+  display:flex;gap:11px;align-items:center;}
+.inapp .ic{flex:1;min-width:0;}
+.inapp .ih{font-size:13.5px;font-weight:600;color:var(--paper);margin-bottom:3px;}
+.inapp .ip{font-size:11.5px;color:var(--dim);line-height:1.6;}
+.inapp .ibtn{flex-shrink:0;border:0;border-radius:10px;padding:10px 14px;
+  background:linear-gradient(135deg,#D9A441,#E9BC63);color:#231803;
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.inapp .ix{flex-shrink:0;border:0;background:transparent;color:#6E7699;
+  font-size:15px;cursor:pointer;padding:6px 2px;}
+@media (max-width:520px){
+  .inapp .ib{flex-wrap:wrap;}
+  .inapp .ibtn{width:100%;order:3;}
+}
 .scrim{display:none;position:fixed;inset:0;background:rgba(6,9,20,.62);z-index:35;}
 
 /* ---------- mobile ---------- */
@@ -119,6 +163,33 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
 <body>
 
 <div class="scrim" id="scrim"></div>
+
+<div class="fbmodal" id="fbModal">
+  <div class="box">
+    <div class="tag">ก่อนเริ่มทำ</div>
+    <h2 id="fbTitle">เปิดในเบราว์เซอร์ก่อนนะ</h2>
+    <p id="fbMsg">ตอนนี้คุณเปิดอยู่ในแอป Facebook ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และมักหายเมื่อแอปล้างข้อมูล ทำให้ต้องเริ่มทำใหม่ทั้งหมด</p>
+    <ol>
+      <li>กดปุ่ม <b>คัดลอกลิงก์</b> ด้านล่าง</li>
+      <li>เปิดแอป <b>Safari</b> หรือ <b>Chrome</b></li>
+      <li>วางลิงก์ในช่องที่อยู่เว็บ แล้วกดไป</li>
+    </ol>
+    <div class="urlbox" id="fbUrl"></div>
+    <button class="cp" id="fbCopy">คัดลอกลิงก์</button>
+    <button class="skip" id="fbSkip">ทำต่อในแอปนี้เลย · ผลอาจหายได้</button>
+  </div>
+</div>
+
+<div class="inapp" id="inappBar">
+  <div class="ib">
+    <div class="ic">
+      <div class="ih" id="inappTitle">คุณกำลังเปิดในแอป</div>
+      <div class="ip" id="inappMsg">ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และอาจหายเมื่อแอปล้างข้อมูล เปิดในเบราว์เซอร์จะเก็บไว้ได้นานกว่า</div>
+    </div>
+    <button class="ibtn" id="inappGo">เปิดในเบราว์เซอร์</button>
+    <button class="ix" id="inappClose" aria-label="ปิด">✕</button>
+  </div>
+</div>
 
 <div class="shell">
 
@@ -147,6 +218,14 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
         <div class="txt">
           <div class="a">ร้านคู่มือ</div>
           <div class="b">ทุกเล่ม ทุกราคา</div>
+        </div>
+        <div class="st new">›</div>
+      </a>
+      <a class="nav read" href="https://whoyouare-production.up.railway.app" target="_blank" rel="noopener">
+        <div class="dot" style="background:#3E8E7E">↗</div>
+        <div class="txt">
+          <div class="a">เข้าอ่านคู่มือ</div>
+          <div class="b">มีรหัสแล้วกดตรงนี้</div>
         </div>
         <div class="st new">›</div>
       </a>
@@ -373,6 +452,112 @@ window.addEventListener('hashchange', function(){
   if(r.k !== current) go(r.k, r.inner);
 });
 window.addEventListener('pageshow', renderNav);
+
+/* ---------- เปิดในแอปหรือเปล่า และเครื่องนี้บันทึกได้ไหม ---------- */
+(function(){
+  var ua = navigator.userAgent || '';
+  var isLine = /\bLine\//i.test(ua);
+  var isFB   = /FBAN|FBAV|FB_IAB|FBIOS|Instagram/i.test(ua);
+  var inApp  = isLine || isFB;
+
+  /* เครื่องนี้เขียนข้อมูลลงเบราว์เซอร์ได้จริงไหม */
+  var canSave = true;
+  try{
+    localStorage.setItem('__ptx_test', '1');
+    localStorage.removeItem('__ptx_test');
+  }catch(e){ canSave = false; }
+
+  var bar = document.getElementById('inappBar');
+  if(!bar) return;
+  var closed = false;
+  try{ closed = sessionStorage.getItem('ptx_inapp_closed') === '1'; }catch(e){}
+
+  if(!canSave){
+    /* หนักกว่า in-app ธรรมดา — ทำแล้วผลหายแน่นอน ปิดไม่ได้ */
+    document.getElementById('inappTitle').textContent = 'เครื่องนี้บันทึกผลไม่ได้';
+    document.getElementById('inappMsg').textContent =
+      'อาจเปิดอยู่ในโหมดส่วนตัวหรือแอปปิดการเก็บข้อมูลไว้ ทำแบบทดสอบได้แต่ผลจะหายทันทีที่ปิดหน้า แนะนำให้เปิดในเบราว์เซอร์ปกติก่อน';
+    document.getElementById('inappClose').style.display = 'none';
+    bar.classList.add('show');
+  }else if(isLine && !closed){
+    /* LINE แก้ได้ด้วยปุ่มเดียว ใช้แถบล่างพอ ไม่ต้องขวางทาง */
+    document.getElementById('inappMsg').textContent =
+      'ผลแบบทดสอบจะถูกเก็บไว้ในแอป LINE เท่านั้น เปิดในเบราว์เซอร์จะเก็บไว้ได้นานกว่า และกลับมาทำต่อได้';
+    bar.classList.add('show');
+  }else if(isFB && !closed){
+    /* Facebook กับ Instagram ไม่มีทางเด้งออกอัตโนมัติ ต้องให้ผู้ใช้ทำเอง
+       จึงใช้กล่องกลางจอเพื่อให้เห็นชัดก่อนเสียเวลาทำ 60 ข้อ */
+    var fm  = document.getElementById('fbModal');
+    var ig  = /Instagram/i.test(ua);
+    if(ig){
+      document.getElementById('fbMsg').textContent =
+        'ตอนนี้คุณเปิดอยู่ในแอป Instagram ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และมักหายเมื่อแอปล้างข้อมูล ทำให้ต้องเริ่มทำใหม่ทั้งหมด';
+    }
+    var link = location.href.split('#')[0];
+    document.getElementById('fbUrl').textContent = link;
+    fm.classList.add('show');
+
+    document.getElementById('fbCopy').onclick = function(){
+      var btn = this;
+      function done(){
+        btn.textContent = 'คัดลอกแล้ว · ไปวางใน Safari หรือ Chrome ได้เลย';
+        btn.classList.add('done');
+      }
+      function manual(){
+        btn.textContent = 'กดค้างที่ลิงก์ด้านบนเพื่อคัดลอก';
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(link).then(done, function(){ fallback(); });
+      }else{ fallback(); }
+      function fallback(){
+        try{
+          var ta = document.createElement('textarea');
+          ta.value = link;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, link.length);
+          var ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          ok ? done() : manual();
+        }catch(e){ manual(); }
+      }
+    };
+
+    document.getElementById('fbSkip').onclick = function(){
+      fm.classList.remove('show');
+      try{ sessionStorage.setItem('ptx_inapp_closed', '1'); }catch(e){}
+      document.getElementById('inappMsg').textContent =
+        'ผลอาจหายเมื่อแอปล้างข้อมูล ถ้าทำครบแล้วยังไม่ได้ซื้อ แนะนำให้เปิดในเบราว์เซอร์อีกครั้ง';
+      bar.classList.add('show');
+    };
+  }
+
+  document.getElementById('inappClose').onclick = function(){
+    bar.classList.remove('show');
+    try{ sessionStorage.setItem('ptx_inapp_closed', '1'); }catch(e){}
+  };
+
+  document.getElementById('inappGo').onclick = function(){
+    var url = location.href.split('#')[0];
+    if(isLine){
+      /* LINE รู้จักพารามิเตอร์นี้ จะเด้งไปเปิดเบราว์เซอร์จริงให้ */
+      location.href = url + (url.indexOf('?') > -1 ? '&' : '?') + 'openExternalBrowser=1';
+      return;
+    }
+    var full = location.href;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(full).then(function(){
+        alert('คัดลอกลิงก์แล้ว\n\nเปิดเบราว์เซอร์ Safari หรือ Chrome แล้ววางลิงก์นี้\nหรือกดปุ่มสามจุดมุมขวาบนของแอป แล้วเลือกเปิดในเบราว์เซอร์');
+      }, function(){
+        alert('กดปุ่มสามจุดมุมขวาบนของแอป แล้วเลือกเปิดในเบราว์เซอร์');
+      });
+    }else{
+      alert('กดปุ่มสามจุดมุมขวาบนของแอป แล้วเลือกเปิดในเบราว์เซอร์');
+    }
+  };
+})();
 
 /* ---------- เริ่มทำงาน ---------- */
 (function(){

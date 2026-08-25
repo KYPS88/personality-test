@@ -159,6 +159,11 @@ a{color:var(--accent2);}
 .navbar .nb.home{color:#D9A441;border-color:rgba(217,164,65,.35);background:rgba(217,164,65,.09);}
 .navbar .sp{flex:1;}
 .navbar .nb.hide{display:none;}
+
+.qver{background:rgba(217,164,65,.13);border:1px solid rgba(217,164,65,.4);
+  border-radius:13px;padding:13px 15px;margin:0 0 16px;}
+.qver .qh{font-size:13.5px;font-weight:600;color:#F1EDE4;margin-bottom:5px;}
+.qver .qp{font-size:12.5px;color:#9DA3BD;line-height:1.7;}
 </style>
 </head>
 <body>
@@ -406,7 +411,7 @@ const ITEMS = [
 {ax:'TF',k:1, t:'ในการถกเถียง ฉันสนใจว่าใครมีเหตุผลหนักแน่นกว่า มากกว่าใครเสียความรู้สึก'},
 {ax:'TF',k:-1,t:'ฉันมักเป็นคนที่คนอื่นเลือกมาเล่าเรื่องหนักใจให้ฟัง'},
 {ax:'TF',k:1, t:'ฉันถอยออกมามองปัญหาของคนแบบไม่เอาอารมณ์เข้าไปปนได้ไม่ยาก'},
-{ax:'TF',k:-1,t:'ฉันรู้สึกไม่สบายใจไปด้วยเวลาเห็นคนรอบตัวทะเลาะกัน'},
+{ax:'TF',k:-1,t:'เวลามีคนไม่ถูกกัน ฉันอดไม่ได้ที่จะเข้าไปช่วยให้เรื่องจบ'},
 {ax:'TF',k:1, t:'กฎควรใช้เหมือนกันกับทุกคน แม้บางกรณีจะดูใจร้าย'},
 {ax:'TF',k:-1,t:'ฉันเลือกคำพูดอย่างระวังเพื่อไม่ให้ใครเสียความรู้สึก'},
 {ax:'TF',k:1, t:'คำติที่ตรงไปตรงมามีค่ากับฉันมากกว่าคำปลอบใจ'},
@@ -420,9 +425,9 @@ const ITEMS = [
 {ax:'JP',k:1, t:'ฉันอึดอัดเวลามีงานค้างที่ยังไม่ได้สะสาง'},
 {ax:'JP',k:-1,t:'ฉันทำงานออกมาดีเวลาปล่อยให้ไหลไปตามจังหวะของวันนั้น'},
 {ax:'JP',k:1, t:'ฉันชอบรู้ล่วงหน้าว่าพรุ่งนี้จะมีอะไรเกิดขึ้นบ้าง'},
-{ax:'JP',k:-1,t:'ฉันมักมีหลายอย่างทำค้างไว้พร้อมกัน'},
+{ax:'JP',k:-1,t:'ฉันสบายใจกับการปล่อยงานค้างไว้ก่อน ค่อยกลับมาทำ'},
 {ax:'JP',k:1, t:'ฉันมักไปถึงก่อนเวลานัด'},
-{ax:'JP',k:-1,t:'ฉันตัดสินใจเรื่องเล็กๆ ช้ากว่าคนอื่น เพราะอยากดูตัวเลือกให้ครบก่อน'},
+{ax:'JP',k:-1,t:'ฉันชอบเก็บตัวเลือกไว้หลายทางก่อนตัดสินใจ'},
 {ax:'JP',k:1, t:'เมื่อเริ่มอะไรแล้ว ฉันอยากทำให้จบก่อนไปเริ่มอย่างอื่น'},
 {ax:'JP',k:-1,t:'ตารางที่แน่นเกินไปทำให้ฉันรู้สึกอึดอัด'},
 {ax:'JP',k:1, t:'ฉันตั้งเส้นตายให้ตัวเองแม้ไม่มีใครกำหนดให้'}
@@ -482,7 +487,7 @@ function loadAll(){ try{ const r=localStorage.getItem(KEY); return r?JSON.parse(
 function saveAll(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){ mem.data=o; } }
 function saveResult(res){
   const all = loadAll();
-  all[TEST_ID] = Object.assign({savedAt:new Date().toISOString(), name:TEST_NAME}, res);
+  all[TEST_ID] = Object.assign({savedAt:new Date().toISOString(), name:TEST_NAME, v: ITEMS_VERSION}, res);
   saveAll(all);
 }
 const DRAFT = 'ptx_draft_' + TEST_ID;
@@ -663,9 +668,19 @@ function buildProfile(){
   if(all.sixteen && all.sixteen.code) p.sixteen = {code: all.sixteen.code, pct: all.sixteen.pct};
   return p;
 }
+var BOUGHT_KEY = 'ptx_bought_v1';
+function markBought(book, edition){
+  try{
+    var b = {};
+    try{ b = JSON.parse(localStorage.getItem(BOUGHT_KEY) || '{}'); }catch(e){}
+    b[book + '/' + edition] = Date.now();
+    localStorage.setItem(BOUGHT_KEY, JSON.stringify(b));
+  }catch(e){}
+}
 function goBuy(planKey, btn){
   const plan = PLANS[planKey];
   if(!plan) return;
+  markBought(plan.book, plan.edition);
   if(btn){
     btn.disabled = true;
     const cta = btn.querySelector('.cta');
@@ -732,6 +747,25 @@ $('againBtn').addEventListener('click', ()=>{
       });
     }
   }
+})();
+
+/* ---------- เลขรุ่นข้อคำถาม ----------
+   ถ้าผลที่เก็บไว้มาจากข้อคำถามรุ่นก่อน คะแนนจะเทียบกับรุ่นนี้ไม่ได้
+   ไม่ลบผลเก่าให้ แต่บอกให้รู้ว่าควรทำใหม่ */
+const ITEMS_VERSION = 2;
+(function(){
+  var r = null;
+  try{ r = loadAll()[TEST_ID]; }catch(e){}
+  if(!r) return;
+  if(r.v === ITEMS_VERSION) return;
+  var host = document.querySelector('.screen.active') || document.querySelector('.wrap') || document.body;
+  if(!host) return;
+  var d = document.createElement('div');
+  d.className = 'qver';
+  d.innerHTML = '<div class="qh">แบบทดสอบชุดนี้ปรับข้อคำถามแล้ว</div>' +
+    '<div class="qp">ผลที่คุณเก็บไว้มาจากข้อคำถามชุดก่อน บางข้อเคยถามสองเรื่องในประโยคเดียวจนตอบได้ไม่ตรง ' +
+    'ผลเดิมยังอยู่ ไม่ได้ถูกลบ แต่ถ้าอยากได้ผลที่แม่นกว่า แนะนำให้ทำใหม่อีกครั้ง</div>';
+  host.insertBefore(d, host.firstChild);
 })();
 </script>
 </body>
