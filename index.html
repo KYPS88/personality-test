@@ -116,10 +116,12 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
 .fbmodal ol{margin:0 0 16px;padding-left:20px;}
 .fbmodal li{font-size:13.5px;color:#C8CBDA;line-height:1.9;margin-bottom:4px;}
 .fbmodal li b{color:var(--paper);}
-.fbmodal .urlbox{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:10px;
-  padding:11px 12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
-  color:#9FD8C8;word-break:break-all;line-height:1.6;margin-bottom:14px;
-  -webkit-user-select:all;user-select:all;}
+.fbmodal .howbox{background:rgba(62,142,126,.12);border:1px solid rgba(62,142,126,.36);
+  border-radius:12px;padding:14px 15px;margin-bottom:16px;}
+.fbmodal .howbox .hb{font-size:13.5px;font-weight:600;color:#9FD8C8;margin-bottom:9px;}
+.fbmodal .howbox ol{margin:0 0 9px;padding-left:20px;}
+.fbmodal .howbox li{font-size:13.5px;line-height:1.9;color:#C8CBDA;margin-bottom:2px;}
+.fbmodal .howbox .hn{font-size:12px;color:var(--dim);line-height:1.7;}
 .fbmodal .cp{display:block;width:100%;border:0;border-radius:11px;padding:13px;
   background:linear-gradient(135deg,#D9A441,#E9BC63);color:#231803;
   font-family:'IBM Plex Sans Thai',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
@@ -166,17 +168,18 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
 
 <div class="fbmodal" id="fbModal">
   <div class="box">
-    <div class="tag">ก่อนเริ่มทำ</div>
-    <h2 id="fbTitle">เปิดในเบราว์เซอร์ก่อนนะ</h2>
-    <p id="fbMsg">ตอนนี้คุณเปิดอยู่ในแอป Facebook ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และมักหายเมื่อแอปล้างข้อมูล ทำให้ต้องเริ่มทำใหม่ทั้งหมด</p>
-    <ol>
-      <li>กดปุ่ม <b>คัดลอกลิงก์</b> ด้านล่าง</li>
-      <li>เปิดแอป <b>Safari</b> หรือ <b>Chrome</b></li>
-      <li>วางลิงก์ในช่องที่อยู่เว็บ แล้วกดไป</li>
-    </ol>
-    <div class="urlbox" id="fbUrl"></div>
-    <button class="cp" id="fbCopy">คัดลอกลิงก์</button>
-    <button class="skip" id="fbSkip">ทำต่อในแอปนี้เลย · ผลอาจหายได้</button>
+    <div class="tag">อ่านก่อนสักนิด</div>
+    <h2 id="fbTitle">ทำได้เลย แต่ผลจะไม่ถูกเก็บไว้</h2>
+    <p id="fbMsg">ตอนนี้คุณเปิดหน้านี้อยู่ในแอป Facebook ทำแบบทดสอบได้ตามปกติทุกอย่าง เพียงแต่ผลที่ได้จะอยู่แค่ในแอปนี้ พอปิดแอปไปมักหายไปด้วย ทำให้กลับมาดูผลเดิมหรือทำชุดต่อไปให้ครบไม่ได้</p>
+    <div class="howbox">
+      <div class="hb">อยากให้ผลถูกเก็บไว้ ทำแบบนี้</div>
+      <ol>
+        <li>กดปุ่ม <b>จุดสามจุด</b> มุมขวาบนของหน้าจอ</li>
+        <li>เลือก <b>เปิดในเบราว์เซอร์</b> หรือ <b>Open in Safari</b></li>
+      </ol>
+      <div class="hn">หน้าเดิมจะเปิดใน Safari หรือ Chrome ให้อัตโนมัติ ไม่ต้องพิมพ์อะไรเพิ่ม</div>
+    </div>
+    <button class="cp" id="fbSkip">เข้าใจแล้ว ทำต่อเลย</button>
   </div>
 </div>
 
@@ -493,44 +496,11 @@ window.addEventListener('pageshow', renderNav);
       document.getElementById('fbMsg').textContent =
         'ตอนนี้คุณเปิดอยู่ในแอป Instagram ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และมักหายเมื่อแอปล้างข้อมูล ทำให้ต้องเริ่มทำใหม่ทั้งหมด';
     }
-    var link = location.href.split('#')[0];
-    document.getElementById('fbUrl').textContent = link;
     fm.classList.add('show');
-
-    document.getElementById('fbCopy').onclick = function(){
-      var btn = this;
-      function done(){
-        btn.textContent = 'คัดลอกแล้ว · ไปวางใน Safari หรือ Chrome ได้เลย';
-        btn.classList.add('done');
-      }
-      function manual(){
-        btn.textContent = 'กดค้างที่ลิงก์ด้านบนเพื่อคัดลอก';
-      }
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(link).then(done, function(){ fallback(); });
-      }else{ fallback(); }
-      function fallback(){
-        try{
-          var ta = document.createElement('textarea');
-          ta.value = link;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          ta.setSelectionRange(0, link.length);
-          var ok = document.execCommand('copy');
-          document.body.removeChild(ta);
-          ok ? done() : manual();
-        }catch(e){ manual(); }
-      }
-    };
 
     document.getElementById('fbSkip').onclick = function(){
       fm.classList.remove('show');
       try{ sessionStorage.setItem('ptx_inapp_closed', '1'); }catch(e){}
-      document.getElementById('inappMsg').textContent =
-        'ผลอาจหายเมื่อแอปล้างข้อมูล ถ้าทำครบแล้วยังไม่ได้ซื้อ แนะนำให้เปิดในเบราว์เซอร์อีกครั้ง';
-      bar.classList.add('show');
     };
   }
 
@@ -546,6 +516,8 @@ window.addEventListener('pageshow', renderNav);
       location.href = url + (url.indexOf('?') > -1 ? '&' : '?') + 'openExternalBrowser=1';
       return;
     }
+    alert('กดปุ่มจุดสามจุดมุมขวาบนของหน้าจอ แล้วเลือกเปิดในเบราว์เซอร์');
+    return;
     var full = location.href;
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(full).then(function(){
