@@ -170,7 +170,7 @@ iframe#view{width:100%;height:100%;border:0;display:block;background:var(--ink);
   <div class="box">
     <div class="tag">อ่านก่อนสักนิด</div>
     <h2 id="fbTitle">ทำได้เลย แต่ผลจะไม่ถูกเก็บไว้</h2>
-    <p id="fbMsg">ตอนนี้คุณเปิดหน้านี้อยู่ในแอป Facebook ทำแบบทดสอบได้ตามปกติทุกอย่าง เพียงแต่ผลที่ได้จะอยู่แค่ในแอปนี้ พอปิดแอปไปมักหายไปด้วย ทำให้กลับมาดูผลเดิมหรือทำชุดต่อไปให้ครบไม่ได้</p>
+    <p id="fbMsg">ตอนนี้คุณเปิดหน้านี้อยู่ในแอป Facebook หากไม่ต้องการเก็บผลลัพธ์ไว้ สามารถทำแบบทดสอบต่อได้เลย</p>
     <div class="howbox">
       <div class="hb">อยากให้ผลถูกเก็บไว้ ทำแบบนี้</div>
       <ol>
@@ -494,7 +494,7 @@ window.addEventListener('pageshow', renderNav);
     var ig  = /Instagram/i.test(ua);
     if(ig){
       document.getElementById('fbMsg').textContent =
-        'ตอนนี้คุณเปิดอยู่ในแอป Instagram ผลแบบทดสอบจะถูกเก็บไว้ในแอปนี้เท่านั้น และมักหายเมื่อแอปล้างข้อมูล ทำให้ต้องเริ่มทำใหม่ทั้งหมด';
+        'ตอนนี้คุณเปิดหน้านี้อยู่ในแอป Instagram หากไม่ต้องการเก็บผลลัพธ์ไว้ สามารถทำแบบทดสอบต่อได้เลย';
     }
     fm.classList.add('show');
 
